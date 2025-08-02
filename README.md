@@ -1251,7 +1251,8 @@ SELECT Name FROM ArtsStudents;
 - Column ka naam alias (`AS Name`) use kar ke result aur readable banaya ja sakta hai.
 
 ---
-```sql
+
+
 -- 👨‍💼 Employees Table (Simple table jahan har employee ka ek department hota hai)
 CREATE TABLE Employees (
   EmpID INT,
