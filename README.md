@@ -2047,4 +2047,159 @@ SELECT * FROM EmpHierarchy;
 - Hierarchy analysis
 - Performance-efficient complex queries likhne ke liye
 
+#  DISTINCT, TOP / LIMIT, ORDER BY, GROUP BY, HAVING — 
+
+---
+
+##  1. DISTINCT
+
+ **Kya karta hai?**
+DISTINCT kisi column ya columns ki **duplicate values hata deta hai**.
+
+ **Use Case (Real-world)**: Kitne unique cities se customers hain?
+
+```sql
+SELECT DISTINCT city FROM customers;
+```
+
+**Output**:
+
+| city     |
+|----------|
+| Lahore   |
+| Karachi  |
+| Islamabad|
+
+ **Real Use**:
+- Unique categories ya regions nikalna
+- Exploratory data analysis (EDA)
+
+---
+
+##  2. TOP / LIMIT
+
+ **Kya karta hai?**
+TOP (SQL Server) ya LIMIT (MySQL/PostgreSQL) results ki **maximum rows control** karta hai.
+
+ **Use Case**: Top 5 highest paid employees dikhayein
+
+### SQL Server:
+```sql
+SELECT TOP 5 emp_name, salary FROM employees ORDER BY salary DESC;
+```
+
+### MySQL/PostgreSQL:
+```sql
+SELECT emp_name, salary FROM employees ORDER BY salary DESC LIMIT 5;
+```
+
+ **Output**:
+
+| emp_name | salary |
+|----------|--------|
+| Ali      | 90000  |
+| Sara     | 85000  |
+| Aslam    | 82000  |
+| Ayesha   | 80000  |
+| Zain     | 78000  |
+
+ **Real Use**:
+- Top N customers/products/orders
+- Performance testing mein limited data lena
+
+---
+
+## 🔹 3. ORDER BY
+
+ **Kya karta hai?**
+ORDER BY results ko **sort** karta hai (ASC by default, ya DESC).
+
+ **Use Case**: Employees ko salary ke hisaab se sort karna
+
+```sql
+SELECT emp_name, salary FROM employees ORDER BY salary DESC;
+```
+
+ **Output**:
+
+| emp_name | salary |
+|----------|--------|
+| Ali      | 90000  |
+| Sara     | 85000  |
+| ...      | ...    |
+
+ **Real Use**:
+- Reports banate waqt sorting
+- Rank-wise display
+- Trends dekhna (sales by date)
+
+---
+
+##  4. GROUP BY
+
+ **Kya karta hai?**
+GROUP BY records ko group karta hai **aggregation functions** (SUM, AVG, COUNT) ke saath use karne ke liye.
+
+ **Use Case**: Har city mein kitne customers hain?
+
+```sql
+SELECT city, COUNT(*) AS total_customers
+FROM customers
+GROUP BY city;
+```
+
+ **Output**:
+
+| city     | total_customers |
+|----------|------------------|
+| Lahore   | 5                |
+| Karachi  | 3                |
+
+ **Real Use**:
+- KPIs banane mein
+- Regional, category-wise summaries
+
+---
+
+##  5. HAVING
+
+ **Kya karta hai?**
+HAVING filter karta hai **aggregated groups** ko (WHERE jaise but after GROUP BY).
+
+ **Use Case**: Wo cities jahan 3 se zyada customers hain
+
+```sql
+SELECT city, COUNT(*) AS total_customers
+FROM customers
+GROUP BY city
+HAVING COUNT(*) > 3;
+```
+
+ **Output**:
+
+| city   | total_customers |
+|--------|------------------|
+| Lahore | 5                |
+
+ **Real Use**:
+- High-performing regions/groups filter karna
+- Grouped summaries ke upar conditions lagana
+
+---
+
+##  Summary Table
+
+| Keyword     | Kaam kya karta hai                        | Real-time Use Case                     |
+|-------------|--------------------------------------------|----------------------------------------|
+| DISTINCT    | Duplicate hataata hai                      | Unique values dekhna (e.g., cities)    |
+| TOP / LIMIT | Limited records dikhata hai                | Top 10 products, recent 5 orders       |
+| ORDER BY    | Sorting karta hai                          | Rankings, date-wise trends             |
+| GROUP BY    | Group karta hai aggregation ke liye        | Sales by region, customer type         |
+| HAVING      | Aggregated results ko filter karta hai     | High-value customers, active cities    |
+
+---
+
+** Tip:** 
+Ye sab clauses commonly use hote hain **Power BI**, **Excel Pivot Tables**, aur **Python Pandas groupby()** operations mein — to agar aapko inka SQL version aata hai to aap visual tools aur coding mein easily transition kar sakte ho.
+
 
