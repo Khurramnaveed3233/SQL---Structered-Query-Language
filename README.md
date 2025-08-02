@@ -748,5 +748,251 @@ WHERE LEN(name) < 3 OR CHARINDEX('123', name) > 0;
  **Conclusion**:  
 String functions are a key part of **data cleaning, feature engineering, text mining**, and **report preparation** in SQL-based data analytics workflows.
 
+# 🕒 SQL Date & Time Functions: Usage, Examples & Outputs in Real-Time Data Analysis
+
+These functions are crucial in **time-based reporting**, **trend analysis**, **cohort segmentation**, and **date formatting** for dashboards.
+
+---
+
+##  1. `GETDATE()` – Current System Date & Time
+
+ **Use**: Returns current date & time (datetime datatype).
+
+ *Use Case*: Stamp row insert time or filter "today's data".
+
+```sql
+SELECT GETDATE() AS current_datetime;
+```
+
+ **Output:**
+
+| current_datetime       |
+|------------------------|
+| 2025-08-02 09:30:15.890|
+
+---
+
+##  2. `CURRENT_TIMESTAMP` – Same as `GETDATE()`
+
+ **Use**: ANSI standard alternative to `GETDATE()`.
+
+```sql
+SELECT CURRENT_TIMESTAMP AS now_time;
+```
+
+ **Output:**
+
+| now_time               |
+|------------------------|
+| 2025-08-02 09:30:15.890|
+
+---
+
+##  3. `DATEDIFF()` – Difference Between Two Dates
+
+ **Use**: Get number of days, months, or years between two dates.
+
+ *Use Case*: Customer age or time since last purchase.
+
+```sql
+SELECT DATEDIFF(DAY, '2025-01-01', GETDATE()) AS days_passed;
+```
+
+ **Output:**
+
+| days_passed |
+|-------------|
+| 214         |
+
+---
+
+##  4. `DATEADD()` – Add/Subtract Date Parts
+
+ **Use**: Add/subtract days, months, or years from a date.
+
+ *Use Case*: Calculate subscription expiry date.
+
+```sql
+SELECT DATEADD(MONTH, 6, '2025-01-01') AS expiry_date;
+```
+
+ **Output:**
+
+| expiry_date |
+|-------------|
+| 2025-07-01  |
+
+---
+
+##  5. `DATENAME()` – Return String Part of a Date
+
+ **Use**: Return day name, month name, etc. as string.
+
+ *Use Case*: Filter or group sales by weekday name.
+
+```sql
+SELECT DATENAME(WEEKDAY, '2025-08-02') AS day_name;
+```
+
+ **Output:**
+
+| day_name |
+|----------|
+| Saturday |
+
+---
+
+##  6. `DAY()` – Extract Day (Number)
+
+```sql
+SELECT DAY('2025-08-02') AS day_number;
+```
+
+ **Output:**
+
+| day_number |
+|------------|
+| 2          |
+
+---
+
+##  7. `MONTH()` – Extract Month (Number)
+
+```sql
+SELECT MONTH('2025-08-02') AS month_number;
+```
+
+ **Output:**
+
+| month_number |
+|---------------|
+| 8             |
+
+---
+
+##  8. `YEAR()` – Extract Year (Number)
+
+```sql
+SELECT YEAR('2025-08-02') AS year_number;
+```
+
+ **Output:**
+
+| year_number |
+|-------------|
+| 2025        |
+
+---
+
+##  9. `FORMAT()` – Custom Date Formatting (SQL Server 2012+)
+
+ **Use**: Convert date to custom string format.
+
+ *Use Case*: Format dates for reports or Excel exports.
+
+```sql
+SELECT FORMAT(GETDATE(), 'dd-MMM-yyyy') AS formatted_date;
+```
+
+ **Output:**
+
+| formatted_date |
+|----------------|
+| 02-Aug-2025    |
+
+---
+
+##  10. `CAST()` – Convert Between Data Types
+
+ **Use**: Convert strings to dates or vice versa.
+
+ *Use Case*: Convert string column to date for filtering.
+
+```sql
+SELECT CAST('2025-08-02' AS DATETIME) AS converted_date;
+```
+
+ **Output:**
+
+| converted_date       |
+|----------------------|
+| 2025-08-02 00:00:00.000|
+
+---
+
+## 11. `CONVERT()` – Convert & Format Dates
+
+ **Use**: More formatting control (style-based).
+
+ *Use Case*: Format dates in 'dd/mm/yyyy' style for reports.
+
+```sql
+SELECT CONVERT(VARCHAR, GETDATE(), 103) AS uk_style_date;
+```
+
+🧾 **Output:**
+
+| uk_style_date |
+|----------------|
+| 02/08/2025     |
+
+---
+
+## 📈 Real-Time Analytics Use Cases
+
+### 1. **Find Orders in the Last 7 Days**
+```sql
+SELECT * FROM orders
+WHERE order_date >= DATEADD(DAY, -7, GETDATE());
+```
+
+---
+
+### 2. **Monthly Sales Summary**
+```sql
+SELECT MONTH(order_date) AS sale_month, SUM(amount) AS total_sales
+FROM orders
+GROUP BY MONTH(order_date);
+```
+
+---
+
+### 3. **Filter by Specific Day Name**
+```sql
+SELECT * FROM sales
+WHERE DATENAME(WEEKDAY, sale_date) = 'Sunday';
+```
+
+---
+
+### 4. **Subscription Expiring in Next 30 Days**
+```sql
+SELECT * FROM subscriptions
+WHERE expiry_date BETWEEN GETDATE() AND DATEADD(DAY, 30, GETDATE());
+```
+
+---
+
+##  Summary Table
+
+| Function          | Purpose                                |
+|-------------------|----------------------------------------|
+| `GETDATE()`       | Current system date & time             |
+| `CURRENT_TIMESTAMP`| ANSI version of GETDATE()             |
+| `DATEDIFF()`      | Difference between 2 dates             |
+| `DATEADD()`       | Add/subtract time                      |
+| `DATENAME()`      | Day/Month name as string               |
+| `DAY()`           | Numeric day of month                   |
+| `MONTH()`         | Numeric month                          |
+| `YEAR()`          | Numeric year                           |
+| `FORMAT()`        | Custom date format string              |
+| `CAST()`          | Convert data types                     |
+| `CONVERT()`       | Convert and format (with style codes)  |
+
+---
+
+ **Conclusion**:  
+Date & time functions are **indispensable** in data science for **time series**, **trend reporting**, **forecasting**, and **temporal filtering**. SQL gives full control to manipulate and format date values as needed for any project.
+
 
 
