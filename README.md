@@ -173,3 +173,110 @@ SELECT * FROM Employees WHERE Email IS NOT NULL;
 
 Umeed hai ke yeh summary aapko SQL ke logical aur comparison operators achi tarah samajhne mein madad degi.
 
+# SQL Aggregate Functions (Roman Urdu mein)
+
+Aggregate functions SQL mein use hoti hain jab humein kai rows ke upar calculations karni hoti hain — jaise total, average, count waghera. Ye functions aik column ki multiple values ko le kar ek single result return karte hain.
+
+---
+
+## `COUNT()` — Ginti karna  
+Yeh function rows ki ginti karta hai.
+
+**Example:**
+```sql
+SELECT COUNT(*) FROM Students;
+```
+Yeh total students ki ginti dega.
+
+**Example with condition:**
+```sql
+SELECT COUNT(*) FROM Students WHERE City = 'Lahore';
+```
+
+---
+
+## `SUM()` — Total nikalna  
+Yeh kisi numeric column ka total nikalta hai.
+
+**Example:**
+```sql
+SELECT SUM(Salary) FROM Employees;
+```
+
+---
+
+## `AVG()` — Average nikalna  
+Kisi numeric column ka average (mean) nikalta hai.
+
+**Example:**
+```sql
+SELECT AVG(Marks) FROM Students;
+```
+
+---
+
+## `MIN()` — Sabse choti value  
+Column mein sabse choti (minimum) value nikalta hai.
+
+**Example:**
+```sql
+SELECT MIN(Price) FROM Products;
+```
+
+---
+
+## `MAX()` — Sabse badi value  
+Column mein sabse badi (maximum) value nikalta hai.
+
+**Example:**
+```sql
+SELECT MAX(Salary) FROM Employees;
+```
+
+---
+
+## `GROUP BY` ke saath use karna  
+Aggregate functions ko aksar `GROUP BY` ke saath use kiya jata hai taake categories ke mutabiq calculations ho sakein.
+
+**Example: Total salary by department:**
+```sql
+SELECT Department, SUM(Salary)
+FROM Employees
+GROUP BY Department;
+```
+
+**Example: Student count by city:**
+```sql
+SELECT City, COUNT(*) 
+FROM Students 
+GROUP BY City;
+```
+
+---
+
+## `HAVING` clause  
+`HAVING` clause aggregate results ko filter karta hai (jaise `WHERE`, lekin `GROUP BY` ke saath).
+
+**Example:**
+```sql
+SELECT City, COUNT(*) 
+FROM Students 
+GROUP BY City
+HAVING COUNT(*) > 5;
+```
+
+---
+
+## 🔍 Summary Table
+
+| Function   | Kaam (Roman Urdu)                     |
+|------------|----------------------------------------|
+| COUNT()    | Rows ki ginti karta hai               |
+| SUM()      | Total nikalta hai                     |
+| AVG()      | Average (mean) nikalta hai            |
+| MIN()      | Sabse choti value nikalta hai         |
+| MAX()      | Sabse badi value nikalta hai          |
+
+---
+
+Umeed hai ke yeh aggregate functions ke examples aur explanation aapko SQL mein calculations aur summarization ko behtar samajhne mein madad denge.
