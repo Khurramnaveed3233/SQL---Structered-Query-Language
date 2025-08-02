@@ -1,140 +1,283 @@
-#  Comparison & Logical Operators ka Istemaal (Roman Urdu mein)
+# 📊 Comparison & Logical Operators with Outputs (Roman Urdu + Example Results)
 
-Yeh operators data ko **filter**, **query** aur **analyze** karne ke liye use hote hain — chahe aap SQL use kar rahe ho, Python (Pandas), ya Power BI jaise tools.
-
----
-
-##  1. Comparison Operators (Muqabla Karnay Wale)
-
-| Operator | Matlab                       | Example                    | Real Life Use Case |
-|----------|------------------------------|----------------------------|---------------------|
-| =        | Barabar                      | `salary = 50000`           | Wo log jin ki salary exactly 50,000 ho |
-| != or <> | Barabar nahi                 | `city != 'Lahore'`         | Lahore ke ilawa sari cities dekhni ho |
-| <        | Chhota                       | `age < 30`                 | Aise log jo 30 se chhote hon |
-| >        | Bara                         | `revenue > 100000`         | Products jin ka revenue 1 lakh se zyada ho |
-| <=       | Chhota ya barabar            | `rating <= 3.5`            | Low-rated cheezein (3.5 ya us se kam) |
-| >=       | Bara ya barabar              | `experience >= 5`          | 5 ya us se zyada experience walay log |
+Yeh examples real-world data analysis mein use hotay hain, jaise SQL databases ya Python Pandas DataFrames mein filtering karte waqt.
 
 ---
 
-##  2. Logical Operators (Mantaqi Operators)
+## 1. Comparison Operators (Muqabla Karne Wale)
 
-Ye operators multiple shartein combine karne ke kaam aate hain.
+### = (Barabar)
+
+```sql
+SELECT name, salary FROM employees
+WHERE salary = 50000;
+```
+
+ **Output:**
+
+| name     | salary |
+|----------|--------|
+| Ali      | 50000  |
+| Sana     | 50000  |
+
+---
+
+### != or <> (Barabar nahi)
+
+```sql
+SELECT name, city FROM customers
+WHERE city != 'Lahore';
+```
+
+ **Output:**
+
+| name   | city     |
+|--------|----------|
+| Ahmed  | Karachi  |
+| Ayesha | Islamabad|
+
+---
+
+### < (Chhota)
+
+```sql
+SELECT * FROM students
+WHERE age < 20;
+```
+
+ **Output:**
+
+| name   | age |
+|--------|-----|
+| Sara   | 19  |
+| Bilal  | 18  |
+
+---
+
+### > (Bara)
+
+```sql
+SELECT * FROM orders
+WHERE amount > 10000;
+```
+
+ **Output:**
+
+| order_id | amount |
+|----------|--------|
+| 101      | 15000  |
+| 105      | 11000  |
+
+---
+
+### <= (Chhota ya Barabar)
+
+```sql
+SELECT * FROM reviews
+WHERE rating <= 3.5;
+```
+
+ **Output:**
+
+| product | rating |
+|---------|--------|
+| Phone A | 3.0    |
+| Phone B | 2.5    |
+
+---
+
+### >= (Bara ya Barabar)
+
+```sql
+SELECT * FROM candidates
+WHERE experience >= 5;
+```
+
+ **Output:**
+
+| name     | experience |
+|----------|------------|
+| Uzair    | 6          |
+| Fatima   | 5          |
+
+---
+
+## 🧠 Logical Operators (Mantaqi)
 
 ###  AND
-**Jab dono conditions true hon**
 
 ```sql
 SELECT * FROM customers
 WHERE age > 25 AND income > 50000;
 ```
 
-🔍 *25 se upar aur 50k+ kamai walay customers*
+ **Output:**
+
+| name   | age | income |
+|--------|-----|--------|
+| Ali    | 30  | 60000  |
+| Hina   | 28  | 70000  |
 
 ---
 
-###  OR
-**Agar aik bhi condition true ho**
+### OR
 
 ```sql
 SELECT * FROM orders
 WHERE status = 'Pending' OR status = 'Delayed';
 ```
 
-🔍 *Woh orders jo abhi complete nahi hue*
+🧾 **Output:**
+
+| order_id | status  |
+|----------|---------|
+| 201      | Pending |
+| 204      | Delayed |
 
 ---
 
-###  NOT
-**Condition ka ulta karta hai**
+### NOT
 
 ```sql
 SELECT * FROM products
 WHERE NOT category = 'Electronics';
 ```
 
-🔍 *Electronics ke ilawa sari cheezein*
+ **Output:**
+
+| product_name | category   |
+|--------------|------------|
+| Sofa         | Furniture  |
+| Shampoo      | Cosmetics  |
 
 ---
 
 ###  BETWEEN
-**Aik range ke andar value check karta hai (inclusive)**
 
 ```sql
 SELECT * FROM sales
-WHERE sale_date BETWEEN '2024-01-01' AND '2024-12-31';
+WHERE sale_date BETWEEN '2024-01-01' AND '2024-01-31';
 ```
 
-🔍 *2024 ke andar ki sales dekhni ho*
+ **Output:**
+
+| sale_id | sale_date |
+|---------|-----------|
+| 1001    | 2024-01-10|
+| 1002    | 2024-01-25|
 
 ---
 
 ###  IN
-**List ke andar koi value match ho**
 
 ```sql
 SELECT * FROM employees
-WHERE department IN ('HR', 'Finance', 'IT');
+WHERE department IN ('HR', 'Finance');
 ```
 
-🔍 *Specific departments ke employees dhoondhna*
+ **Output:**
+
+| name   | department |
+|--------|------------|
+| Zainab | HR         |
+| Omar   | Finance    |
 
 ---
 
-###  LIKE
-**Pattern match karna (wildcard ke sath)**
-
-| Pattern | Matlab                      |
-|---------|-----------------------------|
-| %       | Koi bhi letters ya characters |
-| _       | Sirf aik character           |
+### LIKE
 
 ```sql
 SELECT * FROM customers
 WHERE email LIKE '%.edu';
 ```
 
- *University walay emails (students mostly)*
+🧾 **Output:**
+
+| name   | email                |
+|--------|----------------------|
+| Ali    | ali@uni.edu          |
+| Sara   | sara@student.edu.pk  |
 
 ---
 
 ###  IS NULL / IS NOT NULL
-**Khaali ya filled value check karta hai**
+
+**IS NULL:**
 
 ```sql
--- Khaali entries
 SELECT * FROM surveys WHERE response IS NULL;
+```
 
--- Filled entries
+ **Output:**
+
+| user_id | response |
+|---------|----------|
+| 101     | NULL     |
+| 104     | NULL     |
+
+**IS NOT NULL:**
+
+```sql
 SELECT * FROM surveys WHERE response IS NOT NULL;
 ```
 
- *Data cleaning ke liye missing values find karna*
+ **Output:**
+
+| user_id | response   |
+|---------|------------|
+| 102     | Excellent  |
+| 103     | Average    |
 
 ---
 
-## 🛠 Real-Time Data Science mein Istemaal
+##  Python (Pandas) mein Comparison & Logical Operators
 
-### 1. **Data Cleaning (Python / Pandas)**:
+Assume karo aik DataFrame `df` hai:
+
 ```python
-df[df['age'] > 30]
-df[df['city'].isin(['Lahore', 'Karachi'])]
-df[df['email'].str.contains('.edu')]
+import pandas as pd
+
+df = pd.DataFrame({
+    'name': ['Ali', 'Sara', 'Bilal'],
+    'age': [30, 19, 24],
+    'income': [60000, 20000, 50000]
+})
 ```
 
-### 2. **SQL for Dashboards (Power BI / Tableau)**:
-```sql
-SELECT * FROM traffic_data
-WHERE region = 'North' AND speed > 80;
-```
+### `df[df['age'] < 25]`
 
-### 3. **Exploratory Data Analysis (EDA)**:
-- Missing values dhoondhna: `df[df['column'].isnull()]`
-- Filter karna: `df[(df['income'] > 50000) & (df['age'] < 35)]`
+ **Output:**
+
+| name  | age | income |
+|-------|-----|--------|
+| Sara  | 19  | 20000  |
+| Bilal | 24  | 50000  |
 
 ---
 
-**Conclusion**:  
+### `df[df['income'] >= 50000]`
 
-Yeh sare operators data analysis mein **bohot zaroori** hain — filtering, reporting, dashboards, aur even predictive modeling mein yeh har jagah kaam aate hain.
+ **Output:**
+
+| name | age | income |
+|------|-----|--------|
+| Ali  | 30  | 60000  |
+| Bilal| 24  | 50000  |
+
+---
+
+### `df[df['name'].isin(['Ali', 'Sara'])]`
+
+ **Output:**
+
+| name | age | income |
+|------|-----|--------|
+| Ali  | 30  | 60000  |
+| Sara | 19  | 20000  |
+
+---
+
+ **Summary**: 
+ 
+Yeh sare comparison aur logical operators data analysis ka foundation hain — filtering, reporting, dashboards, aur machine learning models sab mein inka use hota hai.
 
