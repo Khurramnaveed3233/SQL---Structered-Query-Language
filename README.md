@@ -1,10 +1,10 @@
-# 📊 Comparison & Logical Operators ka Istemaal (Roman Urdu mein)
+#  Comparison & Logical Operators ka Istemaal (Roman Urdu mein)
 
 Yeh operators data ko **filter**, **query** aur **analyze** karne ke liye use hote hain — chahe aap SQL use kar rahe ho, Python (Pandas), ya Power BI jaise tools.
 
 ---
 
-## 🔁 1. Comparison Operators (Muqabla Karnay Wale)
+##  1. Comparison Operators (Muqabla Karnay Wale)
 
 | Operator | Matlab                       | Example                    | Real Life Use Case |
 |----------|------------------------------|----------------------------|---------------------|
@@ -17,11 +17,11 @@ Yeh operators data ko **filter**, **query** aur **analyze** karne ke liye use ho
 
 ---
 
-## 🧠 2. Logical Operators (Mantaqi Operators)
+##  2. Logical Operators (Mantaqi Operators)
 
 Ye operators multiple shartein combine karne ke kaam aate hain.
 
-### ✅ AND
+###  AND
 **Jab dono conditions true hon**
 
 ```sql
@@ -33,7 +33,7 @@ WHERE age > 25 AND income > 50000;
 
 ---
 
-### ✅ OR
+###  OR
 **Agar aik bhi condition true ho**
 
 ```sql
@@ -45,7 +45,7 @@ WHERE status = 'Pending' OR status = 'Delayed';
 
 ---
 
-### ✅ NOT
+###  NOT
 **Condition ka ulta karta hai**
 
 ```sql
@@ -57,7 +57,7 @@ WHERE NOT category = 'Electronics';
 
 ---
 
-### ✅ BETWEEN
+###  BETWEEN
 **Aik range ke andar value check karta hai (inclusive)**
 
 ```sql
@@ -69,7 +69,7 @@ WHERE sale_date BETWEEN '2024-01-01' AND '2024-12-31';
 
 ---
 
-### ✅ IN
+###  IN
 **List ke andar koi value match ho**
 
 ```sql
@@ -81,7 +81,7 @@ WHERE department IN ('HR', 'Finance', 'IT');
 
 ---
 
-### ✅ LIKE
+###  LIKE
 **Pattern match karna (wildcard ke sath)**
 
 | Pattern | Matlab                      |
@@ -94,11 +94,11 @@ SELECT * FROM customers
 WHERE email LIKE '%.edu';
 ```
 
-🔍 *University walay emails (students mostly)*
+ *University walay emails (students mostly)*
 
 ---
 
-### ✅ IS NULL / IS NOT NULL
+###  IS NULL / IS NOT NULL
 **Khaali ya filled value check karta hai**
 
 ```sql
@@ -109,7 +109,7 @@ SELECT * FROM surveys WHERE response IS NULL;
 SELECT * FROM surveys WHERE response IS NOT NULL;
 ```
 
-🔍 *Data cleaning ke liye missing values find karna*
+ *Data cleaning ke liye missing values find karna*
 
 ---
 
@@ -134,6 +134,7 @@ WHERE region = 'North' AND speed > 80;
 
 ---
 
-✅ **Conclusion**:  
+**Conclusion**:  
+
 Yeh sare operators data analysis mein **bohot zaroori** hain — filtering, reporting, dashboards, aur even predictive modeling mein yeh har jagah kaam aate hain.
 
