@@ -39,7 +39,7 @@ CREATE TABLE sales_data (
 
 ---
 
-### 2. ✏ ALTER
+### 2.  ALTER
 
  **Kaam**: Pehle se existing table ka structure change karta hai.
 
@@ -119,30 +119,221 @@ TRUNCATE TABLE sales_data;
 - Data clean-up aur backup ke liye TRUNCATE
 - Security & maintenance ke liye DROP ya ALTER
 
+##  DML (Data Manipulation Language)
 
+**DML SQL ka wo part hai jiska use hum table ke andar data insert, update, ya delete karne ke liye karte hain.** Data analysts aur data engineers mostly DML use karte hain jab woh data analysis ke liye tables mein data manage karte hain.
 
+---
 
+### 1.  INSERT
 
+ **Kaam**: Table ke andar naye records add karta hai.
 
+ **Syntax**:
+```sql
+INSERT INTO table_name (column1, column2, ...)
+VALUES (value1, value2, ...);
+```
 
+ **Example**:
+```sql
+INSERT INTO sales_data (sale_id, customer_name, sale_amount, sale_date, region)
+VALUES (1, 'Ali Khan', 1200.50, '2025-07-01', 'Punjab');
+```
 
+ **Output**: Ek naya row insert ho gaya `sales_data` table mein.
 
+ **Real-time Use**: Jab analyst sales data manually enter kar raha ho ya kisi ETL pipeline ke zariye data load kar raha ho.
 
+---
 
+### 2.  UPDATE
 
+ **Kaam**: Table ke existing records ko modify karta hai.
 
+ **Syntax**:
+```sql
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+```
 
+ **Example**:
+```sql
+UPDATE sales_data
+SET sale_amount = 1300.00
+WHERE sale_id = 1;
+```
 
+ **Output**: Row jisme `sale_id = 1` hai uska `sale_amount` ab 1300.00 ho gaya.
 
+ **Real-time Use**: Analyst ne dekha ke koi data galat load ho gaya, to woh correct karne ke liye `UPDATE` karta hai.
 
+ **Note**: Hamesha `WHERE` clause use karo warna sari table update ho sakti hai!
 
+---
 
+### 3.  DELETE
 
+ **Kaam**: Table ke andar se specific rows delete karta hai.
 
+ **Syntax**:
+```sql
+DELETE FROM table_name
+WHERE condition;
+```
 
+ **Example**:
+```sql
+DELETE FROM sales_data
+WHERE sale_id = 1;
+```
 
+ **Output**: Row jisme `sale_id = 1` tha, wo table se delete ho gaya.
 
+ **Real-time Use**: Jab analyst ko duplicate ya test data remove karna ho.
 
+ **Note**: Agar `WHERE` use nahi kiya to saari table ka data delete ho sakta hai.
+
+---
+
+##  Summary Table
+
+| Command | Syntax Example | Kaam | Output | Use Case |
+|--------|----------------|------|--------|----------|
+| INSERT | `INSERT INTO sales_data (...) VALUES (...)` | Table mein naya data daalna | Naya row add hota hai | Nayi sales entry insert karna |
+| UPDATE | `UPDATE sales_data SET ... WHERE ...` | Existing row update karna | Specific data change hota hai | Galat entry ko correct karna |
+| DELETE | `DELETE FROM sales_data WHERE ...` | Row delete karna | Row remove ho jata hai | Duplicate ya unwanted data delete karna |
+
+---
+
+##  Real-Time Data Analysis Mein DML Ka Use
+
+1.  **INSERT** – Jab naye data sources se records load kiye ja rahe ho.
+2.  **UPDATE** – Jab data cleanse process mein values sahi ki ja rahi ho.
+3.  **DELETE** – Jab NULL ya test entries remove ki ja rahi ho analysis se pehle.
+
+**Example Scenario:**
+Data analyst ko ek weekly sales report banani hai. Wo ETL tool se data `INSERT` karta hai, fir agar koi entry galat ho to `UPDATE`, aur agar duplicates milte hain to `DELETE`.
+
+##  DQL – Data Query Language
+
+ **Kaam**: Table se data fetch (query) karne ke liye use hoti hai. Ye data analysis ka sabse important part hai.
+
+ **Command**: `SELECT`
+
+---
+
+### 1.  SELECT
+
+ **Syntax**:
+```sql
+SELECT column1, column2 FROM table_name WHERE condition;
+```
+
+ **Example**:
+```sql
+SELECT customer_name, sale_amount
+FROM sales_data
+WHERE region = 'Punjab';
+```
+
+ **Output**:
+| customer_name | sale_amount |
+|---------------|-------------|
+| Ali Khan      | 1300.00     |
+
+ **Real-time Use**: Analyst Punjab region ke sales dekh raha hai report ke liye.
+
+---
+
+##  DCL – Data Control Language
+
+ **Kaam**: User permissions aur access rights control karne ke liye use hoti hai. Ye security aur collaboration mein help karti hai.
+
+ **Commands**: `GRANT`, `REVOKE`
+
+---
+
+### 1.  GRANT
+
+ **Syntax**:
+```sql
+GRANT SELECT, INSERT ON sales_data TO analyst_user;
+```
+
+ **Output**: `analyst_user` ab `sales_data` table ko SELECT aur INSERT kar sakta hai.
+
+ **Real-time Use**: Analyst ko data access dena report banane ke liye.
+
+---
+
+### 2.  REVOKE
+
+ **Syntax**:
+```sql
+REVOKE INSERT ON sales_data FROM analyst_user;
+```
+
+ **Output**: `analyst_user` ka INSERT access hata diya gaya.
+
+ **Real-time Use**: Jab analyst ka role change ho jaye ya unauthorized action prevent karna ho.
+
+---
+
+##  TCL – Transaction Control Language
+
+ **Kaam**: Transactions manage karna — yaani multiple SQL commands ko ek unit ke tor par execute karna. Useful for maintaining **data consistency and recovery**.
+
+ **Commands**: `COMMIT`, `ROLLBACK`
+
+---
+
+### 1.  COMMIT
+
+ **Syntax**:
+```sql
+BEGIN TRANSACTION;
+UPDATE sales_data SET sale_amount = 1500 WHERE sale_id = 2;
+COMMIT;
+```
+
+ **Output**: Sale amount update ho gaya permanently — changes save ho gayi.
+
+ **Real-time Use**: Jab data analyst ne analysis ke liye records fix kiye aur save karne hain.
+
+---
+
+### 2.  ROLLBACK
+
+ **Syntax**:
+```sql
+BEGIN TRANSACTION;
+UPDATE sales_data SET sale_amount = 99999 WHERE sale_id = 2;
+ROLLBACK;
+```
+
+ **Output**: Galat update ki wajah se change cancel ho gaya — original value wapas aa gayi.
+
+ **Real-time Use**: Jab analyst ne accidentally galat data update kar diya ho aur usko undo karna ho.
+
+---
+
+##  Summary Table
+
+| Type | Commands | Kaam | Example Use Case | Output |
+|------|----------|------|------------------|--------|
+| DQL  | SELECT   | Data ko query karna | Sales report banani ho | Filtered rows |
+| DCL  | GRANT, REVOKE | Access dena ya lena | Analyst ko SELECT access dena ya lena | Permissions change |
+| TCL  | COMMIT, ROLLBACK | Transactions ko manage karna | ETL ya updates ke dauran data save/undo karna | Permanent save ya cancel |
+
+---
+
+##  Real-World Scenario for Data Analysts
+
+- Tum `SELECT` se filtered data nikaalte ho charts ke liye.
+- Tumhare team members ko limited access dena ho to `GRANT`/`REVOKE` use hota hai.
+- Data updates karte waqt agar galti ho jaye to `ROLLBACK` helpful hota hai warna `COMMIT` se changes save kar lete hain
 
 ## 1. Comparison Operators (Muqabla Karne Wale)
 
