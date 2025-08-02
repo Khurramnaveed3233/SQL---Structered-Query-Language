@@ -1,4 +1,4 @@
-#  Comparison & Logical Operators 
+#  SQL Functions for Data Analysis 
 
 Yeh examples real-world data analysis mein use hotay hain, jaise SQL databases ya Python Pandas DataFrames mein filtering karte waqt.
 
@@ -1373,6 +1373,254 @@ FROM employees;
 ---
 
  **Conclusion**:
+ 
 Ye conditional functions data analyst ke toolkit ka core part hain. Inka use reporting, dashboards, feature engineering, and anomaly detection mein hota hai. Especially tab jab data inconsistent ho ya business rules apply karne ho.
 
+#  SQL Conditional Functions + Set Operators 
+
+SQL mein Conditional aur Set Operators dono ka bohot important role hota hai real-time data analysis mein — jaise decision-making, missing data handle karna, aur multi-query data combine karna. Neeche sab kuch detail mein diya gaya hai:
+
+---
+
+##  1. CASE WHEN THEN ELSE END
+
+ **Explanation**:
+Yeh IF-ELSE jaisa logic lagata hai rows pe based on conditions.
+
+ **Use Case**: Customer salary ke base par earning group banani hai.
+
+```sql
+SELECT name, salary,
+  CASE 
+    WHEN salary >= 100000 THEN 'High'
+    WHEN salary BETWEEN 50000 AND 99999 THEN 'Medium'
+    ELSE 'Low'
+  END AS income_level
+FROM customers;
+```
+
+ **Output**:
+
+| name  | salary  | income_level |
+|-------|---------|---------------|
+| Ali   | 120000  | High          |
+| Sara  | 75000   | Medium        |
+| Omer  | 30000   | Low           |
+
+ **Real Use**:
+- Risk scoring
+- Tier grouping
+- Custom business logic apply karna
+
+---
+
+## 2. COALESCE()
+
+ **Explanation**:
+Pehli non-NULL value return karta hai jo list mein pehli milti ho.
+
+ **Use Case**: Contact column create karni hai jahan email ya phone ho, warna "No Info".
+
+```sql
+SELECT name, COALESCE(email, phone, 'No Info') AS contact_info
+FROM users;
+```
+
+ **Output**:
+
+| name  | contact_info   |
+|-------|----------------|
+| Ali   | ali@gmail.com  |
+| Sara  | 03001234567    |
+| Omer  | No Info        |
+
+ **Real Use**:
+- Missing data ka replacement
+- Reporting dashboards
+- Default values assign karna
+
+---
+
+##  3. NULLIF()
+
+ **Explanation**:
+Agar dono values same hoon to NULL return karega, warna pehli value.
+
+ **Use Case**: Divide-by-zero error avoid karna.
+
+```sql
+SELECT name, sales, target,
+  sales / NULLIF(target, 0) AS performance_ratio
+FROM performance_data;
+```
+
+ **Output**:
+
+| name  | sales | target | performance_ratio |
+|-------|-------|--------|-------------------|
+| Ali   | 5000  | 2500   | 2.0               |
+| Sara  | 4000  | 0      | NULL              |
+
+ **Real Use**:
+- Safe division karna
+- NULLs se bachna
+- Smart math operations
+
+---
+
+##  4. IIF()
+
+ **Explanation**:
+Simple IF condition – CASE ka short version.
+
+ **Use Case**: Eligible for bonus ya nahi salary base par.
+
+```sql
+SELECT name, salary,
+  IIF(salary >= 60000, 'Eligible', 'Not Eligible') AS bonus_status
+FROM employees;
+```
+
+ **Output**:
+
+| name  | salary | bonus_status   |
+|-------|--------|----------------|
+| Ali   | 70000  | Eligible       |
+| Sara  | 45000  | Not Eligible   |
+
+ **Real Use**:
+- Quick flags
+- Binary classification
+- Fast condition checks
+
+---
+
+##  Set Operators
+
+Set operators ka use hum multiple queries ke result ko combine karne ke liye karte hain. Har query ka number of columns aur data types same hone chahiye.
+
+---
+
+##  5. UNION
+
+ **Explanation**: Duplicates hata ke combine karta hai multiple SELECTs.
+
+ **Use Case**: Active + retired employees ka unique list.
+
+```sql
+SELECT name FROM active_employees
+UNION
+SELECT name FROM retired_employees;
+```
+
+ **Output**:
+
+| name     |
+|----------|
+| Ali      |
+| Sara     |
+| Aslam    |
+
+ **Real Use**:
+- Unique customer list
+- Combining old + new data
+- Duplicate-free joins
+
+---
+
+##  6. UNION ALL
+
+ **Explanation**: Duplicates ko include karta hai. Fast hota hai UNION se.
+
+ **Use Case**: Total transactions list from online + offline.
+
+```sql
+SELECT transaction_id FROM online_sales
+UNION ALL
+SELECT transaction_id FROM offline_sales;
+```
+
+ **Output**: Includes all transactions, even if repeated
+
+| transaction_id |
+|----------------|
+| T001           |
+| T002           |
+| T001           |
+
+ **Real Use**:
+- Logs combine karna
+- Raw data analysis
+- Faster performance
+
+---
+
+##  7. INTERSECT
+
+ **Explanation**: Sirf wo rows return karta hai jo dono queries mein common hoti hain.
+
+ **Use Case**: Customers jinhone app + website dono pe order diya.
+
+```sql
+SELECT customer_id FROM app_orders
+INTERSECT
+SELECT customer_id FROM web_orders;
+```
+
+ **Output**:
+
+| customer_id |
+|-------------|
+| C101        |
+| C204        |
+
+ **Real Use**:
+- Cross-channel user analysis
+- Loyalty user tracking
+- Common data analysis
+
+---
+
+##  8. EXCEPT
+
+ **Explanation**: Pehli query ki wo rows jo doosri mein nahi hain.
+
+ **Use Case**: Customers who bought online, but never in-store.
+
+```sql
+SELECT customer_id FROM online_orders
+EXCEPT
+SELECT customer_id FROM store_orders;
+```
+
+ **Output**:
+
+| customer_id |
+|-------------|
+| C305        |
+| C498        |
+
+ **Real Use**:
+- Unique audience detection
+- Channel gap analysis
+- Targeted marketing
+
+---
+
+##  Summary Table:
+
+| Function       | Kya karta hai                                | Real Analysis Use Case        |
+|----------------|----------------------------------------------|-------------------------------|
+| CASE WHEN      | Conditional logic apply karta hai            | Segment, band, risk flag      |
+| COALESCE()     | Pehli non-null value return karta hai         | NULL handle, fallback data    |
+| NULLIF()       | Same value ho to NULL return karta hai        | Division safety               |
+| IIF()          | IF-ELSE ka shortcut hai                       | Binary flags, eligibility     |
+| UNION          | Duplicates ko remove karke combine karta hai  | Unique lists                  |
+| UNION ALL      | Duplicates ke sath combine karta hai          | Logs, fast union              |
+| INTERSECT      | Common records dono queries mein              | Cross-segment user match      |
+| EXCEPT         | Pehli query ki non-matching rows return karta hai | Exclusive segment analysis    |
+
+---
+
+ Ye sab functions aur operators data analysis workflows, dashboards, ETL, customer segmentation, and business rule validation mein commonly use hote hain.
 
