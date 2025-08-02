@@ -3,6 +3,113 @@
 Yeh examples real-world data analysis mein use hotay hain, jaise SQL databases ya Python Pandas DataFrames mein filtering karte waqt.
 
 ---
+DDL (Data Definition Language) SQL ka wo part hota hai jiska use hum **database ke structure ko define ya modify** karne ke liye karte hain — jaise tables, views, indexes banana, unmein tabdili karna, ya unhein delete karna.
+
+ Main Commands:
+1. CREATE
+2. ALTER
+3. DROP
+4. TRUNCATE
+
+---
+
+### 1. CREATE
+ Kaam: Nayi table, view, ya index banata hai.
+
+Example:
+CREATE TABLE customers (
+    customer_id INT,
+    name VARCHAR(100),
+    email VARCHAR(100)
+);
+
+ Output: `customers` table ban jati hai with 3 columns.
+
+ Real-time Use:
+- Data analysis project start karte waqt table structure define karna
+- Raw data ko store karne ke liye staging tables banana
+
+---
+
+### 2. ALTER
+ Kaam: Pehle se existing table ka structure change karta hai (column add/remove/modify).
+
+Example:
+ALTER TABLE customers ADD phone VARCHAR(15);
+
+ Output: `customers` table mein ek naya column `phone` add ho jata hai.
+
+ Real-time Use:
+- Jab naye fields ka data analysis mein zarurat ho (e.g., phone, gender)
+- Column rename ya datatype change karne ke liye
+
+---
+
+### 3. DROP
+ Kaam: Table ya view ko permanently delete karta hai.
+
+Example:
+DROP TABLE customers;
+
+ Output: `customers` table database se permanently delete ho jati hai.
+
+ Real-time Use:
+- Old test tables delete karna
+- Unused views ya backup tables ko hata dena
+
+⚠ Warning: DROP ke baad data recover nahi hota.
+
+---
+
+### 4. TRUNCATE
+ Kaam: Table ka sara data delete karta hai lekin table structure ko intact rakhta hai.
+
+Example:
+TRUNCATE TABLE customers;
+
+ Output: `customers` table ka sara data delete ho jata hai, magar table rehti hai.
+
+ Real-time Use:
+- Data reset karna bina table dobara banaye
+- ETL pipeline test karne ke liye clean slate chahiye ho to
+
+⚠ Note: TRUNCATE fast hota hai DELETE se, aur rollback nahi hota (by default).
+
+---
+
+###  Summary Table:
+
+| Command  | Kaam                        | Real Use Case                          |
+|----------|-----------------------------|----------------------------------------|
+| CREATE   | Table ya object create karna| Analysis start karne se pehle tables banana |
+| ALTER    | Table modify karna          | Naye columns add ya existing change karna  |
+| DROP     | Table delete karna          | Old tables ko permanently hatana      |
+| TRUNCATE | Table ka sara data clean karna| Test ya fresh import ke liye use karna|
+
+Yeh sab DDL commands data analysts aur BI developers ko SQL database mein data structure banane aur maintain karne mein help karte hain — chahe woh Power BI ka model ho ya kisi ETL process ka backend.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## 1. Comparison Operators (Muqabla Karne Wale)
 
