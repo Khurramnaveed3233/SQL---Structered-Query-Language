@@ -1691,6 +1691,430 @@ SELECT * FROM Chain;
 
 ---
 
+# SQL: DISTINCT, TOP / LIMIT, ORDER BY, GROUP BY, HAVING (Real-Life Examples + Output)
+
+Yeh commands aapko help karti hain **duplicate values hataane**, **limited rows dikhane**, **data ko sort karne**, aur **grouped analysis karne** mein.
+
+---
+
+## 🎓 Sample Table: `Orders`
+
+```sql
+CREATE TABLE Orders (
+  OrderID INT,
+  CustomerName VARCHAR(50),
+  Product VARCHAR(50),
+  Quantity INT,
+  Price DECIMAL(10, 2)
+);
+
+INSERT INTO Orders VALUES
+(1, 'Ali', 'Laptop', 1, 80000),
+(2, 'Sara', 'Mobile', 2, 40000),
+(3, 'Ali', 'Laptop', 1, 80000),
+(4, 'Usman', 'Tablet', 3, 30000),
+(5, 'Zara', 'Mobile', 1, 40000),
+(6, 'Ahmed', 'Laptop', 2, 80000),
+(7, 'Ali', 'Tablet', 1, 30000);
+```
+
+---
+
+## 1. 🔄 `DISTINCT` – Duplicate values hataata hai
+
+```sql
+SELECT DISTINCT CustomerName FROM Orders;
+```
+
+📌 **Output:**
+
+| CustomerName |
+|--------------|
+| Ali          |
+| Sara         |
+| Usman        |
+| Zara         |
+| Ahmed        |
+
+📝 **Explanation:** `Ali` ka naam multiple baar tha, lekin `DISTINCT` ne use sirf ek baar dikhaya.
+
+---
+
+## 2. ⬇️ `TOP` (SQL Server) / `LIMIT` (MySQL) – Sirf limited rows dikhana
+
+```sql
+-- SQL Server
+SELECT TOP 3 * FROM Orders;
+
+-- MySQL
+SELECT * FROM Orders LIMIT 3;
+```
+
+📌 **Output:**
+
+| OrderID | CustomerName | Product | Quantity | Price  |
+|---------|--------------|---------|----------|--------|
+| 1       | Ali          | Laptop  | 1        | 80000  |
+| 2       | Sara         | Mobile  | 2        | 40000  |
+| 3       | Ali          | Laptop  | 1        | 80000  |
+
+📝 **Explanation:** Sirf top 3 records show kiye.
+
+---
+
+## 3. ⬆️ `ORDER BY` – Data ko sort karta hai (ascending ya descending)
+
+```sql
+SELECT * FROM Orders
+ORDER BY Price DESC;
+```
+
+📌 **Output:**
+
+| OrderID | CustomerName | Product | Quantity | Price  |
+|---------|--------------|---------|----------|--------|
+| 1       | Ali          | Laptop  | 1        | 80000  |
+| 3       | Ali          | Laptop  | 1        | 80000  |
+| 6       | Ahmed        | Laptop  | 2        | 80000  |
+| 2       | Sara         | Mobile  | 2        | 40000  |
+| 5       | Zara         | Mobile  | 1        | 40000  |
+| 4       | Usman        | Tablet  | 3        | 30000  |
+| 7       | Ali          | Tablet  | 1        | 30000  |
+
+📝 **Explanation:** Price ke mutabiq descending order mein sort kiya gaya.
+
+---
+
+## 4. 👥 `GROUP BY` – Similar rows ko group karta hai
+
+```sql
+SELECT Product, COUNT(*) AS TotalOrders
+FROM Orders
+GROUP BY Product;
+```
+
+📌 **Output:**
+
+| Product | TotalOrders |
+|---------|-------------|
+| Laptop  | 3           |
+| Mobile  | 2           |
+| Tablet  | 2           |
+
+📝 **Explanation:** Har product ke total orders count kiye gaye.
+
+---
+
+## 5. 🛑 `HAVING` – Grouped results pe condition lagata hai
+
+```sql
+SELECT Product, COUNT(*) AS TotalOrders
+FROM Orders
+GROUP BY Product
+HAVING COUNT(*) > 2;
+```
+
+📌 **Output:**
+
+| Product | TotalOrders |
+|---------|-------------|
+| Laptop  | 3           |
+
+📝 **Explanation:** Sirf wo product dikhaya jiska total order 2 se zyada hai.
+
+---
+
+## ✅ Summary Table
+
+| Command     | Kya karta hai                          | Real-life Example                     |
+|-------------|----------------------------------------|----------------------------------------|
+| `DISTINCT`  | Duplicate hataata hai                  | Unique customer names                  |
+| `TOP`/`LIMIT` | Limited rows show karta hai            | Top 3 orders                           |
+| `ORDER BY`  | Rows ko sort karta hai                 | Highest price first                    |
+| `GROUP BY`  | Similar values ko group karta hai      | Product-wise total orders              |
+| `HAVING`    | Grouped result pe filter lagata hai    | Sirf wo products jinke orders > 2 hain |
+
+---
+
+# SQL: Stored Procedures, Views & Triggers (Real-Life Examples + Output)
+
+Yeh 3 cheezein SQL development mein bohot powerful hoti hain:
+- **Stored Procedure**: Reusable SQL code jo bar bar chalaya ja sakta hai
+- **View**: Virtual table jo query ka result show karti hai
+- **Trigger**: Automatically koi action perform hota hai jab INSERT/UPDATE/DELETE hota hai
+
+---
+
+## 🎓 Sample Table: `Employees`
+
+```sql
+CREATE TABLE Employees (
+  EmpID INT PRIMARY KEY,
+  Name VARCHAR(50),
+  Department VARCHAR(50),
+  Salary DECIMAL(10,2)
+);
+
+INSERT INTO Employees VALUES
+(1, 'Ali', 'IT', 80000),
+(2, 'Sara', 'HR', 60000),
+(3, 'Usman', 'IT', 90000),
+(4, 'Zara', 'Finance', 70000);
+```
+
+---
+
+## 1. 🧠 Stored Procedure – Reusable SQL logic banata hai
+
+```sql
+-- Procedure to get employees by department
+CREATE PROCEDURE GetEmployeesByDept
+  @DeptName VARCHAR(50)
+AS
+BEGIN
+  SELECT * FROM Employees WHERE Department = @DeptName;
+END;
+
+-- Call the procedure
+EXEC GetEmployeesByDept 'IT';
+```
+
+📌 **Output:**
+
+| EmpID | Name  | Department | Salary  |
+|-------|-------|------------|---------|
+| 1     | Ali   | IT         | 80000.0 |
+| 3     | Usman | IT         | 90000.0 |
+
+📝 **Explanation:** Jab bhi IT department ke employees chahiyein, procedure ko call kar lo.
+
+---
+
+## 2. 👁️ View – Virtual table jo query ka result store karti hai
+
+```sql
+-- View to show high earners only
+CREATE VIEW HighEarners AS
+SELECT Name, Department, Salary
+FROM Employees
+WHERE Salary > 75000;
+
+-- Use the view
+SELECT * FROM HighEarners;
+```
+
+📌 **Output:**
+
+| Name  | Department | Salary  |
+|-------|------------|---------|
+| Ali   | IT         | 80000.0 |
+| Usman | IT         | 90000.0 |
+
+📝 **Explanation:** View `HighEarners` sirf un employees ko dikhata hai jinki salary 75,000 se zyada hai.
+
+---
+
+## 3. 🚨 Trigger – Auto action jab data mein change ho
+
+```sql
+-- Create Audit Table
+CREATE TABLE SalaryAudit (
+  EmpID INT,
+  OldSalary DECIMAL(10,2),
+  NewSalary DECIMAL(10,2),
+  ChangeDate DATETIME
+);
+
+-- Trigger to log salary updates
+CREATE TRIGGER trg_SalaryUpdate
+ON Employees
+AFTER UPDATE
+AS
+BEGIN
+  INSERT INTO SalaryAudit (EmpID, OldSalary, NewSalary, ChangeDate)
+  SELECT d.EmpID, d.Salary, i.Salary, GETDATE()
+  FROM deleted d
+  JOIN inserted i ON d.EmpID = i.EmpID
+  WHERE d.Salary <> i.Salary;
+END;
+
+-- Update to fire trigger
+UPDATE Employees SET Salary = 95000 WHERE EmpID = 3;
+
+-- Check Audit Table
+SELECT * FROM SalaryAudit;
+```
+
+📌 **Output:**
+
+| EmpID | OldSalary | NewSalary | ChangeDate             |
+|-------|-----------|-----------|-------------------------|
+| 3     | 90000.0   | 95000.0   | 2025-08-02 12:10:00     |
+
+📝 **Explanation:** Jab salary update hui, trigger ne automatically audit table mein change log kar diya.
+
+---
+
+## ✅ Summary Table
+
+| Feature         | Kya karta hai                              | Real-Life Example                         |
+|-----------------|---------------------------------------------|-------------------------------------------|
+| Stored Procedure | Reusable query/function banata hai         | IT department ke employees fetch karna    |
+| View            | Virtual table jo dynamic query show karti hai | High earners dikhana                      |
+| Trigger         | Auto response on INSERT/UPDATE/DELETE       | Salary change audit log banana            |
+
+---
+
+# SQL: Transactions, Indexes & Normalization (Real-Life Examples + Output)
+
+---
+
+## 1️⃣ Transactions – Ek group of SQL commands jo ya to **poora chalega**, ya **kuch bhi nahi**
+
+🧠 Use case: Aap bank transfer kar rahe hain – paisa ek account se nikle aur doosre mein aaye. Agar beech mein error ho jaye, dono steps cancel honay chahiyein.
+
+```sql
+-- Create Accounts table
+CREATE TABLE Accounts (
+  AccID INT PRIMARY KEY,
+  Name VARCHAR(50),
+  Balance DECIMAL(10,2)
+);
+
+-- Insert sample data
+INSERT INTO Accounts VALUES
+(1, 'Ali', 10000),
+(2, 'Sara', 5000);
+
+-- Begin Transaction: Transfer Rs. 2000 from Ali to Sara
+BEGIN TRANSACTION;
+
+-- Deduct from Ali
+UPDATE Accounts SET Balance = Balance - 2000 WHERE AccID = 1;
+
+-- Add to Sara
+UPDATE Accounts SET Balance = Balance + 2000 WHERE AccID = 2;
+
+-- Commit if all successful
+COMMIT;
+
+-- Check final balances
+SELECT * FROM Accounts;
+```
+
+📌 **Output:**
+
+| AccID | Name | Balance |
+|-------|------|---------|
+| 1     | Ali  | 8000.00 |
+| 2     | Sara | 7000.00 |
+
+📝 **Explanation:** Agar dono updates successful hain, tabhi `COMMIT` hoga. Agar koi error aaye to `ROLLBACK` karte hain.
+
+---
+
+## 2️⃣ Indexes – Table mein searching ko **fast** banata hai (like a book index)
+
+🧠 Use case: Aapko 50,000 students ke record mein se fast search chahiye `CNIC` ya `Email` ke through.
+
+```sql
+-- Create Students table
+CREATE TABLE Students (
+  StudentID INT PRIMARY KEY,
+  Name VARCHAR(50),
+  CNIC VARCHAR(20),
+  Email VARCHAR(100)
+);
+
+-- Create index on CNIC for fast lookup
+CREATE INDEX idx_CNIC ON Students(CNIC);
+
+-- Now CNIC search will be fast
+SELECT * FROM Students WHERE CNIC = '35202-1234567-8';
+```
+
+📝 **Explanation:** Index banane se database ko har row ko line-by-line dekhna nahi padta. Isse performance fast hoti hai.
+
+---
+
+## 3️⃣ Normalization – Data ko **duplicate-free aur logical parts** mein todna
+
+🧠 Real-life problem: Employee table mein department ka naam baar baar repeat ho raha hai.
+
+### ❌ Without Normalization:
+```sql
+CREATE TABLE Employees (
+  EmpID INT,
+  EmpName VARCHAR(50),
+  Department VARCHAR(50)
+);
+
+INSERT INTO Employees VALUES
+(1, 'Ali', 'HR'),
+(2, 'Sara', 'IT'),
+(3, 'Usman', 'HR');
+```
+
+🛑 **Problem:** Agar “HR” ka naam change karna ho, sab rows edit karni padengi.
+
+### ✅ With Normalization (2NF):
+
+**Step 1: Department Table**
+```sql
+CREATE TABLE Departments (
+  DeptID INT PRIMARY KEY,
+  DeptName VARCHAR(50)
+);
+
+INSERT INTO Departments VALUES
+(1, 'HR'),
+(2, 'IT');
+```
+
+**Step 2: Employee Table with Foreign Key**
+```sql
+CREATE TABLE Employees (
+  EmpID INT,
+  EmpName VARCHAR(50),
+  DeptID INT,
+  FOREIGN KEY (DeptID) REFERENCES Departments(DeptID)
+);
+
+INSERT INTO Employees VALUES
+(1, 'Ali', 1),
+(2, 'Sara', 2),
+(3, 'Usman', 1);
+```
+
+**Join to get final view:**
+```sql
+SELECT E.EmpName, D.DeptName
+FROM Employees E
+JOIN Departments D ON E.DeptID = D.DeptID;
+```
+
+📌 **Output:**
+
+| EmpName | DeptName |
+|---------|----------|
+| Ali     | HR       |
+| Sara    | IT       |
+| Usman   | HR       |
+
+📝 **Explanation:** Ab agar "HR" ka naam "Human Resources" karna ho, sirf `Departments` table mein 1 row update karni hai.
+
+---
+
+## ✅ Summary
+
+| Concept      | Real-Life Use Case                        | Fayda kya hai?                         |
+|--------------|--------------------------------------------|----------------------------------------|
+| Transaction  | Bank transfer – ya to dono steps ya none  | Data integrity                        |
+| Index        | Search student by CNIC or Email fast       | Speed & performance                   |
+| Normalization| Data ko separate tables mein todna         | Avoid duplication, easy maintenance   |
+
+---
+
 
 
 
