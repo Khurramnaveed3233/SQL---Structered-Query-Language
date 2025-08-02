@@ -1236,5 +1236,143 @@ FROM sales_data;
  
 Window functions **group by ke bina aggregation, ranking, aur lag/lead analysis** karne ka sabse powerful tool hain — khas tor par **financial reporting**, **customer behavior tracking**, aur **time series analysis** mein.
 
+#  SQL Conditional Functions 
+
+SQL mein conditional functions ka use hum tab karte hain jab humein kisi condition ke base par values assign karni hoti hain. Data science & analysis mein yeh kaafi useful hoti hain – jaise classification, flagging, ya NULL values ka handling.
+
+---
+
+## 1. CASE WHEN THEN ELSE END
+
+ **Explanation**:
+IF-ELSE jaisa logic hota hai SQL mein. Har row ke liye alag condition check hoti hai.
+
+ **Real-World Example**:
+Customer ke salary ke basis par unko "High", "Medium", ya "Low" earning category mein daalna.
+
+```sql
+SELECT name, salary,
+  CASE 
+    WHEN salary >= 100000 THEN 'High Earner'
+    WHEN salary BETWEEN 50000 AND 99999 THEN 'Medium Earner'
+    ELSE 'Low Earner'
+  END AS income_group
+FROM customers;
+```
+
+ **Output**:
+
+| name  | salary  | income_group   |
+|-------|---------|----------------|
+| Ali   | 120000  | High Earner    |
+| Sara  | 75000   | Medium Earner  |
+| Omer  | 30000   | Low Earner     |
+
+ **Use Cases**:
+- Risk score category assign karna
+- Age ke basis par group banana
+- Custom segmentation
+
+---
+
+## 2. COALESCE()
+
+ **Explanation**:
+Jo pehli non-NULL value milti hai wo return karta hai. Alternative values assign karne ke liye useful.
+
+ **Real-World Example**:
+Agar kisi customer ka email missing hai to phone ya default message show karo.
+
+```sql
+SELECT name, COALESCE(email, phone, 'No Contact Info') AS contact_info
+FROM customers;
+```
+
+ **Output**:
+
+| name  | contact_info       |
+|-------|--------------------|
+| Ali   | ali@example.com    |
+| Sara  | 03001234567        |
+| Omer  | No Contact Info    |
+
+ **Use Cases**:
+- NULL values fill karna
+- Reporting mein fallback contact ya values show karna
+- Data cleaning
+
+---
+
+## 3. NULLIF()
+
+ **Explanation**:
+Agar dono values same hon to NULL return karta hai, warna pehli value return hoti hai.
+
+ **Real-World Example**:
+Divide by zero error avoid karne ke liye targets ko 0 hone par NULL bana do.
+
+```sql
+SELECT name, sales, targets,
+  sales / NULLIF(targets, 0) AS achievement_ratio
+FROM sales_data;
+```
+
+ **Output**:
+
+| name  | sales | targets | achievement_ratio |
+|-------|-------|---------|-------------------|
+| Ali   | 5000  | 2500    | 2.0               |
+| Sara  | 3000  | 0       | NULL              |
+| Omer  | 2000  | 1000    | 2.0               |
+
+ **Use Cases**:
+- Divide by 0 error handle karna
+- Conditional logic with NULL values
+- Clean numeric analysis
+
+---
+
+## 4. IIF()
+
+ **Explanation**:
+Short version of CASE – sirf ek single condition ke liye use hota hai (ternary logic).
+
+ **Real-World Example**:
+Bonus eligible hai ya nahi based on salary threshold.
+
+```sql
+SELECT name, salary,
+  IIF(salary >= 60000, 'Bonus Eligible', 'Not Eligible') AS bonus_status
+FROM employees;
+```
+
+ **Output**:
+
+| name  | salary | bonus_status     |
+|-------|--------|------------------|
+| Ali   | 65000  | Bonus Eligible   |
+| Sara  | 40000  | Not Eligible     |
+| Omer  | 60000  | Bonus Eligible   |
+
+ **Use Cases**:
+- Flags generate karna (Yes/No)
+- Binary decision making
+- Quick logic for dashboards
+
+---
+
+##  Summary Table:
+
+| Function      | Kya karta hai                                | Real Data Use |
+|---------------|----------------------------------------------|----------------|
+| CASE WHEN     | Multiple condition check aur value return    | Segmentation, classification |
+| COALESCE()    | Pehli non-NULL value return karta hai         | Fallback values, NULL handling |
+| NULLIF()      | Dono same ho to NULL return karta hai         | Avoid divide-by-zero |
+| IIF()         | Quick if-else for single condition            | Flags, Yes/No logic |
+
+---
+
+ **Conclusion**:
+Ye conditional functions data analyst ke toolkit ka core part hain. Inka use reporting, dashboards, feature engineering, and anomaly detection mein hota hai. Especially tab jab data inconsistent ho ya business rules apply karne ho.
 
 
