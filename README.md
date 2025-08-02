@@ -1,4 +1,4 @@
-# 📊 Comparison & Logical Operators with Outputs (Roman Urdu + Example Results)
+#  Comparison & Logical Operators 
 
 Yeh examples real-world data analysis mein use hotay hain, jaise SQL databases ya Python Pandas DataFrames mein filtering karte waqt.
 
@@ -281,7 +281,7 @@ df = pd.DataFrame({
  
 Yeh sare comparison aur logical operators data analysis ka foundation hain — filtering, reporting, dashboards, aur machine learning models sab mein inka use hota hai.
 
-#  SQL Aggregate Functions Explained with Examples, Usage & Output
+#  SQL Aggregate Functions 
 
 Aggregate functions **summarize multiple rows into a single result** — essential in data science for KPIs, summaries, dashboards, and reports.
 
@@ -331,7 +331,7 @@ WHERE order_date BETWEEN '2025-01-01' AND '2025-01-31';
 
  **Usage**: Kisi column ki average value nikalna — e.g., average salary, rating.
 
-💡 *Use Case*: Product ki average rating dekhni.
+ *Use Case*: Product ki average rating dekhni.
 
 ```sql
 SELECT AVG(rating) AS avg_rating
@@ -387,9 +387,9 @@ FROM customers;
 
 ## 6.  `COUNT(DISTINCT)` – Unique Values Count
 
-🧠 **Usage**: Kitne alag-alag values hain kisi column mein.
+ **Usage**: Kitne alag-alag values hain kisi column mein.
 
-💡 *Use Case*: Kitne unique cities mein humare customers hain?
+ *Use Case*: Kitne unique cities mein humare customers hain?
 
 ```sql
 SELECT COUNT(DISTINCT city) AS unique_cities
@@ -406,9 +406,9 @@ FROM customers;
 
 ## 7.  `GROUP BY` with Aggregate Functions
 
-🧠 **Usage**: Groups ke andar totals/averages etc. calculate karna.
+**Usage**: Groups ke andar totals/averages etc. calculate karna.
 
-💡 *Use Case*: Har department ki average salary.
+ *Use Case*: Har department ki average salary.
 
 ```sql
 SELECT department, AVG(salary) AS avg_salary
@@ -428,9 +428,9 @@ GROUP BY department;
 
 ## 8.  `HAVING` – Filter after Aggregation
 
-🧠 **Usage**: Jab aggregation ke baad filter karna ho (GROUP BY ke sath use hota hai).
+ **Usage**: Jab aggregation ke baad filter karna ho (GROUP BY ke sath use hota hai).
 
-💡 *Use Case*: Sirf un departments ko dikhana jinki avg salary 60k se zyada hai.
+ *Use Case*: Sirf un departments ko dikhana jinki avg salary 60k se zyada hai.
 
 ```sql
 SELECT department, AVG(salary) AS avg_salary
@@ -449,9 +449,9 @@ HAVING AVG(salary) > 60000;
 
 ## 9.  `ROUND()` with Aggregates (Bonus)
 
-🧠 **Usage**: Decimal values ko round karna, especially averages.
+ **Usage**: Decimal values ko round karna, especially averages.
 
-💡 *Use Case*: Round off average ratings to 1 decimal.
+ *Use Case*: Round off average ratings to 1 decimal.
 
 ```sql
 SELECT product_id, ROUND(AVG(rating), 1) AS rounded_avg
@@ -485,5 +485,268 @@ GROUP BY product_id;
 ---
 
  **Conclusion**:  
+ 
 Aggregate functions are essential in **summarizing**, **reporting**, and **finding insights** from big datasets — they’re everywhere in **SQL-based dashboards**, **data pipelines**, and **analyst reports**.
+
+#  SQL String Functions 
+
+String functions are used in **data cleaning**, **standardization**, **text extraction**, and **pattern analysis** — essential in data science and analytics workflows.
+
+---
+
+##  1. `UPPER()` – Convert to UPPERCASE
+
+ **Use**: Convert text to capital letters.
+
+ *Use Case*: Clean names or emails before comparison.
+
+```sql
+SELECT UPPER('khurram') AS upper_name;
+```
+
+ **Output:**
+
+| upper_name |
+|------------|
+| KHURRAM    |
+
+---
+
+##  2. `LOWER()` – Convert to lowercase
+
+ **Use**: Convert text to small letters.
+
+ *Use Case*: Email comparisons are usually case-insensitive.
+
+```sql
+SELECT LOWER('HELLO@EMAIL.COM') AS lower_email;
+```
+
+ **Output:**
+
+| lower_email     |
+|-----------------|
+| hello@email.com |
+
+---
+
+##  3. `TRIM()` – Remove spaces from both ends (SQL Server 2017+)
+
+ **Use**: Clean extra white space from user input.
+
+ *Use Case*: Standardize names entered with extra spaces.
+
+```sql
+SELECT TRIM('   Ali Raza   ') AS trimmed_name;
+```
+
+ **Output:**
+
+| trimmed_name |
+|--------------|
+| Ali Raza     |
+
+---
+
+##  4. `LTRIM()` – Remove spaces from the LEFT side
+
+```sql
+SELECT LTRIM('   Lahore') AS clean_left;
+```
+
+ **Output:**
+
+| clean_left |
+|------------|
+| Lahore     |
+
+---
+
+##  5. `RTRIM()` – Remove spaces from the RIGHT side
+
+```sql
+SELECT RTRIM('Lahore   ') AS clean_right;
+```
+
+ **Output:**
+
+| clean_right |
+|-------------|
+| Lahore      |
+
+---
+
+##  6. `SUBSTRING()` – Extract part of a string
+
+ **Use**: Extract specific characters based on position.
+
+ *Use Case*: Extract year from a date string.
+
+```sql
+SELECT SUBSTRING('2025-08-01', 1, 4) AS year;
+```
+
+ **Output:**
+
+| year |
+|------|
+| 2025 |
+
+---
+
+## ⬅ 7. `LEFT()` – Get characters from the LEFT
+
+ **Use**: Useful for standard codes, phone prefixes, etc.
+
+ *Use Case*: Get first 3 letters of a customer name.
+
+```sql
+SELECT LEFT('Khurram', 3) AS short_name;
+```
+
+ **Output:**
+
+| short_name |
+|------------|
+| Khu        |
+
+---
+
+## ➡ 8. `RIGHT()` – Get characters from the RIGHT
+
+ *Use Case*: Get last 4 digits of a phone number.
+
+```sql
+SELECT RIGHT('03001234567', 4) AS last_digits;
+```
+
+🧾 **Output:**
+
+| last_digits |
+|-------------|
+| 4567        |
+
+---
+
+##  9. `LEN()` – Get string length
+
+ **Use**: Check number of characters in a field.
+
+ *Use Case*: Validate phone number length.
+
+```sql
+SELECT LEN('03451234567') AS phone_length;
+```
+
+ **Output:**
+
+| phone_length |
+|--------------|
+| 11           |
+
+---
+
+##  10. `REPLACE()` – Replace part of a string
+
+ **Use**: Replace unwanted characters (e.g., dashes in phone).
+
+ *Use Case*: Clean phone numbers for uniformity.
+
+```sql
+SELECT REPLACE('0345-123-4567', '-', '') AS clean_phone;
+```
+
+ **Output:**
+
+| clean_phone |
+|-------------|
+| 03451234567 |
+
+---
+
+##  11. `CHARINDEX()` – Find position of substring
+
+ **Use**: Find where a specific character starts.
+
+ *Use Case*: Find where "@" appears in an email.
+
+```sql
+SELECT CHARINDEX('@', 'ali@example.com') AS at_position;
+```
+
+ **Output:**
+
+| at_position |
+|-------------|
+| 4           |
+
+---
+
+##  Real-Time Data Analysis Use Cases
+
+### 1. **Email Cleanup & Standardization**
+```sql
+SELECT LOWER(TRIM(email)) AS clean_email FROM users;
+```
+
+### 2. **Extracting Domains from Emails**
+```sql
+SELECT SUBSTRING(email, CHARINDEX('@', email) + 1, LEN(email)) AS domain
+FROM users;
+```
+
+ **Output:**
+
+| domain         |
+|----------------|
+| gmail.com      |
+| uopeople.edu   |
+
+---
+
+### 3. **Masking Credit Card Numbers**
+```sql
+SELECT CONCAT('****-****-****-', RIGHT(card_number, 4)) AS masked_card
+FROM payments;
+```
+
+ **Output:**
+
+| masked_card         |
+|---------------------|
+| ****-****-****-5678 |
+
+---
+
+### 4. **Detecting Invalid Names**
+```sql
+SELECT name
+FROM employees
+WHERE LEN(name) < 3 OR CHARINDEX('123', name) > 0;
+```
+
+---
+
+##  Summary Table
+
+| Function     | Purpose                        |
+|--------------|--------------------------------|
+| `UPPER()`    | Convert to capital letters     |
+| `LOWER()`    | Convert to small letters       |
+| `TRIM()`     | Remove spaces (both sides)     |
+| `LTRIM()`    | Remove left-side spaces        |
+| `RTRIM()`    | Remove right-side spaces       |
+| `SUBSTRING()`| Extract specific part of string|
+| `LEFT()`     | Get left side characters       |
+| `RIGHT()`    | Get right side characters      |
+| `LEN()`      | Count characters in string     |
+| `REPLACE()`  | Replace specific characters    |
+| `CHARINDEX()`| Find position of substring     |
+
+---
+
+ **Conclusion**:  
+String functions are a key part of **data cleaning, feature engineering, text mining**, and **report preparation** in SQL-based data analytics workflows.
+
+
 
