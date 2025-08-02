@@ -1239,4 +1239,210 @@ SELECT Name FROM ArtsStudents;
 - Har `SELECT` mein columns ka order aur data type same hona chahiye.
 - Set operators column aliases use karne mein help karte hain result ko readable banane mein.
 
-Agle topic mein `JOINS`, `Subqueries`, ya `Stored Procedures` chahiyein to zaroor batayen ✅
+# SQL Joins (Roman Urdu + Real-Time Examples + Output)
+
+SQL mein `JOIN` ka use tab hota hai jab humein 2 ya zyada tables ke data ko combine karna ho based on a related column (usually foreign key).
+
+---
+
+🎓 **Scenario**:
+
+Humare paas 2 tables hain: `Employees` aur `Departments`
+
+```sql
+-- Employees Table
+CREATE TABLE Employees (
+  EmpID INT,
+  Name VARCHAR(50),
+  DeptID INT
+);
+
+INSERT INTO Employees VALUES
+(1, 'Ali', 10),
+(2, 'Sara', 20),
+(3, 'Usman', 30),
+(4, 'Zara', NULL),
+(5, 'Ahmed', 40);
+
+-- Departments Table
+CREATE TABLE Departments (
+  DeptID INT,
+  DeptName VARCHAR(50)
+);
+
+INSERT INTO Departments VALUES
+(10, 'HR'),
+(20, 'Finance'),
+(30, 'IT'),
+(50, 'Marketing');
+```
+
+---
+
+## 1. `INNER JOIN` – Sirf wo rows return karta hai jahan match hota ho dono tables mein
+
+```sql
+SELECT e.Name, d.DeptName
+FROM Employees e
+INNER JOIN Departments d
+  ON e.DeptID = d.DeptID;
+```
+
+📌 **Output:**
+
+| Name   | DeptName |
+|--------|----------|
+| Ali    | HR       |
+| Sara   | Finance  |
+| Usman  | IT       |
+
+📝 **Explanation:** Sirf unhi employees ko show kiya jinhon ne valid department join kiya.
+
+---
+
+## 2. `LEFT JOIN` – Left table ke sab rows laata hai, right table ka match ho to wo bhi laata hai
+
+```sql
+SELECT e.Name, d.DeptName
+FROM Employees e
+LEFT JOIN Departments d
+  ON e.DeptID = d.DeptID;
+```
+
+📌 **Output:**
+
+| Name   | DeptName  |
+|--------|-----------|
+| Ali    | HR        |
+| Sara   | Finance   |
+| Usman  | IT        |
+| Zara   | NULL      |
+| Ahmed  | NULL      |
+
+📝 **Explanation:** `Zara` ka department missing tha (NULL), aur `Ahmed` ka deptID `40` departments table mein nahi hai — isliye unka DeptName `NULL` aaya.
+
+---
+
+## 3. `RIGHT JOIN` – Right table ke sab rows laata hai, left ka match ho to wo bhi laata hai
+
+```sql
+SELECT e.Name, d.DeptName
+FROM Employees e
+RIGHT JOIN Departments d
+  ON e.DeptID = d.DeptID;
+```
+
+📌 **Output:**
+
+| Name   | DeptName   |
+|--------|------------|
+| Ali    | HR         |
+| Sara   | Finance    |
+| Usman  | IT         |
+| NULL   | Marketing  |
+
+📝 **Explanation:** `Marketing` department mein koi employee nahi hai, isliye `Name = NULL`.
+
+---
+
+## 4. `FULL OUTER JOIN` – Dono tables ke sab records laata hai, match ho to merge karta hai, warna `NULL`
+
+```sql
+SELECT e.Name, d.DeptName
+FROM Employees e
+FULL OUTER JOIN Departments d
+  ON e.DeptID = d.DeptID;
+```
+
+📌 **Output:**
+
+| Name   | DeptName   |
+|--------|------------|
+| Ali    | HR         |
+| Sara   | Finance    |
+| Usman  | IT         |
+| Zara   | NULL       |
+| Ahmed  | NULL       |
+| NULL   | Marketing  |
+
+📝 **Explanation:** Sabhi records dikhaye gaye — chahe match ho ya na ho.
+
+---
+
+## 5. `CROSS JOIN` – Har row ko doosri table ki har row ke saath combine karta hai (Cartesian Product)
+
+```sql
+SELECT e.Name, d.DeptName
+FROM Employees e
+CROSS JOIN Departments d;
+```
+
+📌 **Output:** (5 Employees x 4 Departments = 20 rows)
+
+| Name   | DeptName   |
+|--------|------------|
+| Ali    | HR         |
+| Ali    | Finance    |
+| Ali    | IT         |
+| Ali    | Marketing  |
+| Sara   | HR         |
+| ...    | ...        |
+
+📝 **Explanation:** Har employee ka combination har department ke saath show hota hai.
+
+---
+
+## 6. `SELF JOIN` – Table ko khud ke saath join karte hain
+
+🎓 **Example**: Ek table `Employees` jismein har employee ka manager bhi likha gaya hai:
+
+```sql
+-- Updated Employees table
+CREATE TABLE Employees2 (
+  EmpID INT,
+  Name VARCHAR(50),
+  ManagerID INT
+);
+
+INSERT INTO Employees2 VALUES
+(1, 'Ali', NULL),
+(2, 'Sara', 1),
+(3, 'Usman', 1),
+(4, 'Zara', 2);
+```
+
+```sql
+SELECT e.Name AS Employee, m.Name AS Manager
+FROM Employees2 e
+LEFT JOIN Employees2 m
+  ON e.ManagerID = m.EmpID;
+```
+
+📌 **Output:**
+
+| Employee | Manager |
+|----------|---------|
+| Ali      | NULL    |
+| Sara     | Ali     |
+| Usman    | Ali     |
+| Zara     | Sara    |
+
+📝 **Explanation:** Table ko khud se join karke har employee ka manager show kiya gaya.
+
+---
+
+## 📌 Summary Table:
+
+| Join Type         | Kya karta hai                                           |
+|-------------------|---------------------------------------------------------|
+| INNER JOIN        | Sirf matched records dikhata hai                        |
+| LEFT JOIN         | Left table ke sab records + right table ka match        |
+| RIGHT JOIN        | Right table ke sab records + left table ka match        |
+| FULL OUTER JOIN   | Dono tables ke sab records, match ho to merge, warna NULL |
+| CROSS JOIN        | Har record ka combination sab ke saath (cartesian)      |
+| SELF JOIN         | Table ko khud ke saath join karta hai                   |
+
+---
+
+Agar aap chahain to `Subqueries`, `Stored Procedures`, ya `Indexes` par bhi real-time examples ke saath content banaya jaa sakta hai ✅
+
