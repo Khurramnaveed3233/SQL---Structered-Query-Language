@@ -1278,6 +1278,7 @@ INSERT INTO Departments VALUES
 (20, 'Finance'),
 (30, 'IT'),
 (50, 'Marketing');  -- Is department mein abhi koi employee nahi hai
+
 ```
 
 ## 1️⃣ INNER JOIN – Sirf wo log jinke department ka match ho
