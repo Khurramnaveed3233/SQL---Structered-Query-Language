@@ -1813,4 +1813,238 @@ LEFT JOIN employees e2 ON e1.manager_id = e2.emp_id;
 - Reports aur dashboards banane ke liye
 - Business intelligence mein relationship mapping ke liye
 
-Agar chaho to main ye joins `Pandas` ya `Power BI DAX` syntax mein bhi dikha sakta hoon. Let me know!
+#  Subqueries & CTEs in SQL 
+
+---
+
+##  SUBQUERIES
+
+Subquery ka matlab hai ek query ke andar doosri query likhna. Ye SELECT, WHERE, ya FROM clause mein ho sakti hai.
+
+---
+
+### 1 Subquery in SELECT
+
+ **Explanation**: Ek subquery SELECT mein lagake derived ya calculated value nikalte hain.
+
+ **Use Case**: Har employee ki salary ko average salary ke sath compare karo.
+
+```sql
+SELECT emp_name, salary,
+       (SELECT AVG(salary) FROM employees) AS avg_salary
+FROM employees;
+```
+
+ **Output**:
+
+| emp_name | salary | avg_salary |
+|----------|--------|------------|
+| Ali      | 50000  | 56666.66   |
+| Sara     | 60000  | 56666.66   |
+| Aslam    | 60000  | 56666.66   |
+
+ **Real Use**:
+- Relative comparisons
+- Standard benchmarks calculate karna
+
+---
+
+### 2 Subquery in WHERE
+
+ **Explanation**: Filter karne ke liye subquery use hoti hai.
+
+ **Use Case**: Wo customers dikhayein jinhon ne order diya hai.
+
+```sql
+SELECT name FROM customers
+WHERE customer_id IN (SELECT customer_id FROM orders);
+```
+
+ **Output**:
+
+| name  |
+|-------|
+| Ali   |
+| Sara  |
+
+ **Real Use**:
+- Existence check
+- Related entity filtering
+
+---
+
+### 3 Subquery in FROM
+
+ **Explanation**: Subquery ek temporary table create karti hai jise hum alias dekar use karte hain.
+
+ **Use Case**: Department-wise average salary dikhani hai.
+
+```sql
+SELECT dept_id, AVG_SALARY
+FROM (
+    SELECT dept_id, AVG(salary) AS AVG_SALARY
+    FROM employees
+    GROUP BY dept_id
+) AS dept_avg;
+```
+
+ **Output**:
+
+| dept_id | AVG_SALARY |
+|---------|------------|
+| D001    | 52000      |
+| D002    | 60000      |
+
+ **Real Use**:
+- Derived tables
+- Complex aggregations
+- Dashboard-level summaries
+
+---
+
+##  EXISTS vs IN vs NOT IN
+
+---
+
+### EXISTS
+
+ **Explanation**: Check karta hai agar subquery se koi record return ho raha ho.
+
+ **Use Case**: Wo customers jinke orders hain.
+
+```sql
+SELECT name FROM customers c
+WHERE EXISTS (
+  SELECT 1 FROM orders o WHERE o.customer_id = c.customer_id
+);
+```
+
+ **Real Use**:
+- Performance ke liye fast on indexed columns
+- Existence-based filtering
+
+---
+
+### IN
+
+ **Explanation**: List ke against matching karta hai.
+
+```sql
+SELECT name FROM customers
+WHERE customer_id IN (SELECT customer_id FROM orders);
+```
+
+ **Real Use**:
+- Small lists ke liye theek hai
+- Readability zyada hoti hai
+
+---
+
+### NOT IN
+
+ **Explanation**: Wo records jo list mein nahi hain.
+
+```sql
+SELECT name FROM customers
+WHERE customer_id NOT IN (SELECT customer_id FROM orders);
+```
+
+ **Output**:
+
+| name  |
+|-------|
+| Aslam |
+
+ **Real Use**:
+- Non-participating records dhoondhna
+- Jaise inactive customers
+
+---
+
+##  Common Table Expressions (CTEs)
+
+CTE temporary named result set hota hai jo `WITH` keyword ke sath banta hai.
+
+---
+
+### 1 Simple CTE
+
+ **Explanation**: CTE define karke usko aage ki query mein use karte hain.
+
+ **Use Case**: Top earning employees nikaalne hain.
+
+```sql
+WITH HighEarners AS (
+  SELECT emp_name, salary FROM employees WHERE salary > 55000
+)
+SELECT * FROM HighEarners;
+```
+
+ **Output**:
+
+| emp_name | salary |
+|----------|--------|
+| Sara     | 60000  |
+| Aslam    | 60000  |
+
+ **Real Use**:
+- Clean code likhne ke liye
+- Reusable subqueries
+
+---
+
+### 2 RECURSIVE CTE
+
+ **Explanation**: Jab data hierarchical ho jaise employee-manager, ya category-subcategory.
+
+ **Use Case**: Employee hierarchy banana (manager ke neeche kon kon hai).
+
+```sql
+WITH EmpHierarchy AS (
+  SELECT emp_id, emp_name, manager_id
+  FROM employees
+  WHERE manager_id IS NULL
+  UNION ALL
+  SELECT e.emp_id, e.emp_name, e.manager_id
+  FROM employees e
+  JOIN EmpHierarchy h ON e.manager_id = h.emp_id
+)
+SELECT * FROM EmpHierarchy;
+```
+
+ **Output**:
+
+| emp_id | emp_name | manager_id |
+|--------|----------|------------|
+| 1      | Aslam    | NULL       |
+| 2      | Sara     | 1          |
+| 3      | Ali      | 2          |
+
+ **Real Use**:
+- Organizational charts
+- Category levels (Product Catalogs)
+- Recursive tree structures
+
+---
+
+##  Summary
+
+| Feature           | Real Use Case                           |
+|-------------------|------------------------------------------|
+| Subquery (SELECT) | Derived metrics, comparisons             |
+| Subquery (WHERE)  | Filtering based on other tables          |
+| Subquery (FROM)   | Temporary aggregated tables              |
+| EXISTS            | Fast existence checks                    |
+| IN / NOT IN       | Inclusion/exclusion lists                |
+| CTE               | Modular & readable query building        |
+| Recursive CTE     | Hierarchical data handling               |
+
+---
+
+ Data science ya analysis mein yeh concepts use hote hain:
+- Dashboards & KPIs banane ke liye
+- Business rule implementation
+- Hierarchy analysis
+- Performance-efficient complex queries likhne ke liye
+
+
