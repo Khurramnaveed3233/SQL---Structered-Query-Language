@@ -994,5 +994,246 @@ WHERE expiry_date BETWEEN GETDATE() AND DATEADD(DAY, 30, GETDATE());
  **Conclusion**:  
 Date & time functions are **indispensable** in data science for **time series**, **trend reporting**, **forecasting**, and **temporal filtering**. SQL gives full control to manipulate and format date values as needed for any project.
 
+# 🪟 SQL Window Functions - Roman Urdu mein Samjhaayi gayi
+
+Window functions aise SQL functions hote hain jo **row-wise analysis** karte hain bina data ko group kiye huye. Ye functions **analytics**, **ranking**, aur **time-series** tasks mein bohot kaam aate hain.
+
+---
+
+## 1. `ROW_NUMBER()`
+
+ Har row ko unique number assign karta hai partition/order ke basis par.
+
+ *Use Case*: Top N records per group nikalna.
+
+```sql
+SELECT name, department, salary,
+       ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS row_num
+FROM employees;
+```
+
+ **Output:**
+
+| name   | department | salary | row_num |
+|--------|------------|--------|---------|
+| Ali    | HR         | 80000  | 1       |
+| Sara   | HR         | 75000  | 2       |
+| Zain   | IT         | 90000  | 1       |
+
+---
+
+##  2. `RANK()`
+
+ Same values ko **same rank** deta hai lekin **gaps** chhodta hai.
+
+ *Use Case*: Sales ranking jahan tie scores ho sakte hain.
+
+```sql
+SELECT name, sales,
+       RANK() OVER (ORDER BY sales DESC) AS rank_pos
+FROM sellers;
+```
+
+ **Output:**
+
+| name   | sales | rank_pos |
+|--------|-------|----------|
+| Ali    | 1000  | 1        |
+| Sana   | 1000  | 1        |
+| Umar   | 900   | 3        |
+
+---
+
+##  3. `DENSE_RANK()`
+
+ Same rank deta hai **without skipping** numbers.
+
+ *Use Case*: Leaderboard jahan aapko sequential ranking chahiye.
+
+```sql
+SELECT name, marks,
+       DENSE_RANK() OVER (ORDER BY marks DESC) AS dense_rank
+FROM students;
+```
+
+ **Output:**
+
+| name   | marks | dense_rank |
+|--------|-------|------------|
+| Ahsan  | 95    | 1          |
+| Fiza   | 95    | 1          |
+| Nida   | 90    | 2          |
+
+---
+
+##  4. `LAG()`
+
+ Previous row ka value laata hai.
+
+ *Use Case*: Sales comparison with previous month.
+
+```sql
+SELECT month, sales,
+       LAG(sales, 1) OVER (ORDER BY month) AS previous_sales
+FROM monthly_sales;
+```
+
+🧾 **Output:**
+
+| month | sales | previous_sales |
+|-------|-------|----------------|
+| Jan   | 1000  | NULL           |
+| Feb   | 1200  | 1000           |
+| Mar   | 1300  | 1200           |
+
+---
+
+##  5. `LEAD()`
+
+ Next row ka value laata hai.
+
+ *Use Case*: Predict next month's value or trend.
+
+```sql
+SELECT month, sales,
+       LEAD(sales, 1) OVER (ORDER BY month) AS next_sales
+FROM monthly_sales;
+```
+
+🧾 **Output:**
+
+| month | sales | next_sales |
+|-------|-------|------------|
+| Jan   | 1000  | 1200       |
+| Feb   | 1200  | 1300       |
+| Mar   | 1300  | NULL       |
+
+---
+
+##  6. `FIRST_VALUE()`
+
+ Partition/group ke first record ka value laata hai.
+
+ *Use Case*: First order or first purchase amount track karna.
+
+```sql
+SELECT customer_id, order_date, amount,
+       FIRST_VALUE(amount) OVER (PARTITION BY customer_id ORDER BY order_date) AS first_order_amount
+FROM orders;
+```
+
+---
+
+##  7. `LAST_VALUE()`
+
+ Partition ka last value return karta hai (use with proper frame settings).
+
+ *Use Case*: Last salary ya latest activity find karna.
+
+```sql
+SELECT employee_id, salary_date, salary,
+       LAST_VALUE(salary) OVER (PARTITION BY employee_id ORDER BY salary_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS latest_salary
+FROM salaries;
+```
+
+---
+
+##  8. `SUM() OVER()` – Cumulative/Running Total
+
+```sql
+SELECT month, sales,
+       SUM(sales) OVER (ORDER BY month) AS running_total
+FROM monthly_sales;
+```
+
+ **Output:**
+
+| month | sales | running_total |
+|-------|-------|----------------|
+| Jan   | 1000  | 1000           |
+| Feb   | 1200  | 2200           |
+| Mar   | 1500  | 3700           |
+
+---
+
+##  9. `AVG() OVER()` – Running/Cumulative Average
+
+```sql
+SELECT month, sales,
+       AVG(sales) OVER (ORDER BY month) AS running_avg
+FROM monthly_sales;
+```
+
+---
+
+##  10. `COUNT() OVER()` – Row Count without GROUP BY
+
+💡 *Use Case*: Count how many orders per customer without grouping.
+
+```sql
+SELECT customer_id, order_id,
+       COUNT(*) OVER (PARTITION BY customer_id) AS total_orders
+FROM orders;
+```
+
+---
+
+##  PARTITION BY & ORDER BY – Kaise kaam karte hain?
+
+###  `PARTITION BY`: Data ko group karta hai (lekin aggregate nahi karta)
+###  `ORDER BY`: Us group ke andar sorting karta hai (ranking ya time series ke liye)
+
+```sql
+SELECT department, employee, salary,
+       RANK() OVER (PARTITION BY department ORDER BY salary DESC) AS dept_rank
+FROM employees;
+```
+
+---
+
+## 📈 Real-Life Examples in Data Analysis
+
+###  Customer ke Top 3 Orders
+```sql
+SELECT *
+FROM (
+  SELECT customer_id, order_id, amount,
+         ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY amount DESC) AS rn
+  FROM orders
+) x
+WHERE rn <= 3;
+```
+
+###  Running Total of Sales per Region
+```sql
+SELECT region, month, sales,
+       SUM(sales) OVER (PARTITION BY region ORDER BY month) AS region_running_sales
+FROM sales_data;
+```
+
+---
+
+##  Summary Table
+
+| Function         | Kaam (Use)                                 |
+|------------------|---------------------------------------------|
+| ROW_NUMBER()     | Unique row number per partition             |
+| RANK()           | Ranking with gaps (ties)                    |
+| DENSE_RANK()     | Ranking without gaps                        |
+| LAG()            | Previous row ka value                       |
+| LEAD()           | Next row ka value                           |
+| FIRST_VALUE()    | Pehli value partition mein                  |
+| LAST_VALUE()     | Aakhri value partition mein                 |
+| SUM() OVER()     | Running/cumulative total                    |
+| AVG() OVER()     | Running average                             |
+| COUNT() OVER()   | Total count per partition                   |
+| PARTITION BY     | Groups data logically                       |
+| ORDER BY (OVER)  | Sorts rows within each partition            |
+
+---
+
+ **Conclusion**:  
+Window functions **group by ke bina aggregation, ranking, aur lag/lead analysis** karne ka sabse powerful tool hain — khas tor par **financial reporting**, **customer behavior tracking**, aur **time series analysis** mein.
+
 
 
