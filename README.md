@@ -173,7 +173,7 @@ SELECT * FROM Employees WHERE Email IS NOT NULL;
 
 Umeed hai ke yeh summary aapko SQL ke logical aur comparison operators achi tarah samajhne mein madad degi.
 
-# SQL Aggregate Functions (Roman Urdu mein)
+# SQL Aggregate Functions 
 
 Aggregate functions SQL mein use hoti hain jab humein kai rows ke upar calculations karni hoti hain — jaise total, average, count waghera. Ye functions aik column ki multiple values ko le kar ek single result return karte hain.
 
