@@ -1108,4 +1108,135 @@ DROP TABLE StudentsBackup;
 
 Ye sab commands **table structure aur data management** ke liye basic aur essential hain.
 
-Agle topic mein `JOINS`, `Views`, ya `CTEs` chahiye ho to batayen 
+# SQL Set Operators (Roman Urdu + Real-Time Examples + Output)
+
+Set Operators ka use SQL mein do ya zyada `SELECT` queries ke results ko combine karne ke liye hota hai. Har operator ka apna specific role hota hai.
+
+---
+
+🎓 **Scenario**: Humare paas do tables hain: `ScienceStudents` aur `ArtsStudents`
+
+```sql
+-- ScienceStudents
+CREATE TABLE ScienceStudents (
+  StudentID INT,
+  Name VARCHAR(50)
+);
+
+INSERT INTO ScienceStudents VALUES
+(1, 'Ali'),
+(2, 'Sara'),
+(3, 'Usman');
+
+-- ArtsStudents
+CREATE TABLE ArtsStudents (
+  StudentID INT,
+  Name VARCHAR(50)
+);
+
+INSERT INTO ArtsStudents VALUES
+(3, 'Usman'),
+(4, 'Zara'),
+(5, 'Ahmed');
+```
+
+---
+
+## 1. `UNION` – Dono tables ke unique records combine karta hai (duplicates hata deta hai)
+
+```sql
+SELECT Name FROM ScienceStudents
+UNION
+SELECT Name FROM ArtsStudents;
+```
+
+📌 **Output:**
+
+| Name   |
+|--------|
+| Ali    |
+| Sara   |
+| Usman  |
+| Zara   |
+| Ahmed  |
+
+📝 **Explanation:** Sirf unique names aayenge. `Usman` do baar hai, lekin ek hi baar show hoga.
+
+---
+
+## 2. `UNION ALL` – Dono tables ke sab records combine karta hai (duplicates bhi dikhata hai)
+
+```sql
+SELECT Name FROM ScienceStudents
+UNION ALL
+SELECT Name FROM ArtsStudents;
+```
+
+📌 **Output:**
+
+| Name   |
+|--------|
+| Ali    |
+| Sara   |
+| Usman  |
+| Usman  |
+| Zara   |
+| Ahmed  |
+
+📝 **Explanation:** Yahan `Usman` 2 dafa show ho raha hai kyunke `UNION ALL` duplicates bhi show karta hai.
+
+---
+
+## 3. `INTERSECT` – Sirf wo records jo dono tables mein common hon
+
+```sql
+SELECT Name FROM ScienceStudents
+INTERSECT
+SELECT Name FROM ArtsStudents;
+```
+
+📌 **Output:**
+
+| Name   |
+|--------|
+| Usman  |
+
+📝 **Explanation:** Sirf `Usman` dono tables mein common tha, sirf wahi output mein aaya.
+
+---
+
+## 4. `EXCEPT` – Pehli query ke results mein se doosri query ke results hata deta hai
+
+```sql
+SELECT Name FROM ScienceStudents
+EXCEPT
+SELECT Name FROM ArtsStudents;
+```
+
+📌 **Output:**
+
+| Name   |
+|--------|
+| Ali    |
+| Sara   |
+
+📝 **Explanation:** `ScienceStudents` mein se sirf `Ali` aur `Sara` aise names hain jo `ArtsStudents` mein nahi hain.
+
+---
+
+## 📌 Summary Table:
+
+| Operator    | Kya karta hai |
+|-------------|----------------|
+| `UNION`     | Combine karta hai aur duplicates hata deta hai |
+| `UNION ALL` | Combine karta hai with duplicates |
+| `INTERSECT` | Sirf common records dikhata hai |
+| `EXCEPT`    | Pehli list mein se doosri list ke records nikal deta hai |
+
+---
+
+🧠 **Note:**
+- Har `SELECT` mein columns ka order aur data type same hona chahiye.
+- Set operators column aliases use karne mein help karte hain result ko readable banane mein.
+
+Agle topic mein `JOINS`, `Subqueries`, ya `Stored Procedures` chahiyein to zaroor batayen ✅
