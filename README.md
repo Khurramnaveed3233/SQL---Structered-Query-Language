@@ -1444,5 +1444,253 @@ LEFT JOIN Employees2 m
 
 ---
 
-Agar aap chahain to `Subqueries`, `Stored Procedures`, ya `Indexes` par bhi real-time examples ke saath content banaya jaa sakta hai ✅
+# SQL Subqueries & CTEs (Asaan Zuban + Real-Life Examples + Output)
+
+SQL mein **Subqueries** aur **CTEs (Common Table Expressions)** ka use hum tab karte hain jab hum nested ya temporary results create karke complex queries ko simplify karna chahtay hain.
+
+---
+
+## 🎓 Tables Setup
+
+```sql
+-- Employees Table
+CREATE TABLE Employees (
+  EmpID INT,
+  Name VARCHAR(50),
+  Salary INT,
+  DeptID INT
+);
+
+INSERT INTO Employees VALUES
+(1, 'Ali', 70000, 10),
+(2, 'Sara', 85000, 20),
+(3, 'Usman', 60000, 10),
+(4, 'Zara', 75000, 30),
+(5, 'Ahmed', 50000, 20);
+
+-- Departments Table
+CREATE TABLE Departments (
+  DeptID INT,
+  DeptName VARCHAR(50)
+);
+
+INSERT INTO Departments VALUES
+(10, 'HR'),
+(20, 'Finance'),
+(30, 'IT');
+```
+
+---
+
+## 1. 🔁 Subquery in `SELECT` – Calculate something inline
+
+```sql
+SELECT Name, Salary,
+  (SELECT AVG(Salary) FROM Employees) AS AvgSalary
+FROM Employees;
+```
+
+📌 **Output:**
+
+| Name   | Salary | AvgSalary |
+|--------|--------|-----------|
+| Ali    | 70000  | 68000     |
+| Sara   | 85000  | 68000     |
+| Usman  | 60000  | 68000     |
+| Zara   | 75000  | 68000     |
+| Ahmed  | 50000  | 68000     |
+
+📝 **Explanation:** Har row ke saath puray table ka average salary show ho rahi hai.
+
+---
+
+## 2. 🧠 Subquery in `WHERE` – Filter based on subresult
+
+```sql
+SELECT Name, Salary
+FROM Employees
+WHERE Salary > (SELECT AVG(Salary) FROM Employees);
+```
+
+📌 **Output:**
+
+| Name   | Salary |
+|--------|--------|
+| Sara   | 85000  |
+| Zara   | 75000  |
+
+📝 **Explanation:** Sirf un employees ko dikhaya jinhon ne average se zyada salary li hai.
+
+---
+
+## 3. 🧱 Subquery in `FROM` – Treat subquery as table
+
+```sql
+SELECT DeptID, AvgSal
+FROM (
+  SELECT DeptID, AVG(Salary) AS AvgSal
+  FROM Employees
+  GROUP BY DeptID
+) AS DeptAvgs;
+```
+
+📌 **Output:**
+
+| DeptID | AvgSal |
+|--------|--------|
+| 10     | 65000  |
+| 20     | 67500  |
+| 30     | 75000  |
+
+📝 **Explanation:** Har department ki average salary calculate ki gayi.
+
+---
+
+## 4. ✅ `EXISTS` – Check karta hai ke koi record exist karta hai ya nahi
+
+```sql
+SELECT DeptName
+FROM Departments d
+WHERE EXISTS (
+  SELECT 1 FROM Employees e
+  WHERE e.DeptID = d.DeptID
+);
+```
+
+📌 **Output:**
+
+| DeptName |
+|----------|
+| HR       |
+| Finance  |
+| IT       |
+
+📝 **Explanation:** Sirf un departments ko show kiya jahan employee exist karta hai.
+
+---
+
+## 5. 🔁 `IN` vs `NOT IN`
+
+```sql
+-- IN: Show employees from Finance or HR
+SELECT Name
+FROM Employees
+WHERE DeptID IN (10, 20);
+
+-- NOT IN: Exclude employees from Finance
+SELECT Name
+FROM Employees
+WHERE DeptID NOT IN (20);
+```
+
+📌 **Output (IN):**
+
+| Name   |
+|--------|
+| Ali    |
+| Sara   |
+| Usman  |
+| Ahmed  |
+
+📌 **Output (NOT IN):**
+
+| Name   |
+|--------|
+| Ali    |
+| Usman  |
+| Zara   |
+
+📝 **Explanation:** `IN` include karta hai list wale values, `NOT IN` exclude karta hai.
+
+---
+
+## 6. 📦 `WITH` (CTE - Common Table Expression)
+
+Temporary result create karta hai jo main query ke liye use hota hai.
+
+```sql
+WITH HighEarners AS (
+  SELECT Name, Salary
+  FROM Employees
+  WHERE Salary > 70000
+)
+SELECT * FROM HighEarners;
+```
+
+📌 **Output:**
+
+| Name   | Salary |
+|--------|--------|
+| Sara   | 85000  |
+| Zara   | 75000  |
+
+📝 **Explanation:** Pehle ek temporary table bana (HighEarners), phir use select kiya.
+
+---
+
+## 7. ♻️ Recursive CTE – Jab data hierarchical ho (jaise Manager - Employee chain)
+
+🎓 Example:
+
+```sql
+-- Simple employee hierarchy
+CREATE TABLE EmpHierarchy (
+  EmpID INT,
+  Name VARCHAR(50),
+  ManagerID INT
+);
+
+INSERT INTO EmpHierarchy VALUES
+(1, 'Ali', NULL),
+(2, 'Sara', 1),
+(3, 'Usman', 2),
+(4, 'Zara', 2),
+(5, 'Ahmed', 3);
+```
+
+```sql
+WITH RECURSIVE Chain AS (
+  SELECT EmpID, Name, ManagerID, 1 AS Level
+  FROM EmpHierarchy
+  WHERE ManagerID IS NULL
+
+  UNION ALL
+
+  SELECT e.EmpID, e.Name, e.ManagerID, c.Level + 1
+  FROM EmpHierarchy e
+  JOIN Chain c ON e.ManagerID = c.EmpID
+)
+SELECT * FROM Chain;
+```
+
+📌 **Output:**
+
+| EmpID | Name   | ManagerID | Level |
+|-------|--------|-----------|-------|
+| 1     | Ali    | NULL      | 1     |
+| 2     | Sara   | 1         | 2     |
+| 3     | Usman  | 2         | 3     |
+| 4     | Zara   | 2         | 3     |
+| 5     | Ahmed  | 3         | 4     |
+
+📝 **Explanation:** `Ali` top manager hai, `Sara` uske neeche, aur phir chain chalte ja rahi hai recursively.
+
+---
+
+## 📌 Summary Table
+
+| Concept        | Use Case                             | Real-Life Example                    |
+|----------------|--------------------------------------|--------------------------------------|
+| Subquery (SELECT) | Column mein calculate karna         | Average salary show karna            |
+| Subquery (WHERE)  | Filter karna based on condition     | Above average employees              |
+| Subquery (FROM)   | Table banake group analysis         | Avg salary per department            |
+| EXISTS            | Check record exist karta hai ya nahi| Dept mein koi employee hai ya nahi   |
+| IN / NOT IN       | Filter by value list                | Employees from certain departments   |
+| CTE (`WITH`)      | Temporary table                     | High salary employees                |
+| Recursive CTE     | Hierarchy ya nested data            | Manager-Employee chain               |
+
+---
+
+
+
 
