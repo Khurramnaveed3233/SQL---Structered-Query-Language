@@ -1252,20 +1252,7 @@ SELECT Name FROM ArtsStudents;
 
 ---
 
-Agar aap chahen to mein **ye content PDF format**, **PowerPoint slides**, ya **cheat sheet** mein bhi convert kar sakta hoon.
-
-# SQL Joins (Roman Urdu + Real-Time Examples + Output)
-
-SQL mein `JOIN` ka use tab hota hai jab humein 2 ya zyada tables ke data ko combine karna ho based on a related column (usually foreign key).
-
----
-
-🎓 **Scenario**:
-
-Humare paas 2 tables hain: `Employees` aur `Departments`
-
-```sql
--- Employees Table
+-- 👨‍💼 Employees Table (Matlab logon ki list jahan har employee ka ek department hota hai)
 CREATE TABLE Employees (
   EmpID INT,
   Name VARCHAR(50),
@@ -1276,10 +1263,10 @@ INSERT INTO Employees VALUES
 (1, 'Ali', 10),
 (2, 'Sara', 20),
 (3, 'Usman', 30),
-(4, 'Zara', NULL),
-(5, 'Ahmed', 40);
+(4, 'Zara', NULL),  -- Zara ka department assign nahi hua
+(5, 'Ahmed', 40);   -- Ahmed ka dept ID departments table mein nahi hai
 
--- Departments Table
+-- 🏢 Departments Table (Company ke departments ki list)
 CREATE TABLE Departments (
   DeptID INT,
   DeptName VARCHAR(50)
@@ -1289,130 +1276,72 @@ INSERT INTO Departments VALUES
 (10, 'HR'),
 (20, 'Finance'),
 (30, 'IT'),
-(50, 'Marketing');
-```
+(50, 'Marketing');  -- Is department mein abhi koi employee nahi hai
 
----
-
-## 1. `INNER JOIN` – Sirf wo rows return karta hai jahan match hota ho dono tables mein
-
-```sql
+-- 1️⃣ INNER JOIN – Sirf wo log jinke department ka match ho
 SELECT e.Name, d.DeptName
 FROM Employees e
-INNER JOIN Departments d
-  ON e.DeptID = d.DeptID;
-```
+INNER JOIN Departments d ON e.DeptID = d.DeptID;
+-- Output:
+-- | Name   | DeptName |
+-- |--------|----------|
+-- | Ali    | HR       |
+-- | Sara   | Finance  |
+-- | Usman  | IT       |
 
-📌 **Output:**
-
-| Name   | DeptName |
-|--------|----------|
-| Ali    | HR       |
-| Sara   | Finance  |
-| Usman  | IT       |
-
-📝 **Explanation:** Sirf unhi employees ko show kiya jinhon ne valid department join kiya.
-
----
-
-## 2. `LEFT JOIN` – Left table ke sab rows laata hai, right table ka match ho to wo bhi laata hai
-
-```sql
+-- 2️⃣ LEFT JOIN – Sab employees dikhao, aur unka department agar ho
 SELECT e.Name, d.DeptName
 FROM Employees e
-LEFT JOIN Departments d
-  ON e.DeptID = d.DeptID;
-```
+LEFT JOIN Departments d ON e.DeptID = d.DeptID;
+-- Output:
+-- | Name   | DeptName  |
+-- |--------|-----------|
+-- | Ali    | HR        |
+-- | Sara   | Finance   |
+-- | Usman  | IT        |
+-- | Zara   | NULL      |
+-- | Ahmed  | NULL      |
 
-📌 **Output:**
-
-| Name   | DeptName  |
-|--------|-----------|
-| Ali    | HR        |
-| Sara   | Finance   |
-| Usman  | IT        |
-| Zara   | NULL      |
-| Ahmed  | NULL      |
-
-📝 **Explanation:** `Zara` ka department missing tha (NULL), aur `Ahmed` ka deptID `40` departments table mein nahi hai — isliye unka DeptName `NULL` aaya.
-
----
-
-## 3. `RIGHT JOIN` – Right table ke sab rows laata hai, left ka match ho to wo bhi laata hai
-
-```sql
+-- 3️⃣ RIGHT JOIN – Sab departments dikhao, aur unke employees agar hon
 SELECT e.Name, d.DeptName
 FROM Employees e
-RIGHT JOIN Departments d
-  ON e.DeptID = d.DeptID;
-```
+RIGHT JOIN Departments d ON e.DeptID = d.DeptID;
+-- Output:
+-- | Name   | DeptName   |
+-- |--------|------------|
+-- | Ali    | HR         |
+-- | Sara   | Finance    |
+-- | Usman  | IT         |
+-- | NULL   | Marketing  |
 
-📌 **Output:**
-
-| Name   | DeptName   |
-|--------|------------|
-| Ali    | HR         |
-| Sara   | Finance    |
-| Usman  | IT         |
-| NULL   | Marketing  |
-
-📝 **Explanation:** `Marketing` department mein koi employee nahi hai, isliye `Name = NULL`.
-
----
-
-## 4. `FULL OUTER JOIN` – Dono tables ke sab records laata hai, match ho to merge karta hai, warna `NULL`
-
-```sql
+-- 4️⃣ FULL OUTER JOIN – Sabhi records dono tables se, match ho to merge
 SELECT e.Name, d.DeptName
 FROM Employees e
-FULL OUTER JOIN Departments d
-  ON e.DeptID = d.DeptID;
-```
+FULL OUTER JOIN Departments d ON e.DeptID = d.DeptID;
+-- Output:
+-- | Name   | DeptName   |
+-- |--------|------------|
+-- | Ali    | HR         |
+-- | Sara   | Finance    |
+-- | Usman  | IT         |
+-- | Zara   | NULL       |
+-- | Ahmed  | NULL       |
+-- | NULL   | Marketing  |
 
-📌 **Output:**
-
-| Name   | DeptName   |
-|--------|------------|
-| Ali    | HR         |
-| Sara   | Finance    |
-| Usman  | IT         |
-| Zara   | NULL       |
-| Ahmed  | NULL       |
-| NULL   | Marketing  |
-
-📝 **Explanation:** Sabhi records dikhaye gaye — chahe match ho ya na ho.
-
----
-
-## 5. `CROSS JOIN` – Har row ko doosri table ki har row ke saath combine karta hai (Cartesian Product)
-
-```sql
+-- 5️⃣ CROSS JOIN – Har employee ko har department ke saath mila do
 SELECT e.Name, d.DeptName
 FROM Employees e
 CROSS JOIN Departments d;
-```
+-- Output: (5 × 4 = 20 rows, pehle 5)
+-- | Name   | DeptName  |
+-- |--------|-----------|
+-- | Ali    | HR        |
+-- | Ali    | Finance   |
+-- | Ali    | IT        |
+-- | Ali    | Marketing |
+-- | Sara   | HR        |
 
-📌 **Output:** (5 Employees x 4 Departments = 20 rows)
-
-| Name   | DeptName   |
-|--------|------------|
-| Ali    | HR         |
-| Ali    | Finance    |
-| Ali    | IT         |
-| Ali    | Marketing  |
-| Sara   | HR         |
-| ...    | ...        |
-
-📝 **Explanation:** Har employee ka combination har department ke saath show hota hai.
-
----
-
-## 6. `SELF JOIN` – Table ko khud ke saath join karte hain
-
-🎓 **Example**: Ek table `Employees` jismein har employee ka manager bhi likha gaya hai:
-
-```sql
--- Updated Employees table
+-- 6️⃣ SELF JOIN – Har employee ka manager dikhana (ek hi table ko do dafa join karna)
 CREATE TABLE Employees2 (
   EmpID INT,
   Name VARCHAR(50),
@@ -1420,44 +1349,22 @@ CREATE TABLE Employees2 (
 );
 
 INSERT INTO Employees2 VALUES
-(1, 'Ali', NULL),
-(2, 'Sara', 1),
-(3, 'Usman', 1),
-(4, 'Zara', 2);
-```
+(1, 'Ali', NULL),    -- Ali manager hai
+(2, 'Sara', 1),      -- Sara ka manager Ali hai
+(3, 'Usman', 1),     -- Usman ka bhi Ali manager hai
+(4, 'Zara', 2);      -- Zara ka manager Sara hai
 
-```sql
 SELECT e.Name AS Employee, m.Name AS Manager
 FROM Employees2 e
-LEFT JOIN Employees2 m
-  ON e.ManagerID = m.EmpID;
-```
+LEFT JOIN Employees2 m ON e.ManagerID = m.EmpID;
+-- Output:
+-- | Employee | Manager |
+-- |----------|---------|
+-- | Ali      | NULL    |
+-- | Sara     | Ali     |
+-- | Usman    | Ali     |
+-- | Zara     | Sara    |
 
-📌 **Output:**
-
-| Employee | Manager |
-|----------|---------|
-| Ali      | NULL    |
-| Sara     | Ali     |
-| Usman    | Ali     |
-| Zara     | Sara    |
-
-📝 **Explanation:** Table ko khud se join karke har employee ka manager show kiya gaya.
-
----
-
-## 📌 Summary Table:
-
-| Join Type         | Kya karta hai                                           |
-|-------------------|---------------------------------------------------------|
-| INNER JOIN        | Sirf matched records dikhata hai                        |
-| LEFT JOIN         | Left table ke sab records + right table ka match        |
-| RIGHT JOIN        | Right table ke sab records + left table ka match        |
-| FULL OUTER JOIN   | Dono tables ke sab records, match ho to merge, warna NULL |
-| CROSS JOIN        | Har record ka combination sab ke saath (cartesian)      |
-| SELF JOIN         | Table ko khud ke saath join karta hai                   |
-
----
 
 # SQL Subqueries & CTEs (Asaan Zuban + Real-Life Examples + Output)
 
