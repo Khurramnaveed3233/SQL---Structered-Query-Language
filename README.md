@@ -994,7 +994,7 @@ WHERE expiry_date BETWEEN GETDATE() AND DATEADD(DAY, 30, GETDATE());
  **Conclusion**:  
 Date & time functions are **indispensable** in data science for **time series**, **trend reporting**, **forecasting**, and **temporal filtering**. SQL gives full control to manipulate and format date values as needed for any project.
 
-# 🪟 SQL Window Functions - Roman Urdu mein Samjhaayi gayi
+# 🪟 SQL Window Functions 
 
 Window functions aise SQL functions hote hain jo **row-wise analysis** karte hain bina data ko group kiye huye. Ye functions **analytics**, **ranking**, aur **time-series** tasks mein bohot kaam aate hain.
 
@@ -1078,7 +1078,7 @@ SELECT month, sales,
 FROM monthly_sales;
 ```
 
-🧾 **Output:**
+ **Output:**
 
 | month | sales | previous_sales |
 |-------|-------|----------------|
@@ -1100,7 +1100,7 @@ SELECT month, sales,
 FROM monthly_sales;
 ```
 
-🧾 **Output:**
+ **Output:**
 
 | month | sales | next_sales |
 |-------|-------|------------|
@@ -1168,7 +1168,7 @@ FROM monthly_sales;
 
 ##  10. `COUNT() OVER()` – Row Count without GROUP BY
 
-💡 *Use Case*: Count how many orders per customer without grouping.
+ *Use Case*: Count how many orders per customer without grouping.
 
 ```sql
 SELECT customer_id, order_id,
@@ -1191,7 +1191,7 @@ FROM employees;
 
 ---
 
-## 📈 Real-Life Examples in Data Analysis
+##  Real-Life Examples in Data Analysis
 
 ###  Customer ke Top 3 Orders
 ```sql
@@ -1233,6 +1233,7 @@ FROM sales_data;
 ---
 
  **Conclusion**:  
+ 
 Window functions **group by ke bina aggregation, ranking, aur lag/lead analysis** karne ka sabse powerful tool hain — khas tor par **financial reporting**, **customer behavior tracking**, aur **time series analysis** mein.
 
 
