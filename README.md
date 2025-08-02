@@ -1251,8 +1251,8 @@ SELECT Name FROM ArtsStudents;
 - Column ka naam alias (`AS Name`) use kar ke result aur readable banaya ja sakta hai.
 
 ---
-
--- 👨‍💼 Employees Table (Matlab logon ki list jahan har employee ka ek department hota hai)
+```sql
+-- 👨‍💼 Employees Table (Simple table jahan har employee ka ek department hota hai)
 CREATE TABLE Employees (
   EmpID INT,
   Name VARCHAR(50),
@@ -1277,71 +1277,93 @@ INSERT INTO Departments VALUES
 (20, 'Finance'),
 (30, 'IT'),
 (50, 'Marketing');  -- Is department mein abhi koi employee nahi hai
+```
 
--- 1️⃣ INNER JOIN – Sirf wo log jinke department ka match ho
+## 1️⃣ INNER JOIN – Sirf wo log jinke department ka match ho
+```sql
 SELECT e.Name, d.DeptName
 FROM Employees e
 INNER JOIN Departments d ON e.DeptID = d.DeptID;
--- Output:
--- | Name   | DeptName |
--- |--------|----------|
--- | Ali    | HR       |
--- | Sara   | Finance  |
--- | Usman  | IT       |
+```
+**Output:**
+| Name   | DeptName |
+|--------|----------|
+| Ali    | HR       |
+| Sara   | Finance  |
+| Usman  | IT       |
 
--- 2️⃣ LEFT JOIN – Sab employees dikhao, aur unka department agar ho
+---
+
+## 2️⃣ LEFT JOIN – Sab employees dikhao, aur unka department agar ho
+```sql
 SELECT e.Name, d.DeptName
 FROM Employees e
 LEFT JOIN Departments d ON e.DeptID = d.DeptID;
--- Output:
--- | Name   | DeptName  |
--- |--------|-----------|
--- | Ali    | HR        |
--- | Sara   | Finance   |
--- | Usman  | IT        |
--- | Zara   | NULL      |
--- | Ahmed  | NULL      |
+```
+**Output:**
+| Name   | DeptName  |
+|--------|-----------|
+| Ali    | HR        |
+| Sara   | Finance   |
+| Usman  | IT        |
+| Zara   | NULL      |
+| Ahmed  | NULL      |
 
--- 3️⃣ RIGHT JOIN – Sab departments dikhao, aur unke employees agar hon
+---
+
+## 3️⃣ RIGHT JOIN – Sab departments dikhao, aur unke employees agar hon
+```sql
 SELECT e.Name, d.DeptName
 FROM Employees e
 RIGHT JOIN Departments d ON e.DeptID = d.DeptID;
--- Output:
--- | Name   | DeptName   |
--- |--------|------------|
--- | Ali    | HR         |
--- | Sara   | Finance    |
--- | Usman  | IT         |
--- | NULL   | Marketing  |
+```
+**Output:**
+| Name   | DeptName   |
+|--------|------------|
+| Ali    | HR         |
+| Sara   | Finance    |
+| Usman  | IT         |
+| NULL   | Marketing  |
 
--- 4️⃣ FULL OUTER JOIN – Sabhi records dono tables se, match ho to merge
+---
+
+## 4️⃣ FULL OUTER JOIN – Sabhi records dono tables se, match ho to merge
+```sql
 SELECT e.Name, d.DeptName
 FROM Employees e
 FULL OUTER JOIN Departments d ON e.DeptID = d.DeptID;
--- Output:
--- | Name   | DeptName   |
--- |--------|------------|
--- | Ali    | HR         |
--- | Sara   | Finance    |
--- | Usman  | IT         |
--- | Zara   | NULL       |
--- | Ahmed  | NULL       |
--- | NULL   | Marketing  |
+```
+**Output:**
+| Name   | DeptName   |
+|--------|------------|
+| Ali    | HR         |
+| Sara   | Finance    |
+| Usman  | IT         |
+| Zara   | NULL       |
+| Ahmed  | NULL       |
+| NULL   | Marketing  |
 
--- 5️⃣ CROSS JOIN – Har employee ko har department ke saath mila do
+---
+
+## 5️⃣ CROSS JOIN – Har employee ko har department ke saath mila do
+```sql
 SELECT e.Name, d.DeptName
 FROM Employees e
 CROSS JOIN Departments d;
--- Output: (5 × 4 = 20 rows, pehle 5)
--- | Name   | DeptName  |
--- |--------|-----------|
--- | Ali    | HR        |
--- | Ali    | Finance   |
--- | Ali    | IT        |
--- | Ali    | Marketing |
--- | Sara   | HR        |
+```
+**Output:** *(5 × 4 = 20 rows total, pehle 5 rows neeche)*
+| Name   | DeptName  |
+|--------|-----------|
+| Ali    | HR        |
+| Ali    | Finance   |
+| Ali    | IT        |
+| Ali    | Marketing |
+| Sara   | HR        |
 
--- 6️⃣ SELF JOIN – Har employee ka manager dikhana (ek hi table ko do dafa join karna)
+---
+
+## 6️⃣ SELF JOIN – Har employee ka manager dikhana (ek hi table ko do dafa join karna)
+```sql
 CREATE TABLE Employees2 (
   EmpID INT,
   Name VARCHAR(50),
@@ -1357,13 +1379,14 @@ INSERT INTO Employees2 VALUES
 SELECT e.Name AS Employee, m.Name AS Manager
 FROM Employees2 e
 LEFT JOIN Employees2 m ON e.ManagerID = m.EmpID;
--- Output:
--- | Employee | Manager |
--- |----------|---------|
--- | Ali      | NULL    |
--- | Sara     | Ali     |
--- | Usman    | Ali     |
--- | Zara     | Sara    |
+```
+**Output:**
+| Employee | Manager |
+|----------|---------|
+| Ali      | NULL    |
+| Sara     | Ali     |
+| Usman    | Ali     |
+| Zara     | Sara    |
 
 
 # SQL Subqueries & CTEs (Asaan Zuban + Real-Life Examples + Output)
