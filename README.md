@@ -1281,6 +1281,7 @@ INSERT INTO Departments VALUES
 
 ```
 
+
 ## 1️⃣ INNER JOIN – Sirf wo log jinke department ka match ho
 ```sql
 SELECT e.Name, d.DeptName
