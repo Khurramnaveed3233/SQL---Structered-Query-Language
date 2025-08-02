@@ -790,3 +790,322 @@ FROM Employees;
  **Yeh sab Window Functions report generation, dashboards, aur analytics ke liye bohot kaam aate hain** — jaise performance reports, financial summaries, leaderboard rankings, etc.
 
 Agle topic ka kehna ho to batayen: **JOINS**, **CTEs**, **Subqueries**, ya **Pivot Tables**?
+
+# SQL Conditional Functions (Roman Urdu + Real-Time Examples + Output)
+
+Conditional functions SQL mein istamaal hoti hain taake hum data ko condition ke basis par manipulate ya classify kar saken — jaise agar salary zyada ho to "High", warna "Low", etc.
+
+---
+
+## 🎓 Sample Table: Employees
+
+| EmpID | Name   | Department | Salary | BonusEligible |
+|-------|--------|------------|--------|---------------|
+| 1     | Ali    | HR         | 50000  | Yes           |
+| 2     | Sara   | IT         | 80000  | No            |
+| 3     | Ahmed  | HR         | 60000  | Yes           |
+| 4     | Ayesha | IT         | 85000  | Yes           |
+| 5     | Usman  | Sales      | 55000  | No            |
+
+---
+
+## 1. `CASE` Statement – Condition ke mutabiq custom output dena
+
+```sql
+SELECT 
+  Name, Salary,
+  CASE 
+    WHEN Salary >= 80000 THEN 'High'
+    WHEN Salary >= 60000 THEN 'Medium'
+    ELSE 'Low'
+  END AS SalaryCategory
+FROM Employees;
+```
+
+🔹 **Output:**
+
+| Name   | Salary | SalaryCategory |
+|--------|--------|----------------|
+| Ali    | 50000  | Low            |
+| Sara   | 80000  | High           |
+| Ahmed  | 60000  | Medium         |
+| Ayesha | 85000  | High           |
+| Usman  | 55000  | Low            |
+
+---
+
+## 2. `IF()` – Simple condition (sirf MySQL mein hoti hai)
+
+```sql
+SELECT 
+  Name, Salary,
+  IF(Salary > 60000, 'Above Avg', 'Below Avg') AS SalaryLabel
+FROM Employees;
+```
+
+🔹 **Output:**
+
+| Name   | Salary | SalaryLabel |
+|--------|--------|-------------|
+| Ali    | 50000  | Below Avg   |
+| Sara   | 80000  | Above Avg   |
+| Ahmed  | 60000  | Below Avg   |
+| Ayesha | 85000  | Above Avg   |
+| Usman  | 55000  | Below Avg   |
+
+---
+
+## 3. `IIF()` – SQL Server mein IF ka short form
+
+```sql
+SELECT 
+  Name, Salary,
+  IIF(Salary >= 60000, 'Eligible', 'Not Eligible') AS BonusStatus
+FROM Employees;
+```
+
+🔹 **Output:**
+
+| Name   | Salary | BonusStatus   |
+|--------|--------|---------------|
+| Ali    | 50000  | Not Eligible  |
+| Sara   | 80000  | Eligible      |
+| Ahmed  | 60000  | Eligible      |
+| Ayesha | 85000  | Eligible      |
+| Usman  | 55000  | Not Eligible  |
+
+---
+
+## 4. `NULLIF()` – Dono values barabar hon to NULL return karega, warna pehli value
+
+```sql
+SELECT 
+  Name, BonusEligible,
+  NULLIF(BonusEligible, 'Yes') AS BonusCheck
+FROM Employees;
+```
+
+🔹 **Output:**
+
+| Name   | BonusEligible | BonusCheck |
+|--------|----------------|------------|
+| Ali    | Yes            | NULL       |
+| Sara   | No             | No         |
+| Ahmed  | Yes            | NULL       |
+| Ayesha | Yes            | NULL       |
+| Usman  | No             | No         |
+
+---
+
+## 5. `COALESCE()` – Pehli non-null value return karta hai
+
+```sql
+SELECT 
+  Name,
+  COALESCE(NULL, NULL, Salary, 0) AS FinalSalary
+FROM Employees;
+```
+
+🔹 **Output:**
+
+| Name   | FinalSalary |
+|--------|-------------|
+| Ali    | 50000       |
+| Sara   | 80000       |
+| Ahmed  | 60000       |
+| Ayesha | 85000       |
+| Usman  | 55000       |
+
+---
+
+## 6. `ISNULL()` – Agar value NULL ho to default value return karo (SQL Server only)
+
+```sql
+SELECT 
+  Name,
+  ISNULL(BonusEligible, 'Pending') AS BonusStatus
+FROM Employees;
+```
+
+🔹 **Output:**
+
+| Name   | BonusStatus |
+|--------|-------------|
+| Ali    | Yes         |
+| Sara   | No          |
+| Ahmed  | Yes         |
+| Ayesha | Yes         |
+| Usman  | No          |
+
+(Agar kisi row mein NULL hota to 'Pending' show hota)
+
+---
+
+## 7. `CASE WHEN` with Aggregation – Conditional aggregation example
+
+```sql
+SELECT 
+  Department,
+  COUNT(CASE WHEN BonusEligible = 'Yes' THEN 1 END) AS EligibleCount,
+  COUNT(CASE WHEN BonusEligible = 'No' THEN 1 END) AS NotEligibleCount
+FROM Employees
+GROUP BY Department;
+```
+
+🔹 **Output:**
+
+| Department | EligibleCount | NotEligibleCount |
+|------------|----------------|------------------|
+| HR         | 2              | 0                |
+| IT         | 1              | 1                |
+| Sales      | 0              | 1                |
+
+---
+
+🧠 **Summary:**
+- `CASE`, `IF`, `IIF()` – condition ke mutabiq value dena
+- `NULLIF()` – same value ho to NULL return
+- `COALESCE()` – pehli non-null value return
+- `ISNULL()` – agar NULL ho to default value
+- Aggregated `CASE` – group-wise condition counting
+
+Yeh functions reporting aur decision-making mein bohat kaam aate hain — jaise grade assign karna, eligibility check karna, ya custom columns banana.
+
+Agle topic ka kehna ho to batayen: **JOINS**, **CTEs**, ya **Subqueries**?
+
+
+# SQL Table & Schema Related Commands (Roman Urdu + Real-Time Examples + Output)
+
+Yeh commands SQL mein table banane, usmein data insert/update karne, aur table structure modify ya delete karne ke liye use hoti hain. Neeche sab kuch examples ke saath samjhaya gaya hai.
+
+---
+
+## 🎓 Scenario: Student Management System
+
+---
+
+## 1. `CREATE TABLE` – Nayi table banani
+
+```sql
+CREATE TABLE Students (
+  StudentID INT PRIMARY KEY,
+  Name VARCHAR(50),
+  Age INT,
+  City VARCHAR(50)
+);
+```
+
+📌 **Output:** Table `Students` create ho gayi.
+
+---
+
+## 2. `INSERT INTO` – Table mein data daalna
+
+```sql
+INSERT INTO Students (StudentID, Name, Age, City)
+VALUES 
+  (1, 'Ali', 20, 'Lahore'),
+  (2, 'Sara', 22, 'Karachi'),
+  (3, 'Usman', 21, 'Islamabad');
+```
+
+📌 **Output:** 3 rows insert ho gayin.
+
+---
+
+## 3. `SELECT *` – Data dekhna table se
+
+```sql
+SELECT * FROM Students;
+```
+
+🔹 **Output:**
+
+| StudentID | Name   | Age | City       |
+|-----------|--------|-----|------------|
+| 1         | Ali    | 20  | Lahore     |
+| 2         | Sara   | 22  | Karachi    |
+| 3         | Usman  | 21  | Islamabad  |
+
+---
+
+## 4. `ALTER TABLE` – Table mein column add/update/delete karna
+
+### ➤ Add column:
+```sql
+ALTER TABLE Students ADD Grade CHAR(1);
+```
+
+ **Output:** `Grade` column add ho gaya.
+
+### ➤ Update Grade:
+```sql
+UPDATE Students SET Grade = 'A' WHERE StudentID = 1;
+```
+
+ **Output:** Ali ka grade update ho gaya.
+
+### ➤ Remove column:
+```sql
+ALTER TABLE Students DROP COLUMN Grade;
+```
+
+ **Output:** `Grade` column delete ho gaya.
+
+---
+
+## 5. `UPDATE` – Kisi row ka data change karna
+
+```sql
+UPDATE Students SET City = 'Rawalpindi' WHERE Name = 'Usman';
+```
+
+ **Output:** Usman ki city ab Rawalpindi ho gayi.
+
+---
+
+## 6. `DELETE` – Row delete karna
+
+```sql
+DELETE FROM Students WHERE StudentID = 2;
+```
+
+ **Output:** Sara ka record delete ho gaya.
+
+---
+
+## 7. `SELECT INTO` – Nayi table create karna existing data se
+
+```sql
+SELECT * INTO StudentsBackup FROM Students;
+```
+
+ **Output:** Nayi table `StudentsBackup` ban gayi, jis mein `Students` ka data copy hua hai.
+
+---
+
+## 8. `DROP TABLE` – Table poori delete karna
+
+```sql
+DROP TABLE StudentsBackup;
+```
+
+ **Output:** `StudentsBackup` table permanently delete ho gayi.
+
+---
+
+ **Summary:**
+| Command       | Kaam |
+|---------------|------|
+| `CREATE TABLE` | Nayi table banata hai |
+| `INSERT INTO`  | Data insert karta hai |
+| `SELECT`       | Data dekhne ke liye |
+| `UPDATE`       | Data modify karta hai |
+| `DELETE`       | Row delete karta hai |
+| `ALTER TABLE`  | Table ka structure change karta hai |
+| `SELECT INTO`  | Nayi table banata hai aur data copy karta hai |
+| `DROP TABLE`   | Table delete karta hai |
+
+Ye sab commands **table structure aur data management** ke liye basic aur essential hain.
+
+Agle topic mein `JOINS`, `Views`, ya `CTEs` chahiye ho to batayen 
