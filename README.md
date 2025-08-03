@@ -1488,83 +1488,51 @@ SELECT employee_id, salary_date, salary,
        LAST_VALUE(salary) OVER (PARTITION BY employee_id ORDER BY salary_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS latest_salary
 FROM salaries;
 ```
---  Example Dataset: Customers Table
+ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING ka matlab kya hota hai?
 
-| FullName | Status   | PurchaseAmount | JoinDate   |
-|----------|----------|----------------|------------|
-| Ali      | Active   | 500            | 2021-01-01 |
-| Sana     | Active   | 700            | 2021-02-01 |
-| Ahmed    | Inactive | 300            | 2020-12-01 |
-| Ayesha   | Inactive | 600            | 2021-03-01 |
+Ye window frame ka part hai, jo SQL ko batata hai ke:
 
---------------------------------------------------------------------------------
+"Har row ke liye pura group ka data consider karo — starting se le kar end tak."
 
---  FIRST_VALUE(): 
+Asaan Lafzon Mein:
 
-Har group ka pehla PurchaseAmount return karta hai
+Term	Matlab
+UNBOUNDED PRECEDING	Group ke bilkul pehle record se shuru karo
+UNBOUNDED FOLLOWING	Group ke bilkul aakhri record tak jao
+Pura phrase ka matlab:	"Poora group dekho, pehle se aakhri tak sab rows ka data use karo"
 
-SELECT 
-  FullName,
-  Status,
-  PurchaseAmount,
-  JoinDate,
-  FIRST_VALUE(PurchaseAmount) OVER (
-    PARTITION BY Status 
-    ORDER BY JoinDate
-  ) AS FirstPurchase
-FROM Customers;
+Kyun Zaroori Hai?
 
---  Explanation:
+Agar tum LAST_VALUE() function use karo bina is phrase ke, to wo sirf current row tak ka data dekhta hai — isliye result galat aa sakta hai.
 
--- Status ke mutabiq group banayenge (Active/Inctive)
--- Har group mein rows ko JoinDate ke mutabiq order karenge
--- Pehle record ka PurchaseAmount return hoga sab rows ke liye
+Is phrase ko lagane ka matlab hai:
 
---  Output:
+"Mujhe last row ka value har row ke liye chahiye, to poora group dekho!"
 
-| FullName | Status   | PurchaseAmount | FirstPurchase |
-|----------|----------|----------------|----------------|
-| Ali      | Active   | 500            | 500            |
-| Sana     | Active   | 700            | 500            |
-| Ahmed    | Inactive | 300            | 300            |
-| Ayesha   | Inactive | 600            | 300            |
+Example:
 
---------------------------------------------------------------------------------
+Jaise agar group mein 3 records hain:
 
---  LAST_VALUE(): Har group ka akhri PurchaseAmount return karta hai
+Row	JoinDate	PurchaseAmount
+1	2021-01-01	500
+2	2021-02-01	700
+3	2021-03-01	900
 
---  Important: 
+Agar tum LAST_VALUE() use karo bina UNBOUNDED... ke:
 
-WINDOW RANGE define karna lazmi hai warna incorrect result milega
+ Row 1 ka last = 500
+ Row 2 ka last = 700
+ Row 3 ka last = 900
 
-SELECT 
-  FullName,
-  Status,
-  PurchaseAmount,
-  JoinDate,
-  LAST_VALUE(PurchaseAmount) OVER (
-    PARTITION BY Status 
-    ORDER BY JoinDate 
-    ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
-  ) AS LastPurchase
-FROM Customers;
+(ye galat hai!)
 
---  Explanation:
+Agar tum UNBOUNDED PRECEDING AND FOLLOWING use karo:
 
--- Har group ke andar sabse akhri record ka PurchaseAmount sab rows mein show hoga
+✅ Row 1 ka last = 900
+✅ Row 2 ka last = 900
+✅ Row 3 ka last = 900
 
--- "UNBOUNDED PRECEDING AND FOLLOWING" se pura window consider hoga
-
---  Output:
-
-| FullName | Status   | PurchaseAmount | LastPurchase |
-|----------|----------|----------------|----------------|
-| Ali      | Active   | 500            | 700            |
-| Sana     | Active   | 700            | 700            |
-| Ahmed    | Inactive | 300            | 600            |
-| Ayesha   | Inactive | 600            | 600            |
-
----
+(ye sahi hai!)
 
 ##  8. `SUM() OVER()` – Cumulative/Running Total
 
