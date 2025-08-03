@@ -1034,3 +1034,316 @@ SELECT * FROM numbers;
 
 ---
 
+# SQL Built-in Functions & Logical Expressions 
+
+Yeh document SQL ke commonly used functions aur expressions ko **simple Roman Urdu** mein explain karta hai — taake aap asaani se samajh sakein aur real-world data analytics projects mein use kar sakein.
+
+---
+
+##  1. `SUBSTRING()`
+
+###  Kya karta hai?
+Ek string ke andar se **specified part** ko nikalta hai.
+
+###  Syntax:
+```sql
+SUBSTRING(column_name, start_position, length)
+```
+
+###  Example:
+```sql
+SELECT SUBSTRING('Pakistan Zindabad', 1, 8) AS result;
+```
+
+ **Output:**
+| result    |
+|-----------|
+| Pakistan  |
+
+---
+
+##  2. `CHARINDEX()`
+
+### ➤ Kya karta hai?
+Ek character ya word ka **index number (position)** batata hai string ke andar.
+
+###  Syntax:
+```sql
+CHARINDEX('find_this', 'search_in_this_string')
+```
+
+###  Example:
+```sql
+SELECT CHARINDEX('Zind', 'Pakistan Zindabad') AS position;
+```
+
+ **Output:**
+| position |
+|----------|
+| 10       |
+
+---
+
+##  3. `DATEDIFF()`
+
+###  Kya karta hai?
+Do dates ke darmiyan **difference (days, months, years)** batata hai.
+
+###  Syntax:
+```sql
+DATEDIFF(interval, start_date, end_date)
+```
+
+###  Example:
+```sql
+SELECT DATEDIFF(DAY, '2023-01-01', '2023-01-10') AS days_between;
+```
+
+ **Output:**
+| days_between |
+|--------------|
+| 9            |
+
+---
+
+##  4. `DATEADD()`
+
+###  Kya karta hai?
+Date mein **naya time (days, months, etc.) add karta hai**.
+
+###  Syntax:
+```sql
+DATEADD(interval, number, date)
+```
+
+###  Example:
+```sql
+SELECT DATEADD(DAY, 5, '2023-01-01') AS new_date;
+```
+
+ **Output:**
+| new_date  |
+|-----------|
+| 2023-01-06|
+
+---
+
+##  5. `DATENAME()`
+
+###  Kya karta hai?
+Date ka **part (day, month name, weekday)** return karta hai in text form.
+
+###  Syntax:
+```sql
+DATENAME(part, date)
+```
+
+###  Example:
+```sql
+SELECT DATENAME(MONTH, '2023-08-03') AS month_name;
+```
+
+ **Output:**
+| month_name |
+|------------|
+| August     |
+
+---
+
+##  6. `CAST()` vs `CONVERT()`
+
+###  Kya karte hain?
+Data type **convert karte hain** (e.g., number to string, string to date)
+
+###  CAST Syntax:
+```sql
+CAST(expression AS data_type)
+```
+
+###  CONVERT Syntax:
+```sql
+CONVERT(data_type, expression, style)
+```
+
+###  Example:
+```sql
+SELECT CAST(123 AS VARCHAR) AS casted_value,
+       CONVERT(VARCHAR, GETDATE(), 103) AS converted_date;
+```
+
+ **Output:**
+| casted_value | converted_date |
+|--------------|----------------|
+| 123          | 03/08/2025     |
+
+---
+
+##  7. `CASE WHEN THEN ELSE END`
+
+### ➤ Kya karta hai?
+Conditional logic apply karta hai (jaise IF/ELSE).
+
+### Syntax:
+```sql
+CASE 
+  WHEN condition THEN result
+  ELSE default_result
+END
+```
+
+###  Example:
+```sql
+SELECT 
+  salary,
+  CASE 
+    WHEN salary > 80000 THEN 'High'
+    ELSE 'Normal'
+  END AS salary_status
+FROM employees;
+```
+
+ **Output:**
+| salary | salary_status |
+|--------|----------------|
+| 90000  | High           |
+| 70000  | Normal         |
+
+---
+
+##  8. `COALESCE()`
+
+###  Kya karta hai?
+Jo pehli **non-null value** milti hai, woh return karta hai.
+
+###  Syntax:
+```sql
+COALESCE(val1, val2, val3, ...)
+```
+
+###  Example:
+```sql
+SELECT COALESCE(NULL, NULL, 'Value Mil Gayi') AS result;
+```
+
+ **Output:**
+| result         |
+|----------------|
+| Value Mil Gayi |
+
+---
+
+##  9. `NULLIF()`
+
+### ➤ Kya karta hai?
+Agar dono values same hon to `NULL` return karta hai, warna pehli value.
+
+###  Example:
+```sql
+SELECT NULLIF(100, 100) AS result1,
+       NULLIF(100, 90) AS result2;
+```
+
+ **Output:**
+| result1 | result2 |
+|---------|---------|
+| NULL    | 100     |
+
+---
+
+##  10. `IIF()` (Shortcut of CASE)
+
+###  Kya karta hai?
+Simple condition evaluate karta hai (IF/ELSE style).
+
+###  Syntax:
+```sql
+IIF(condition, true_value, false_value)
+```
+
+###  Example:
+```sql
+SELECT IIF(100 > 50, 'Yes', 'No') AS result;
+```
+
+ **Output:**
+| result |
+|--------|
+| Yes    |
+
+---
+
+##  11. `EXISTS`
+
+###  Kya karta hai?
+Check karta hai ke subquery se **kuch result aaya ya nahi**.
+
+###  Example:
+```sql
+IF EXISTS (SELECT * FROM employees WHERE salary > 100000)
+   PRINT 'High salary employee exists';
+```
+
+ **Output:**
+```text
+High salary employee exists
+```
+
+---
+
+##  12. `IN` vs `NOT IN`
+
+###  Kya karte hain?
+`IN`: Check karta hai value list ke andar hai ya nahi  
+`NOT IN`: Check karta hai value list ke andar **nahi** hai
+
+###  Example:
+```sql
+SELECT employee_name
+FROM employees
+WHERE department IN ('HR', 'IT');
+```
+
+ **Output:**
+| employee_name |
+|---------------|
+| Ali           |
+| Sara          |
+
+---
+
+##  Summary Table
+
+| Function         | Use (Roman Urdu)                              |
+|------------------|------------------------------------------------|
+| `SUBSTRING()`     | String ka hissa nikalna                        |
+| `CHARINDEX()`     | Word ka position find karna                   |
+| `DATEDIFF()`      | Do dates ka farq nikalna                       |
+| `DATEADD()`       | Date mein din/mahina/year add karna           |
+| `DATENAME()`      | Date ka part (month, day name) nikalna        |
+| `CAST()`, `CONVERT()` | Data type change karna                     |
+| `CASE WHEN`       | IF/ELSE logic apply karna                     |
+| `COALESCE()`      | First non-null value lana                     |
+| `NULLIF()`        | Same values ko NULL banakar return karna      |
+| `IIF()`           | One-line IF condition                         |
+| `EXISTS`          | Check karna ke result aata hai ya nahi        |
+| `IN`, `NOT IN`    | Value list mein hai ya nahi                   |
+
+---
+
+##  Real-World Use Cases
+
+- `SUBSTRING()`, `CHARINDEX()` → Email se domain nikalna
+- `DATEDIFF()` → Customer ko kitne din se contact nahi kiya
+- `DATEADD()` → Next follow-up date set karna
+- `CASE` / `IIF()` → Customer status label assign karna
+- `EXISTS` → Data presence validation in subqueries
+
+---
+
+##  Tips
+
+- Hamesha `NULL` values handle karein with `COALESCE()` ya `IS NULL`
+- `CASE` bohot powerful hota hai for custom logic
+- `IN` small lists ke liye efficient hota hai, lekin large subqueries mein `JOIN` ya `EXISTS` better hota hai
+
+---
