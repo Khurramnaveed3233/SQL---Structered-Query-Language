@@ -551,21 +551,21 @@ JOIN Customers B ON A.City = B.City AND A.CustomerID <> B.CustomerID;
 
 ---
 
-#  SQL Window Functions Guide
+# 📘 SQL Window Functions Guide (Roman Urdu + Outputs)
 
-SQL Window Functions allow you to perform calculations across a set of rows that are somehow related to the current row — **without grouping or collapsing rows**. These are extremely useful in analytics, reporting, and trend analysis.
-
----
-
-##  Why Use Window Functions?
-
-- Retain row-level data while performing calculations
-- Perform rankings, running totals, percentiles, and comparisons
-- Avoid complicated self-joins and subqueries
+SQL Window Functions aise functions hote hain jo rows ke group par calculation karte hain, lekin **har row ka data preserve** karte hain. Ye analytics, ranking, running totals aur comparison ke liye kaafi useful hote hain.
 
 ---
 
-##  Syntax
+## 📌 Window Functions Kyun Use Karte Hain?
+
+- Har row ka data rakhtay huay calculation karna
+- Rank dena, running totals nikalna, pehle/baad wali row compare karna
+- Complex subqueries ya self-joins se bachna
+
+---
+
+## 🧾 Syntax
 
 ```sql
 <function_name>(expression) 
@@ -575,15 +575,16 @@ OVER (
 )
 ```
 
-- `PARTITION BY`: Optional. Divides result set into groups.
-- `ORDER BY`: Defines the order of rows within the partition.
+- `PARTITION BY`: Optional — data ko groups mein divide karta hai
+- `ORDER BY`: Row ka order define karta hai
 
 ---
 
-##  Common Window Functions
+## 🔧 Common Window Functions
 
 ### 1. `ROW_NUMBER()`
-Assigns a unique number to each row in its partition.
+
+Har partition ke andar unique row number assign karta hai.
 
 ```sql
 SELECT 
@@ -593,10 +594,21 @@ SELECT
 FROM employees;
 ```
 
-### 2. `RANK()` and `DENSE_RANK()`
-Ranks rows, but:
-- `RANK()` skips numbers on ties.
-- `DENSE_RANK()` doesn’t skip numbers.
+📤 **Output Example:**
+
+| employee_name | department | row_num |
+|---------------|------------|---------|
+| Ali           | HR         | 1       |
+| Ahmed         | HR         | 2       |
+| Sara          | IT         | 1       |
+| Bilal         | IT         | 2       |
+
+---
+
+### 2. `RANK()` vs `DENSE_RANK()`
+
+- `RANK()` tie par number skip karta hai
+- `DENSE_RANK()` tie par number skip nahi karta
 
 ```sql
 SELECT 
@@ -607,8 +619,20 @@ SELECT
 FROM employees;
 ```
 
+📤 **Output Example:**
+
+| employee_name | salary | rank | dense_rank |
+|---------------|--------|------|------------|
+| Ali           | 90000  | 1    | 1          |
+| Sara          | 90000  | 1    | 1          |
+| Ahmed         | 85000  | 3    | 2          |
+| Bilal         | 80000  | 4    | 3          |
+
+---
+
 ### 3. `NTILE(n)`
-Divides data into `n` roughly equal groups (quantiles).
+
+Data ko `n` equal groups (quantiles) mein divide karta hai.
 
 ```sql
 SELECT 
@@ -618,8 +642,20 @@ SELECT
 FROM employees;
 ```
 
-### 4. `LAG()` and `LEAD()`
-Fetch previous or next row’s value.
+ **Output Example:**
+
+| employee_name | salary | quartile |
+|---------------|--------|----------|
+| Ali           | 95000  | 1        |
+| Sara          | 90000  | 1        |
+| Ahmed         | 85000  | 2        |
+| Bilal         | 80000  | 2        |
+
+---
+
+### 4. `LAG()` aur `LEAD()`
+
+Previous ya next row ka data access karne ke liye use hotay hain.
 
 ```sql
 SELECT 
@@ -630,8 +666,20 @@ SELECT
 FROM employees;
 ```
 
-### 5. `FIRST_VALUE()` and `LAST_VALUE()`
-Fetch the first or last value within a partition.
+ **Output Example:**
+
+| employee_name | salary | prev_salary | next_salary |
+|---------------|--------|-------------|-------------|
+| Ali           | 70000  | NULL        | 75000       |
+| Sara          | 75000  | 70000       | 80000       |
+| Ahmed         | 80000  | 75000       | 85000       |
+| Bilal         | 85000  | 80000       | NULL        |
+
+---
+
+### 5. `FIRST_VALUE()` aur `LAST_VALUE()`
+
+Partition ke andar pehli ya aakhri value return karta hai.
 
 ```sql
 SELECT 
@@ -642,8 +690,18 @@ SELECT
 FROM employees;
 ```
 
-### 6. Aggregate Functions with OVER()
-Functions like `SUM()`, `AVG()`, `COUNT()` can be used as window functions.
+ **Output Example:**
+
+| department | employee_name | salary | top_salary |
+|------------|----------------|--------|------------|
+| HR         | Ali            | 90000  | 90000      |
+| HR         | Ahmed          | 85000  | 90000      |
+| IT         | Sara           | 95000  | 95000      |
+| IT         | Bilal          | 87000  | 95000      |
+
+---
+
+### 6. Aggregates with Window (e.g., SUM, AVG)
 
 ```sql
 SELECT 
@@ -654,20 +712,29 @@ SELECT
 FROM employees;
 ```
 
+ **Output Example:**
+
+| department | employee_name | salary | running_total |
+|------------|----------------|--------|----------------|
+| HR         | Ali            | 70000  | 70000          |
+| HR         | Ahmed          | 75000  | 145000         |
+| IT         | Sara           | 80000  | 80000          |
+| IT         | Bilal          | 85000  | 165000         |
+
 ---
 
-##  Real-World Example
+##  Real Example: Sales Table
 
 **Table: sales**
 
 | id | region | salesperson | amount | sale_date  |
 |----|--------|-------------|--------|------------|
-| 1  | East   | Alice       | 1000   | 2023-01-01 |
-| 2  | East   | Bob         | 1500   | 2023-01-02 |
-| 3  | East   | Alice       | 700    | 2023-01-03 |
-| 4  | West   | Charlie     | 2000   | 2023-01-01 |
+| 1  | East   | Ali         | 1000   | 2023-01-01 |
+| 2  | East   | Sara        | 1500   | 2023-01-02 |
+| 3  | East   | Ali         | 700    | 2023-01-03 |
+| 4  | West   | Bilal       | 2000   | 2023-01-01 |
 
-**Query**: Running total of sales by salesperson and ranking within region
+**Query**: Salesperson ka running total aur region ke andar rank:
 
 ```sql
 SELECT 
@@ -679,46 +746,52 @@ SELECT
 FROM sales;
 ```
 
----
+ **Output Example:**
 
-##  Comparison Table
-
-| Function         | Description                                 |
-|------------------|---------------------------------------------|
-| `ROW_NUMBER()`   | Unique row number within each partition     |
-| `RANK()`         | Rank with gaps on tie values                |
-| `DENSE_RANK()`   | Rank without gaps                           |
-| `NTILE(n)`       | Split rows into `n` buckets or quantiles    |
-| `LAG()`          | Get value from previous row                 |
-| `LEAD()`         | Get value from next row                     |
-| `FIRST_VALUE()`  | First value in ordered partition            |
-| `LAST_VALUE()`   | Last value in ordered partition             |
-| `SUM()`, `AVG()` | Running totals/averages per partition       |
+| region | salesperson | amount | running_sales | region_rank |
+|--------|-------------|--------|----------------|--------------|
+| East   | Ali         | 1000   | 1000           | 2            |
+| East   | Sara        | 1500   | 1500           | 1            |
+| East   | Ali         | 700    | 1700           | 3            |
+| West   | Bilal       | 2000   | 2000           | 1            |
 
 ---
 
-##  Tips & Best Practices
+##  Summary Table
 
-- Always use `ORDER BY` inside `OVER()` for correct row sequence.
-- Use `PARTITION BY` to reset calculations per group (e.g., department, region).
-- Combine multiple window functions to build advanced insights.
-- Prefer `ROW_NUMBER()` when needing unique identifiers per group.
-
----
-
-##  Use Cases in Analytics
-
-- Top-N ranking in categories (e.g., top 3 products per region)
-- Compare current vs previous performance (LAG/LEAD)
-- Cumulative totals (SUM() OVER)
-- Sales trend tracking
-- Customer behavior analysis (e.g., churn prediction)
+| Function        | Kya Karta Hai                           |
+|------------------|------------------------------------------|
+| `ROW_NUMBER()`   | Har row ko unique number deta hai        |
+| `RANK()`         | Rank deta hai, tie par number skip karta hai |
+| `DENSE_RANK()`   | Rank deta hai, number skip nahi karta     |
+| `NTILE(n)`       | Data ko buckets mein divide karta hai     |
+| `LAG()`          | Previous row ka data laata hai            |
+| `LEAD()`         | Next row ka data laata hai                |
+| `FIRST_VALUE()`  | Partition ka pehla value laata hai        |
+| `LAST_VALUE()`   | Partition ka aakhri value laata hai       |
+| `SUM()`, `AVG()` | Aggregate functions per row mein          |
 
 ---
 
-##  Summary
+##  Use Cases in Real Life
 
-SQL Window Functions are powerful tools for data analysts to perform complex row-wise calculations **without losing granularity**. Learn them well to write cleaner, more efficient SQL for dashboards, reports, and insights.
+- Top 3 salespersons per region nikaalna
+- Month-over-month product sale comparison
+- Customer behavior (first/last purchase)
+- Running totals aur moving averages
+- Leaderboard create karna
+
+---
+
+##  Tips
+
+- `ORDER BY` zaroori hai jab row-wise comparison kar rahe ho
+- `PARTITION BY` se groups define karo jahan calculation repeat honi chahiye
+- Multiple window functions combine karo for powerful insights
+- Excel jese kaam SQL mein easily window functions se hotay hain
+
+---
+
 
 ---
 
