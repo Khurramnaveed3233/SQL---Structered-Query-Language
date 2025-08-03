@@ -1743,6 +1743,40 @@ FROM sales_data;
 - Conditional logic with NULL values
 - Clean numeric analysis
 
+NULLIF() kya karta hai?
+NULLIF() 2 values ko compare karta hai:
+
+Agar dono values same hoon → result NULL deta hai
+
+Agar different hoon → pehli value wapas deta hai
+
+Asaan Example:
+
+SELECT NULLIF(5, 5);   -- Output: NULL
+SELECT NULLIF(5, 3);   -- Output: 5
+Samajhne ka Tareeqa:
+
+NULLIF(5, 5) ka matlab:
+"Agar 5 aur 5 same hain → NULL dedo"
+
+NULLIF(5, 3) ka matlab:
+"5 aur 3 same nahi → pehli value 5 dedo"
+
+Real-Life Use:
+
+Agar aap kisi number ko divide kar rahe ho aur chahte ho ke 0 se division na ho (kyunki error deta hai), to NULLIF() ka use karo:
+
+
+SELECT Price / NULLIF(Quantity, 0) AS PerItemPrice
+FROM Orders;
+
+Yahan agar Quantity = 0 hoga, to NULLIF() usse NULL bana dega → aur division error se bach jao ge.
+
+Summary:
+
+NULLIF(a, b) ka matlab:
+Agar a aur b same hain, to NULL dedo — warna a wapas karo.
+
 ---
 
 ## 4. IIF()
