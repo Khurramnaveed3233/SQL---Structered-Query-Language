@@ -551,13 +551,13 @@ JOIN Customers B ON A.City = B.City AND A.CustomerID <> B.CustomerID;
 
 ---
 
-# 📘 SQL Window Functions Guide (Roman Urdu + Outputs)
+#  SQL Window Functions Guide 
 
 SQL Window Functions aise functions hote hain jo rows ke group par calculation karte hain, lekin **har row ka data preserve** karte hain. Ye analytics, ranking, running totals aur comparison ke liye kaafi useful hote hain.
 
 ---
 
-## 📌 Window Functions Kyun Use Karte Hain?
+##  Window Functions Kyun Use Karte Hain?
 
 - Har row ka data rakhtay huay calculation karna
 - Rank dena, running totals nikalna, pehle/baad wali row compare karna
@@ -565,7 +565,7 @@ SQL Window Functions aise functions hote hain jo rows ke group par calculation k
 
 ---
 
-## 🧾 Syntax
+##  Syntax
 
 ```sql
 <function_name>(expression) 
@@ -580,7 +580,7 @@ OVER (
 
 ---
 
-## 🔧 Common Window Functions
+##  Common Window Functions
 
 ### 1. `ROW_NUMBER()`
 
@@ -594,7 +594,7 @@ SELECT
 FROM employees;
 ```
 
-📤 **Output Example:**
+ **Output Example:**
 
 | employee_name | department | row_num |
 |---------------|------------|---------|
@@ -619,7 +619,7 @@ SELECT
 FROM employees;
 ```
 
-📤 **Output Example:**
+ **Output Example:**
 
 | employee_name | salary | rank | dense_rank |
 |---------------|--------|------|------------|
@@ -789,9 +789,6 @@ FROM sales;
 - `PARTITION BY` se groups define karo jahan calculation repeat honi chahiye
 - Multiple window functions combine karo for powerful insights
 - Excel jese kaam SQL mein easily window functions se hotay hain
-
----
-
 
 ---
 
