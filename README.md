@@ -554,7 +554,10 @@ JOIN Customers B ON A.City = B.City AND A.CustomerID <> B.CustomerID;
 
 ---
 
-**Use Case:** You can copy this whole markdown into your notes and reference it while studying or applying joins in your real-world personal or work projects.
-
-Let me know if you want this in PDF, HTML, or a Jupyter notebook format as well!
-
+1. ROW_NUMBER(): Row ko number deta
+2. RANK(): Rank with gaps
+3. DENSE_RANK(): Rank without gaps
+4. NTILE(n): Quantile groups
+5. LAG(): Pichla row data
+6. LEAD(): Agla row data
+7. SUM()/AVG()/MAX(): Aggregate in window
