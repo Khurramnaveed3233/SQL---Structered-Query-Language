@@ -792,4 +792,245 @@ FROM sales;
 
 ---
 
+#  SQL: Views, Stored Procedures, aur CTEs 
+
+---
+
+##  1. Views
+
+###  View Kya Hoti Hai?
+
+- View aik **virtual table** hoti hai jo SQL query ka result hoti hai.
+- Is mein actual data store nahi hota — ye sirf **query ka saved version** hoti hai.
+- Views ka use readability, reusability, aur security ke liye kiya jata hai.
+
+---
+
+###  View Banane ka Syntax:
+
+```sql
+CREATE VIEW view_name AS
+SELECT columns
+FROM table
+WHERE condition;
+```
+
+---
+
+###  Example:
+
+```sql
+CREATE VIEW high_salary_employees AS
+SELECT employee_name, salary
+FROM employees
+WHERE salary > 80000;
+```
+
+ **Output (jab view ko select karein):**
+
+```sql
+SELECT * FROM high_salary_employees;
+```
+
+| employee_name | salary |
+|---------------|--------|
+| Ali           | 90000  |
+| Sara          | 95000  |
+
+---
+
+###  View Ko Update Karna:
+
+```sql
+ALTER VIEW high_salary_employees AS
+SELECT employee_name, salary
+FROM employees
+WHERE salary > 85000;
+```
+
+---
+
+###  View Ko Delete Karna:
+
+```sql
+DROP VIEW high_salary_employees;
+```
+
+---
+
+##  2. Stored Procedures
+
+###  Stored Procedure Kya Hoti Hai?
+
+- Stored procedure aik **predefined SQL statements ka group** hota hai.
+- Aap isay **once define kar ke baar baar call** kar sakte hain.
+- Useful for: Automation, complex logic, performance, and security.
+
+---
+
+### 🔧 Syntax:
+
+```sql
+CREATE PROCEDURE procedure_name
+AS
+BEGIN
+  SQL statements
+END;
+```
+
+---
+
+###  Example:
+
+```sql
+CREATE PROCEDURE get_high_salary
+AS
+BEGIN
+  SELECT employee_name, salary
+  FROM employees
+  WHERE salary > 80000;
+END;
+```
+
+ **Procedure Call Karna:**
+
+```sql
+EXEC get_high_salary;
+```
+
+ **Output:**
+
+| employee_name | salary |
+|---------------|--------|
+| Ali           | 90000  |
+| Sara          | 95000  |
+
+---
+
+###  Parameters Ke Sath Procedure:
+
+```sql
+CREATE PROCEDURE get_salary_above @min_salary INT
+AS
+BEGIN
+  SELECT employee_name, salary
+  FROM employees
+  WHERE salary > @min_salary;
+END;
+```
+
+ **Call Example:**
+
+```sql
+EXEC get_salary_above @min_salary = 85000;
+```
+
+ **Output:**
+
+| employee_name | salary |
+|---------------|--------|
+| Sara          | 95000  |
+
+---
+
+###  Procedure Delete Karna:
+
+```sql
+DROP PROCEDURE get_high_salary;
+```
+
+---
+
+##  3. CTE (Common Table Expression)
+
+###  CTE Kya Hoti Hai?
+
+- CTE aik temporary result set hota hai jo aap query ke sath define karte hain.
+- Isay mainly readability aur recursion ke liye use karte hain.
+
+---
+
+###  Syntax:
+
+```sql
+WITH cte_name AS (
+  SELECT ...
+  FROM ...
+  WHERE ...
+)
+SELECT * FROM cte_name;
+```
+
+---
+
+###  Example:
+
+```sql
+WITH high_salary AS (
+  SELECT employee_name, salary
+  FROM employees
+  WHERE salary > 80000
+)
+SELECT * FROM high_salary;
+```
+
+ **Output:**
+
+| employee_name | salary |
+|---------------|--------|
+| Ali           | 90000  |
+| Sara          | 95000  |
+
+---
+
+###  Recursive CTE Example:
+
+```sql
+WITH numbers AS (
+  SELECT 1 AS num
+  UNION ALL
+  SELECT num + 1
+  FROM numbers
+  WHERE num < 5
+)
+SELECT * FROM numbers;
+```
+
+ **Output:**
+
+| num |
+|-----|
+| 1   |
+| 2   |
+| 3   |
+| 4   |
+| 5   |
+
+---
+
+##  Summary Table
+
+| Concept          | Kya Hai?                              | Use Case                           |
+|------------------|----------------------------------------|------------------------------------|
+| `View`           | Virtual table (query ka result)        | Reusable queries, security         |
+| `Stored Procedure` | SQL commands ka reusable group       | Automation, encapsulation          |
+| `CTE`            | Temporary named result set             | Clean queries, recursion, clarity  |
+
+---
+
+##  Real-World Use Cases
+
+- Views: Reports aur dashboards ke liye filtered data banana
+- Stored Procedures: Monthly salary process automation
+- CTE: Recursive hierarchy jaise category trees, org charts, etc.
+
+---
+
+##  Tips
+
+- Views lightweight hoti hain, lekin performance tab effect hota hai jab view ke andar complex joins hon.
+- Stored Procedures mein parameters use karne se flexibility milti hai.
+- CTEs ko nested ya recursive queries readable banane ke liye use karein.
+
+---
 
