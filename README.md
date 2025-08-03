@@ -1488,6 +1488,79 @@ SELECT employee_id, salary_date, salary,
        LAST_VALUE(salary) OVER (PARTITION BY employee_id ORDER BY salary_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS latest_salary
 FROM salaries;
 ```
+-- 👇 Example Dataset: Customers Table
+
+| FullName | Status   | PurchaseAmount | JoinDate   |
+|----------|----------|----------------|------------|
+| Ali      | Active   | 500            | 2021-01-01 |
+| Sana     | Active   | 700            | 2021-02-01 |
+| Ahmed    | Inactive | 300            | 2020-12-01 |
+| Ayesha   | Inactive | 600            | 2021-03-01 |
+
+--------------------------------------------------------------------------------
+
+-- 🥇 FIRST_VALUE(): Har group ka pehla PurchaseAmount return karta hai
+SELECT 
+  FullName,
+  Status,
+  PurchaseAmount,
+  JoinDate,
+  FIRST_VALUE(PurchaseAmount) OVER (
+    PARTITION BY Status 
+    ORDER BY JoinDate
+  ) AS FirstPurchase
+FROM Customers;
+
+-- 📌 Explanation:
+-- Status ke mutabiq group banayenge (Active/Inctive)
+-- Har group mein rows ko JoinDate ke mutabiq order karenge
+-- Pehle record ka PurchaseAmount return hoga sab rows ke liye
+
+-- ✅ Output:
+| FullName | Status   | PurchaseAmount | FirstPurchase |
+|----------|----------|----------------|----------------|
+| Ali      | Active   | 500            | 500            |
+| Sana     | Active   | 700            | 500            |
+| Ahmed    | Inactive | 300            | 300            |
+| Ayesha   | Inactive | 600            | 300            |
+
+--------------------------------------------------------------------------------
+
+-- 🏁 LAST_VALUE(): Har group ka akhri PurchaseAmount return karta hai
+-- 🔐 Important: WINDOW RANGE define karna lazmi hai warna incorrect result milega
+SELECT 
+  FullName,
+  Status,
+  PurchaseAmount,
+  JoinDate,
+  LAST_VALUE(PurchaseAmount) OVER (
+    PARTITION BY Status 
+    ORDER BY JoinDate 
+    ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING
+  ) AS LastPurchase
+FROM Customers;
+
+-- 📌 Explanation:
+-- Har group ke andar sabse akhri record ka PurchaseAmount sab rows mein show hoga
+-- "UNBOUNDED PRECEDING AND FOLLOWING" se pura window consider hoga
+
+-- ✅ Output:
+| FullName | Status   | PurchaseAmount | LastPurchase |
+|----------|----------|----------------|----------------|
+| Ali      | Active   | 500            | 700            |
+| Sana     | Active   | 700            | 700            |
+| Ahmed    | Inactive | 300            | 600            |
+| Ayesha   | Inactive | 600            | 600            |
+
+
+
+
+
+
+
+
+
+
 
 ---
 
