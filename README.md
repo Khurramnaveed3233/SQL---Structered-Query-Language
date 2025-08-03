@@ -1488,7 +1488,7 @@ SELECT employee_id, salary_date, salary,
        LAST_VALUE(salary) OVER (PARTITION BY employee_id ORDER BY salary_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS latest_salary
 FROM salaries;
 ```
--- 👇 Example Dataset: Customers Table
+--  Example Dataset: Customers Table
 
 | FullName | Status   | PurchaseAmount | JoinDate   |
 |----------|----------|----------------|------------|
@@ -1499,7 +1499,10 @@ FROM salaries;
 
 --------------------------------------------------------------------------------
 
--- 🥇 FIRST_VALUE(): Har group ka pehla PurchaseAmount return karta hai
+--  FIRST_VALUE(): 
+
+Har group ka pehla PurchaseAmount return karta hai
+
 SELECT 
   FullName,
   Status,
@@ -1511,12 +1514,14 @@ SELECT
   ) AS FirstPurchase
 FROM Customers;
 
--- 📌 Explanation:
+--  Explanation:
+
 -- Status ke mutabiq group banayenge (Active/Inctive)
 -- Har group mein rows ko JoinDate ke mutabiq order karenge
 -- Pehle record ka PurchaseAmount return hoga sab rows ke liye
 
--- ✅ Output:
+--  Output:
+
 | FullName | Status   | PurchaseAmount | FirstPurchase |
 |----------|----------|----------------|----------------|
 | Ali      | Active   | 500            | 500            |
@@ -1526,8 +1531,12 @@ FROM Customers;
 
 --------------------------------------------------------------------------------
 
--- 🏁 LAST_VALUE(): Har group ka akhri PurchaseAmount return karta hai
--- 🔐 Important: WINDOW RANGE define karna lazmi hai warna incorrect result milega
+--  LAST_VALUE(): Har group ka akhri PurchaseAmount return karta hai
+
+--  Important: 
+
+WINDOW RANGE define karna lazmi hai warna incorrect result milega
+
 SELECT 
   FullName,
   Status,
@@ -1540,27 +1549,20 @@ SELECT
   ) AS LastPurchase
 FROM Customers;
 
--- 📌 Explanation:
+--  Explanation:
+
 -- Har group ke andar sabse akhri record ka PurchaseAmount sab rows mein show hoga
+
 -- "UNBOUNDED PRECEDING AND FOLLOWING" se pura window consider hoga
 
--- ✅ Output:
+--  Output:
+
 | FullName | Status   | PurchaseAmount | LastPurchase |
 |----------|----------|----------------|----------------|
 | Ali      | Active   | 500            | 700            |
 | Sana     | Active   | 700            | 700            |
 | Ahmed    | Inactive | 300            | 600            |
 | Ayesha   | Inactive | 600            | 600            |
-
-
-
-
-
-
-
-
-
-
 
 ---
 
