@@ -335,25 +335,65 @@ ROLLBACK;
 - Tumhare team members ko limited access dena ho to `GRANT`/`REVOKE` use hota hai.
 - Data updates karte waqt agar galti ho jaye to `ROLLBACK` helpful hota hai warna `COMMIT` se changes save kar lete hain
 
-Bilkul! Aapke diye gaye dataset ke hisaab se, mein aapko SQL JOINs ke baare mein aasan Roman Urdu mein tafseeli (detailed) notes bana kar deta hoon. Yeh notes aapke future reference ke liye bohat mufeed (helpful) honge.
+Bilkul! Yahan SQL JOINs par ek mukammal guide hai, jismein sample data aur har JOIN ka output table bhi shamil hai. Yeh aapke notes ke liye behtareen hai.
 
 ### **SQL JOINs ka Ta'aruf (Introduction)**
 
-SQL mein, data aksar alag-alag, related tables mein store kiya jaata hai taake woh organized rahe aur repeat na ho. JOIN clause ka istemal in alag-alag tables se data ko ek common column (jaise `CustomerID` ya `OrderID`) ki bunyad par mila kar, ek single result set mein dikhane ke liye hota hai.
+SQL mein, data aksar alag-alag, related tables mein store kiya jaata hai. JOIN clause ka istemal in alag-alag tables se data ko ek common column (jaise `CustomerID`) ki bunyad par mila kar, ek single result set mein dikhane ke liye hota hai.
 
-Aapke diye gaye database schema mein, `Customers`, `Orders`, `OrderDetails`, `Products` aur `Stores` tables aapas mein `ID` columns ke zariye juray (linked) hue hain. JOINs humein in links ko istemal karke anmol insights nikalne mein madad dete hain.
+---
+
+### **Sample Data**
+
+Hum in sample tables ko apni misalon ke liye istemal karenge.
+
+**Customers Table**
+| CustomerID | FullName | City |
+|:---|:---|:---|
+| 1 | Ali Khan | Lahore |
+| 2 | Fatima Ahmed | Karachi |
+| 3 | Zara Baig | Lahore |
+| 4 | Bilal Chaudhry | Islamabad |
+
+**Orders Table**
+| OrderID | CustomerID | StoreID | OrderDate |
+|:---|:---|:---|:---|
+| 501 | 1 | 10 | 2023-01-15 |
+| 502 | 2 | 20 | 2023-01-17 |
+| 503 | 1 | 10 | 2023-02-10 |
+| 504 | 3 | 10 | 2023-02-20 |
+| 505 | 99 | 20 | 2023-03-01 |
+
+**Products Table**
+| ProductID | ModelName |
+|:---|:---|
+| 101 | iPhone 14 Pro |
+| 102 | Samsung S23 Ultra |
+| 103 | AirPods Pro |
+
+**OrderDetails Table**
+| OrderDetailID | OrderID | ProductID |
+|:---|:---|:---|
+| 1001 | 501 | 101 |
+| 1002 | 502 | 102 |
+| 1003 | 503 | 103 |
+
+**Stores Table**
+| StoreID | StoreName |
+|:---|:---|
+| 10 | Lahore Flagship |
+| 20 | Karachi Central |
+| 30 | Islamabad Express|
 
 ---
 
 ### **JOINs ki Iqsaam (Types of Joins)**
 
-Yahan hum JOINs ki sab se aam (common) types ko aapke dataset ki misalon (examples) ke saath samjhenge.
-
 #### **1. INNER JOIN**
 
-*   **Aasan Lafzon Mein:** Yeh join sirf woh rows dikhata hai jo **dono tables** mein mojood hon (yani jinka data match karta ho). Yeh Venn Diagram ke "intersection" (dono circles ka common hissa) ki tarah hai.
+*   **Aasan Lafzon Mein:** Yeh sirf woh rows dikhata hai jo **dono tables** mein mojood hon (jinka data match karta ho).
 
-*   **Asal Zindagi ki Misal (Real-World Scenario):** Hamein un sab customers ka naam (`FullName`) aur unke order ki tareekh (`OrderDate`) chahiye jinhon ne koi order place kiya hai.
+*   **Asal Zindagi ki Misal:** Un customers ka naam (`FullName`) aur unke order ki tareekh (`OrderDate`) dikhao jinhon ne koi order place kiya hai.
 
 *   **SQL Code:**
     ```sql
@@ -366,23 +406,23 @@ Yahan hum JOINs ki sab se aam (common) types ko aapke dataset ki misalon (exampl
         Orders AS o ON c.CustomerID = o.CustomerID;
     ```
 
-*   **Mumkina Output (Expected Output):**
+*   **Output Table:**
 | FullName | OrderDate |
-| :--- | :--- |
+|:---|:---|
 | Ali Khan | 2023-01-15 |
 | Fatima Ahmed | 2023-01-17 |
 | Ali Khan | 2023-02-10 |
 | Zara Baig | 2023-02-20 |
 
-*   **Output ki Wazahat (Explanation):** Is result mein sirf wohi customers aayenge jinki `CustomerID` `Customers` table aur `Orders` table, dono mein mojood hai. Agar koi aisa customer hai jisne abhi tak koi order nahi kiya, toh uska naam is list mein nahi aayega.
+*   **Output ki Wazahat:** Sirf wohi customers (Ali, Fatima, Zara) dikhaye gaye jinki `CustomerID` `Orders` table mein mojood thi. Bilal Chaudhry ne koi order nahi kiya, isliye woh is list mein nahi hain. `OrderID` 505 ka `CustomerID` 99 `Customers` table mein nahi hai, isliye woh bhi skip ho gaya.
 
 ---
 
-#### **2. LEFT JOIN (or LEFT OUTER JOIN)**
+#### **2. LEFT JOIN**
 
-*   **Aasan Lafzon Mein:** Yeh join "left" (pehli) table ki **sabhi rows** dikhata hai, aur "right" (doosri) table se sirf matching rows dikhata hai. Agar right table mein koi match na mile, toh uske columns mein `NULL` (khali) likha aa jayega.
+*   **Aasan Lafzon Mein:** Yeh "left" (pehli) table ki **sabhi rows** dikhata hai, aur "right" (doosri) table se sirf matching rows dikhata hai. Jahaan match na mile, wahan `NULL` aa jaata hai.
 
-*   **Asal Zindagi ki Misal:** Hamein **sabhi** customers ka naam chahiye, aur agar unhon ne koi order kiya hai to uski `OrderID` bhi. Agar kisi customer ne order nahi kiya, tab bhi uska naam list mein aana chahiye.
+*   **Asal Zindagi ki Misal:** **Sabhi** customers ka naam dikhao, aur agar unhon ne koi order kiya hai to uski `OrderID` bhi.
 
 *   **SQL Code:**
     ```sql
@@ -395,24 +435,24 @@ Yahan hum JOINs ki sab se aam (common) types ko aapke dataset ki misalon (exampl
         Orders AS o ON c.CustomerID = o.CustomerID;
     ```
 
-*   **Mumkina Output:**
+*   **Output Table:**
 | FullName | OrderID |
-| :--- | :--- |
-| Ali Khan | 101 |
-| Fatima Ahmed | 102 |
-| Ali Khan | 103 |
-| Zara Baig | 104 |
+|:---|:---|
+| Ali Khan | 501 |
+| Ali Khan | 503 |
+| Fatima Ahmed | 502 |
+| Zara Baig | 504 |
 | **Bilal Chaudhry** | **NULL** |
 
-*   **Output ki Wazahat:** Is result mein `Customers` table ke sabhi log shamil hain. Bilal Chaudhry ne koi order nahi kiya, isliye unke `OrderID` ke saamne `NULL` likha hai. Yeh join "kaun se customers ne abhi tak kharidari nahi ki?" jaise sawalon ka jawab dene ke liye behtareen hai.
+*   **Output ki Wazahat:** `Customers` (left table) ke sabhi records shamil hain. Bilal Chaudhry ne koi order nahi kiya, isliye unke `OrderID` ke aage `NULL` hai. Yeh un customers ko dhundne ke liye mufeed hai jinhon ne koi kharidari nahi ki.
 
 ---
 
-#### **3. RIGHT JOIN (or RIGHT OUTER JOIN)**
+#### **3. RIGHT JOIN**
 
-*   **Aasan Lafzon Mein:** Yeh `LEFT JOIN` ka bilkul ulta (opposite) hai. Yeh "right" (doosri) table ki **sabhi rows** dikhata hai aur "left" (pehli) table se sirf matching rows dikhata hai. Agar left table mein match na ho, toh wahan `NULL` aa jayega.
+*   **Aasan Lafzon Mein:** Yeh `LEFT JOIN` ka ulta hai. Yeh "right" (doosri) table ki **sabhi rows** dikhata hai. Jahaan left table mein match na mile, wahan `NULL` aa jaata hai.
 
-*   **Asal Zindagi ki Misal:** Hamein **sabhi** orders aur unke customer ka naam chahiye. Agar kisi ghalti se koi order database mein hai lekin uska customer `Customers` table mein mojood nahi hai, to woh order bhi dikhega.
+*   **Asal Zindagi ki Misal:** **Sabhi** orders aur unke customer ka naam dikhao. Isse hum woh orders bhi dekh sakte hain jinka koi valid customer record nahi hai.
 
 *   **SQL Code:**
     ```sql
@@ -425,25 +465,24 @@ Yahan hum JOINs ki sab se aam (common) types ko aapke dataset ki misalon (exampl
         Orders AS o ON c.CustomerID = o.CustomerID;
     ```
 
-*   **Mumkina Output:**
+*   **Output Table:**
 | FullName | OrderID |
-| :--- | :--- |
-| Ali Khan | 101 |
-| Fatima Ahmed | 102 |
-| Ali Khan | 103 |
-| Zara Baig | 104 |
-| **NULL** | **105** |
+|:---|:---|
+| Ali Khan | 501 |
+| Ali Khan | 503 |
+| Fatima Ahmed | 502 |
+| Zara Baig | 504 |
+| **NULL** | **505** |
 
-*   **Output ki Wazahat:** Is result mein `Orders` table ke sabhi records hain. Farz karein `OrderID` 105 database mein ghalti se enter ho gaya aur uska `CustomerID` `Customers` table mein nahi hai, to uske `FullName` ke saamne `NULL` dikhega.
-    *   **Pro Tip:** Aksar developers `RIGHT JOIN` ke bajaye `LEFT JOIN` hi istemal karte hain, bas tables ki position badal dete hain. Isse code padhne mein aasani rehti hai.
+*   **Output ki Wazahat:** `Orders` (right table) ke sabhi records shamil hain. `OrderID` 505 ka `CustomerID` 99 hai, jo `Customers` table mein nahi hai. Isliye uske `FullName` ke aage `NULL` hai.
 
 ---
 
 #### **4. FULL OUTER JOIN**
 
-*   **Aasan Lafzon Mein:** Yeh join `LEFT` aur `RIGHT` join ka combination hai. Yeh dono tables ki **sabhi rows** dikhata hai. Jahan match mil jaye, wahan data dikhata hai, aur jahan kisi bhi taraf se match na mile, wahan `NULL` dikha deta hai.
+*   **Aasan Lafzon Mein:** Yeh `LEFT` aur `RIGHT` join ka combination hai. Yeh dono tables ki **sabhi rows** dikhata hai. Jahaan match nahi milta, wahan `NULL` aa jaata hai.
 
-*   **Asal Zindagi ki Misal:** Hamein sabhi customers aur sabhi orders ki ek poori list chahiye, chahe unka aapas mein koi link ho ya na ho. Yeh un customers ko bhi dikhayega jinhon ne order nahi kiya aur un orders ko bhi jinka koi customer record nahi hai.
+*   **Asal Zindagi ki Misal:** Sabhi customers aur sabhi orders ki ek poori list, chahe unka aapas mein koi link ho ya na ho.
 
 *   **SQL Code:**
     ```sql
@@ -456,25 +495,25 @@ Yahan hum JOINs ki sab se aam (common) types ko aapke dataset ki misalon (exampl
         Orders AS o ON c.CustomerID = o.CustomerID;
     ```
 
-*   **Mumkina Output:**
+*   **Output Table:**
 | FullName | OrderID |
-| :--- | :--- |
-| Ali Khan | 101 |
-| Fatima Ahmed | 102 |
-| Ali Khan | 103 |
-| Zara Baig | 104 |
+|:---|:---|
+| Ali Khan | 501 |
+| Ali Khan | 503 |
+| Fatima Ahmed | 502 |
+| Zara Baig | 504 |
 | **Bilal Chaudhry** | **NULL** |
-| **NULL** | **105** |
+| **NULL** | **505** |
 
-*   **Output ki Wazahat:** Is list mein Bilal Chaudhry (customer jisne order nahi kiya) bhi hain, aur Order 105 (order jiska customer nahi) bhi hai. Yeh join data audit karne aur discrepancies (farq) dhundne ke liye istemal hota hai.
+*   **Output ki Wazahat:** Is list mein Bilal Chaudhry (customer jisne order nahi kiya) bhi hain, aur Order 505 (order jiska customer nahi) bhi hai. Yeh data mein har tarah ki maloomat ko ek saath dekhne ke liye istemal hota hai.
 
 ---
 
 #### **5. SELF JOIN**
 
-*   **Aasan Lafzon Mein:** Yeh koi alag se JOIN keyword nahi hai, balki yeh ek technique hai jismein ek table ko **khud se hi join** kiya jaata hai. Aisa tab karte hain jab ek hi table ke andar rows ke darmiyan koi relation ho.
+*   **Aasan Lafzon Mein:** Ek table ko **khud se hi join** karna. Yeh tab istemal hota hai jab ek hi table ki rows ke darmiyan koi relation ho.
 
-*   **Asal Zindagi ki Misal:** Aapke dataset mein iski aam misal (jaise employees aur unke managers) nahi hai. Lekin hum ek misal bana sakte hain. Farz karein, humein un customers ko dekhna hai jo **ek hi sheher (City)** se hain.
+*   **Asal Zindagi ki Misal:** Un customers ke joray (pairs) dikhao jo **ek hi sheher (City)** se hain.
 
 *   **SQL Code:**
     ```sql
@@ -488,20 +527,20 @@ Yahan hum JOINs ki sab se aam (common) types ko aapke dataset ki misalon (exampl
         Customers AS c2 ON c1.City = c2.City AND c1.CustomerID < c2.CustomerID;
     ```
 
-*   **Mumkina Output (Farz karein Ali aur Zara dono Lahore se hain):**
+*   **Output Table:**
 | Customer1 | Customer2 | City |
-| :--- | :--- |
+|:---|:---|:---|
 | Ali Khan | Zara Baig | Lahore |
 
-*   **Output ki Wazahat:** Yahan humne `Customers` table ko `c1` aur `c2` do alag naam (aliases) diye. Phir humne unhein `City` column par join kiya. `c1.CustomerID < c2.CustomerID` condition isliye lagayi taake duplicate pairs (jaise Ali-Zara aur Zara-Ali) aur ek hi customer ka khud se pair (Ali-Ali) na bane.
+*   **Output ki Wazahat:** Humne `Customers` table ko do alag naam (`c1`, `c2`) diye. Join `City` par kiya gaya. `c1.CustomerID < c2.CustomerID` ki shart lagayi taake duplicate pairs (Zara-Ali) aur self-pairs (Ali-Ali) na banein.
 
 ---
 
-#### **Multi-Table Joins (Ek se Zyada Tables ko Join Karna)**
+#### **6. Multi-Table Joins (Ek se Zyada Tables ko Join Karna)**
 
-Aap ek hi query mein kai tables ko join kar sakte hain.
+*   **Aasan Lafzon Mein:** Aap ek hi query mein zaroorat ke mutabiq kai tables ko chain ki tarah jod (join) sakte hain.
 
-*   **Asal Zindagi ki Misal:** Hamein customer ka naam (`Customers`), uske order mein khareede gaye product ka naam (`Products`), aur woh order kis store (`Stores`) se place hua, yeh sab ek saath dekhna hai.
+*   **Asal Zindagi ki Misal:** Hamein customer ka naam (`Customers`), uske order mein khareeday gaye product ka naam (`Products`), aur woh order kis store (`Stores`) se place hua, yeh sab ek saath dekhna hai.
 
 *   **SQL Code:**
     ```sql
@@ -516,11 +555,12 @@ Aap ek hi query mein kai tables ko join kar sakte hain.
     INNER JOIN Products AS p ON od.ProductID = p.ProductID
     INNER JOIN Stores AS s ON o.StoreID = s.StoreID;
     ```
-*   **Mumkina Output:**
+*   **Output Table:**
 | FullName | ModelName | StoreName |
-| :--- | :--- | :--- |
+|:---|:---|:---|
 | Ali Khan | iPhone 14 Pro | Lahore Flagship |
 | Fatima Ahmed| Samsung S23 Ultra| Karachi Central |
 | Ali Khan | AirPods Pro | Lahore Flagship |
 
-*   **Output ki Wazahat:** Yeh query `Customers` se `Orders` tak, phir `Orders` se `OrderDetails` tak, phir `OrderDetails` se `Products` tak, aur `Orders` se `Stores` tak ka safar karti hai. Is tarah hum 5 alag-alag tables se data nikal kar ek meaningful report bana paaye.
+*   **Output ki Wazahat:** Yeh query `Customers` -> `Orders` -> `OrderDetails` -> `Products` aur `Orders` -> `Stores` ke links ko istemal karke 5 alag tables se data ko combine kar rahi hai aur ek complete, meaningful report bana rahi hai.
+
