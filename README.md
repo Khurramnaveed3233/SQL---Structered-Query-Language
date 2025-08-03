@@ -550,14 +550,176 @@ JOIN Customers B ON A.City = B.City AND A.CustomerID <> B.CustomerID;
 | SELF JOIN     | Table apne aap se join hota hai           |
 
 ---
+
+#  SQL Window Functions Guide
+
+SQL Window Functions allow you to perform calculations across a set of rows that are somehow related to the current row — **without grouping or collapsing rows**. These are extremely useful in analytics, reporting, and trend analysis.
+
+---
+
+##  Why Use Window Functions?
+
+- Retain row-level data while performing calculations
+- Perform rankings, running totals, percentiles, and comparisons
+- Avoid complicated self-joins and subqueries
+
+---
+
+##  Syntax
+
+```sql
+<function_name>(expression) 
+OVER (
+    [PARTITION BY column_name]
+    [ORDER BY column_name]
+)
+```
+
+- `PARTITION BY`: Optional. Divides result set into groups.
+- `ORDER BY`: Defines the order of rows within the partition.
+
+---
+
+##  Common Window Functions
+
+### 1. `ROW_NUMBER()`
+Assigns a unique number to each row in its partition.
+
+```sql
+SELECT 
+  employee_name,
+  department,
+  ROW_NUMBER() OVER (PARTITION BY department ORDER BY salary DESC) AS row_num
+FROM employees;
+```
+
+### 2. `RANK()` and `DENSE_RANK()`
+Ranks rows, but:
+- `RANK()` skips numbers on ties.
+- `DENSE_RANK()` doesn’t skip numbers.
+
+```sql
+SELECT 
+  employee_name,
+  salary,
+  RANK() OVER (ORDER BY salary DESC) AS rank,
+  DENSE_RANK() OVER (ORDER BY salary DESC) AS dense_rank
+FROM employees;
+```
+
+### 3. `NTILE(n)`
+Divides data into `n` roughly equal groups (quantiles).
+
+```sql
+SELECT 
+  employee_name,
+  salary,
+  NTILE(4) OVER (ORDER BY salary DESC) AS quartile
+FROM employees;
+```
+
+### 4. `LAG()` and `LEAD()`
+Fetch previous or next row’s value.
+
+```sql
+SELECT 
+  employee_name,
+  salary,
+  LAG(salary) OVER (ORDER BY hire_date) AS prev_salary,
+  LEAD(salary) OVER (ORDER BY hire_date) AS next_salary
+FROM employees;
+```
+
+### 5. `FIRST_VALUE()` and `LAST_VALUE()`
+Fetch the first or last value within a partition.
+
+```sql
+SELECT 
+  department,
+  employee_name,
+  salary,
+  FIRST_VALUE(salary) OVER (PARTITION BY department ORDER BY salary DESC) AS top_salary
+FROM employees;
+```
+
+### 6. Aggregate Functions with OVER()
+Functions like `SUM()`, `AVG()`, `COUNT()` can be used as window functions.
+
+```sql
+SELECT 
+  department,
+  employee_name,
+  salary,
+  SUM(salary) OVER (PARTITION BY department ORDER BY hire_date) AS running_total
+FROM employees;
 ```
 
 ---
 
-1. ROW_NUMBER(): Row ko number deta
-2. RANK(): Rank with gaps
-3. DENSE_RANK(): Rank without gaps
-4. NTILE(n): Quantile groups
-5. LAG(): Pichla row data
-6. LEAD(): Agla row data
-7. SUM()/AVG()/MAX(): Aggregate in window
+##  Real-World Example
+
+**Table: sales**
+
+| id | region | salesperson | amount | sale_date  |
+|----|--------|-------------|--------|------------|
+| 1  | East   | Alice       | 1000   | 2023-01-01 |
+| 2  | East   | Bob         | 1500   | 2023-01-02 |
+| 3  | East   | Alice       | 700    | 2023-01-03 |
+| 4  | West   | Charlie     | 2000   | 2023-01-01 |
+
+**Query**: Running total of sales by salesperson and ranking within region
+
+```sql
+SELECT 
+  region,
+  salesperson,
+  amount,
+  SUM(amount) OVER (PARTITION BY salesperson ORDER BY sale_date) AS running_sales,
+  RANK() OVER (PARTITION BY region ORDER BY amount DESC) AS region_rank
+FROM sales;
+```
+
+---
+
+##  Comparison Table
+
+| Function         | Description                                 |
+|------------------|---------------------------------------------|
+| `ROW_NUMBER()`   | Unique row number within each partition     |
+| `RANK()`         | Rank with gaps on tie values                |
+| `DENSE_RANK()`   | Rank without gaps                           |
+| `NTILE(n)`       | Split rows into `n` buckets or quantiles    |
+| `LAG()`          | Get value from previous row                 |
+| `LEAD()`         | Get value from next row                     |
+| `FIRST_VALUE()`  | First value in ordered partition            |
+| `LAST_VALUE()`   | Last value in ordered partition             |
+| `SUM()`, `AVG()` | Running totals/averages per partition       |
+
+---
+
+##  Tips & Best Practices
+
+- Always use `ORDER BY` inside `OVER()` for correct row sequence.
+- Use `PARTITION BY` to reset calculations per group (e.g., department, region).
+- Combine multiple window functions to build advanced insights.
+- Prefer `ROW_NUMBER()` when needing unique identifiers per group.
+
+---
+
+##  Use Cases in Analytics
+
+- Top-N ranking in categories (e.g., top 3 products per region)
+- Compare current vs previous performance (LAG/LEAD)
+- Cumulative totals (SUM() OVER)
+- Sales trend tracking
+- Customer behavior analysis (e.g., churn prediction)
+
+---
+
+##  Summary
+
+SQL Window Functions are powerful tools for data analysts to perform complex row-wise calculations **without losing granularity**. Learn them well to write cleaner, more efficient SQL for dashboards, reports, and insights.
+
+---
+
+
