@@ -1488,51 +1488,68 @@ SELECT employee_id, salary_date, salary,
        LAST_VALUE(salary) OVER (PARTITION BY employee_id ORDER BY salary_date ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) AS latest_salary
 FROM salaries;
 ```
-ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING ka matlab kya hota hai?
+## ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING ka matlab kya hota hai?
 
-Ye window frame ka part hai, jo SQL ko batata hai ke:
+Ye `window frame` ka part hai, jo SQL ko batata hai ke:
 
-"Har row ke liye pura group ka data consider karo — starting se le kar end tak."
+> **"Har row ke liye poora group ka data consider karo — starting se le kar end tak."**
 
-Asaan Lafzon Mein:
+---
 
-Term	Matlab
-UNBOUNDED PRECEDING	Group ke bilkul pehle record se shuru karo
-UNBOUNDED FOLLOWING	Group ke bilkul aakhri record tak jao
-Pura phrase ka matlab:	"Poora group dekho, pehle se aakhri tak sab rows ka data use karo"
+##  Asaan Lafzon Mein:
 
-Kyun Zaroori Hai?
+| Term                  | Matlab                                           |
+|-----------------------|--------------------------------------------------|
+| UNBOUNDED PRECEDING   | Group ke **bilkul pehle** record se shuru karo   |
+| UNBOUNDED FOLLOWING   | Group ke **bilkul aakhri** record tak jao        |
+| **Pura phrase ka matlab:** | "Poora group dekho, pehle se aakhri tak sab rows ka data use karo" |
 
-Agar tum LAST_VALUE() function use karo bina is phrase ke, to wo sirf current row tak ka data dekhta hai — isliye result galat aa sakta hai.
+---
 
-Is phrase ko lagane ka matlab hai:
+##  Kyun Zaroori Hai?
 
-"Mujhe last row ka value har row ke liye chahiye, to poora group dekho!"
+Agar tum `LAST_VALUE()` function use karo **bina** is phrase ke, to wo sirf **current row tak ka data** dekhta hai — is wajah se **result galat** aa sakta hai.
 
-Example:
+ Jab tum ye phrase lagate ho to:
 
-Jaise agar group mein 3 records hain:
+> **"Mujhe group ki last row ka value har row ke liye chahiye, to poora group dekho!"**
 
-Row	JoinDate	PurchaseAmount
-1	2021-01-01	500
-2	2021-02-01	700
-3	2021-03-01	900
+---
 
-Agar tum LAST_VALUE() use karo bina UNBOUNDED... ke:
+##  Example:
 
- Row 1 ka last = 500
- Row 2 ka last = 700
- Row 3 ka last = 900
+Agar tumhare paas ye data ho:
 
-(ye galat hai!)
+| Row | JoinDate   | PurchaseAmount |
+|-----|------------|----------------|
+| 1   | 2021-01-01 | 500            |
+| 2   | 2021-02-01 | 700            |
+| 3   | 2021-03-01 | 900            |
 
-Agar tum UNBOUNDED PRECEDING AND FOLLOWING use karo:
+###  Bina `UNBOUNDED...` ke:
 
-✅ Row 1 ka last = 900
-✅ Row 2 ka last = 900
-✅ Row 3 ka last = 900
+| Row | LAST_VALUE() |
+|-----|--------------|
+| 1   | 500          |
+| 2   | 700          |
+| 3   | 900          |
 
-(ye sahi hai!)
+ (Ye galat hai — har row ko sirf apne upar tak ka data mil raha hai)
+
+---
+
+###  `WITH ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING` ke saath:
+
+| Row | LAST_VALUE() |
+|-----|--------------|
+| 1   | 900          |
+| 2   | 900          |
+| 3   | 900          |
+
+ (Ye sahi hai — har row ko group ki **last** value mil rahi hai)
+
+---
+
 
 ##  8. `SUM() OVER()` – Cumulative/Running Total
 
