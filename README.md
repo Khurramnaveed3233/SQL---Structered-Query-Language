@@ -464,334 +464,58 @@ CustomerID NULL` aur `CustomerID 5` ka match nahi mila, isliye wo rows skip ho g
 - Agar matching customer hai to `FullName` show hota hai, warna `NULL` hota hai.
 - OrderID 103` ka customer `NULL` tha aur `OrderID 104` ka customer ID 5 tha jo Customers table me nahi mila, isliye `FullName = NULL`.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## FULL OUTER JOIN Example (Easy & Detailed)
+
+### Customers Table:
+| CustomerID | FullName    |
+|------------|-------------|
+| 1          | Ali Khan    |
+| 2          | Sara Malik  |
+| 3          | Usman Shah  |
+| 4          | Ayesha      |
+
+### Orders Table:
+| OrderID | CustomerID |
+|---------|------------|
+| 101     | 1          |
+| 102     | 2          |
+| 103     | NULL       |
+| 104     | 5          |
 
 ---
+
+### SQL Query:
+```sql
+SELECT c.FullName, o.OrderID
+FROM Customers c
+FULL JOIN Orders o
+ON c.CustomerID = o.CustomerID;
+
+**Output:**
+
+| FullName   | OrderID |
+|------------|---------|
+| Ali Khan   | 101     |
+| Sara Malik | 102     |
+| Usman Shah | NULL    |
+| Ayesha     | NULL    |
+| NULL       | 103     |
+| NULL       | 104     |
+
+**Easy Explanation:**
+FULL OUTER JOIN = **LEFT JOIN + RIGHT JOIN ka combination**.
+
+- Dono tables ka **poora data** lete hain.  
+- Agar match hota hai → dono ka data **same row me** aata hai.  
+- Agar match nahi hota → jis side ka data missing hota hai, wahan **NULL** show hota hai.
+
+**Example Breakdown:**
+- **Ali Khan (1)** → Order **101** se match.  
+- **Sara Malik (2)** → Order **102** se match.  
+- **Usman Shah (3)** → No order → **OrderID = NULL**.  
+- **Ayesha (4)** → No order → **OrderID = NULL**.  
+- **Order 103 (NULL CustomerID)** → No customer → **FullName = NULL**.  
+- **Order 104 (CustomerID = 5)** → No customer → **FullName = NULL**.                                                                                                            
 
 ---
 
