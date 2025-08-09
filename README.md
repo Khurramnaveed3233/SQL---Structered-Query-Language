@@ -506,7 +506,83 @@ FULL OUTER JOIN = **LEFT JOIN + RIGHT JOIN ka combination**.
 - **Usman Shah (3)** → No order → **OrderID = NULL**.  
 - **Ayesha (4)** → No order → **OrderID = NULL**.  
 - **Order 103 (NULL CustomerID)** → No customer → **FullName = NULL**.  
-- **Order 104 (CustomerID = 5)** → No customer → **FullName = NULL**.  
+- **Order 104 (CustomerID = 5)** → No customer → **FullName = NULL**.
+
+## CROSS JOIN in SQL (Roman Urdu)
+
+**Simple Definition:**  
+CROSS JOIN ka matlab hai **dono tables ki har row ko dusre table ki har row ke saath jorna**.  
+Yani har record Table A ka, Table B ke sabhi records ke saath mil jata hai.  
+Isme **matching ka koi rule** nahi hota — bas combination banta hai.
+
+**Formula:**  
+`Total Rows = (Rows in Table A) × (Rows in Table B)`
+
+---
+
+### Example Tables
+
+**Customers Table:**
+
+| CustomerID | FullName   |
+|------------|------------|
+| 1          | Ali Khan   |
+| 2          | Sara Malik |
+| 3          | Usman Shah |
+| 4          | Ayesha     |
+
+**Orders Table:**
+
+| OrderID | CustomerID |
+|---------|------------|
+| 101     | 1          |
+| 102     | 2          |
+| 103     | NULL       |
+| 104     | 5          |
+
+---
+
+### SQL Query:
+```sql
+SELECT Customers.FullName, Orders.OrderID
+FROM Customers
+CROSS JOIN Orders;
+
+-- Expected Output:
+-- FullName      OrderID
+-- Ali Khan      101
+-- Ali Khan      102
+-- Ali Khan      103
+-- Ali Khan      104
+-- Sara Malik    101
+-- Sara Malik    102
+-- Sara Malik    103
+-- Sara Malik    104
+-- Usman Shah    101
+-- Usman Shah    102
+-- Usman Shah    103
+-- Usman Shah    104
+-- Ayesha        101
+-- Ayesha        102
+-- Ayesha        103
+-- Ayesha        104
+
+/* 
+Easy Roman Urdu Explanation:
+CROSS JOIN me hum dono tables ka har possible combination banate hain.
+
+Matlab:
+- Customers me 4 log hain
+- Orders me 4 order IDs hain
+- Har customer ke saath 4 orders match honge
+- Total 4 × 4 = 16 rows output milengi
+
+Example breakdown:
+"Ali Khan" ke saath → 101, 102, 103, 104
+"Sara Malik" ke saath → 101, 102, 103, 104
+"Usman Shah" ke saath → 101, 102, 103, 104
+"Ayesha" ke saath → 101, 102, 103, 104
+*/
 
 ---
 
