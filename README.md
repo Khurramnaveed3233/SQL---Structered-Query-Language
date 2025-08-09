@@ -508,6 +508,21 @@ FULL OUTER JOIN = **LEFT JOIN + RIGHT JOIN ka combination**.
 - **Order 103 (NULL CustomerID)** → No customer → **FullName = NULL**.  
 - **Order 104 (CustomerID = 5)** → No customer → **FullName = NULL**.
 
+**Mechanism:**
+
+1. **Pehle LEFT JOIN ka result leta hai**  
+   - Left table ke saare rows + matching right table rows.  
+   - Jo match nahi milta, unke right table columns **NULL** ho jate hain.  
+
+2. **Phir RIGHT JOIN ka result leta hai**  
+   - Right table ke saare rows + matching left table rows.  
+   - Jo match nahi milta, unke left table columns **NULL** hote hain.  
+
+3. **Dono results ko merge (UNION) karta hai**  
+   - Is tarah dono tables ke saare rows aajate hain — chahe match ho ya na ho.  
+
+--- 
+
 ## CROSS JOIN in SQL (Roman Urdu)
 
 **Simple Definition:**  
