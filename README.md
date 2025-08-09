@@ -567,8 +567,6 @@ CROSS JOIN Orders;
 -- Ayesha        103
 -- Ayesha        104
 
-/* 
-Easy Roman Urdu Explanation:
 CROSS JOIN me hum dono tables ka har possible combination banate hain.
 
 Matlab:
@@ -582,7 +580,7 @@ Example breakdown:
 "Sara Malik" ke saath → 101, 102, 103, 104
 "Usman Shah" ke saath → 101, 102, 103, 104
 "Ayesha" ke saath → 101, 102, 103, 104
-*/
+
 
 ---
 
