@@ -485,6 +485,7 @@ CustomerID NULL` aur `CustomerID 5` ka match nahi mila, isliye wo rows skip ho g
 ---
 
 ### SQL Query:
+
 ```sql
 SELECT c.FullName, o.OrderID
 FROM Customers c
