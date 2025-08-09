@@ -571,6 +571,17 @@ CROSS JOIN me hum dono tables ka **har possible combination** banate hain.
 - "Usman Shah" ke saath → 101, 102, 103, 104  
 - "Ayesha" ke saath → 101, 102, 103, 104  
 
+**Mechanism (CROSS JOIN):**
+
+1. CROSS JOIN me **har row** left table ka, **har row** right table ke saath combine hota hai.  
+2. Ye **Cartesian product** banata hai, matlab saare possible combinations.  
+3. Formula:  
+
+Total Rows = (Left Table Rows) × (Right Table Rows)
+
+4. Koi ON condition nahi hoti, isliye har ek record doosre table ke har record ke saath pair hota hai.  
+5. Zyada rows ka output aa sakta hai agar tables bade hon.  
+
 ---
 
 #  SQL Window Functions Guide 
