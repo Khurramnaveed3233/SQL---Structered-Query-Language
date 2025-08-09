@@ -542,14 +542,6 @@ Isme **matching ka koi rule** nahi hota — bas combination banta hai.
 
 ---
 
-### SQL Query:
-```sql
-SELECT Customers.FullName, Orders.OrderID
-FROM Customers
-CROSS JOIN Orders;
-
----
-
 #  SQL Window Functions Guide 
 
 SQL Window Functions aise functions hote hain jo rows ke group par calculation karte hain, lekin **har row ka data preserve** karte hain. Ye analytics, ranking, running totals aur comparison ke liye kaafi useful hote hain.
