@@ -540,6 +540,43 @@ Isme **matching ka koi rule** nahi hota — bas combination banta hai.
 | 103     | NULL       |
 | 104     | 5          |
 
+-- Expected Output:
+-- FullName      OrderID
+-- Ali Khan      101
+-- Ali Khan      102
+-- Ali Khan      103
+-- Ali Khan      104
+-- Sara Malik    101
+-- Sara Malik    102
+-- Sara Malik    103
+-- Sara Malik    104
+-- Usman Shah    101
+-- Usman Shah    102
+-- Usman Shah    103
+-- Usman Shah    104
+-- Ayesha        101
+-- Ayesha        102
+-- Ayesha        103
+-- Ayesha        104
+
+/* 
+Easy Explanation:
+CROSS JOIN me hum dono tables ka har possible combination banate hain.
+
+Matlab:
+- Customers me 4 log hain
+- Orders me 4 order IDs hain
+- Har customer ke saath 4 orders match honge
+- Total 4 × 4 = 16 rows output milengi
+
+Example breakdown:
+"Ali Khan" ke saath → 101, 102, 103, 104
+"Sara Malik" ke saath → 101, 102, 103, 104
+"Usman Shah" ke saath → 101, 102, 103, 104
+"Ayesha" ke saath → 101, 102, 103, 104
+*/
+
+
 ---
 
 #  SQL Window Functions Guide 
