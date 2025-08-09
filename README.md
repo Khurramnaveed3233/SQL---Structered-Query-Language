@@ -354,7 +354,7 @@ SQL Joins ka use hum tab karte hain jab humein **multiple tables ki information 
 
 <img width="1068" height="596" alt="33" src="https://github.com/user-attachments/assets/c427e32f-9a7f-41ff-99e1-f441e0a35a6b" />
 
-1. INNER JOIN
+### 1. INNER JOIN
 
 **Simple Matlab:**
 Sirf woh rows jo dono tables me match ho jaati hain.
@@ -397,8 +397,72 @@ ON c.CustomerID = o.CustomerID;
 
 **Explanation:**
 Sirf woh rows dikhte hain jahan `Customers.CustomerID = Orders.CustomerID` match hota hai.  
-`CustomerID NULL` aur `CustomerID 5` ka match nahi mila, isliye wo rows skip ho gayi.
+CustomerID NULL` aur `CustomerID 5` ka match nahi mila, isliye wo rows skip ho gayi.
 
+## LEFT JOIN Example
+
+**Customers Table:**
+| CustomerID | FullName   |
+|------------|------------|
+| 1          | Ali Khan   |
+| 2          | Sara Malik |
+| 3          | Usman Shah |
+| 4          | Ayesha     |
+
+**Orders Table:**
+| OrderID | CustomerID |
+|---------|------------|
+| 101     | 1          |
+| 102     | 2          |
+| 103     | NULL       |
+| 104     | 5          |
+
+**Output (LEFT JOIN):**
+| FullName   | OrderID |
+|------------|---------|
+| Ali Khan   | 101     |
+| Sara Malik | 102     |
+| Usman Shah | NULL    |
+| Ayesha     | NULL    |
+
+**Explanation:**
+- LEFT JOIN me **Customers table ka poora data** aata hai.
+- Agar matching order hai to `OrderID` show hota hai, warna `NULL` hota hai.
+- `CustomerID 3` aur `CustomerID 4` ke orders nahi the, isliye unka `OrderID = NULL`.
+
+---
+
+## RIGHT JOIN Example
+
+**Customers Table:**
+| CustomerID | FullName   |
+|------------|------------|
+| 1          | Ali Khan   |
+| 2          | Sara Malik |
+| 3          | Usman Shah |
+| 4          | Ayesha     |
+
+**Orders Table:**
+| OrderID | CustomerID |
+|---------|------------|
+| 101     | 1          |
+| 102     | 2          |
+| 103     | NULL       |
+| 104     | 5          |
+
+**Output (RIGHT JOIN):**
+| FullName   | OrderID |
+|------------|---------|
+| Ali Khan   | 101     |
+| Sara Malik | 102     |
+| NULL       | 103     |
+| NULL       | 104     |
+
+**Explanation:**
+
+- RIGHT JOIN me **Orders table ka poora data** aata hai.
+- Agar matching customer hai to `FullName` show hota hai, warna `NULL` hota hai.
+- OrderID 103` ka customer `NULL` tha aur `OrderID 104` ka customer ID 5 tha jo Customers table me nahi mila, isliye `FullName = NULL`.
 
 
 
