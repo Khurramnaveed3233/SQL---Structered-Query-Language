@@ -523,7 +523,7 @@ FULL OUTER JOIN = **LEFT JOIN + RIGHT JOIN ka combination**.
 
 --- 
 
-## CROSS JOIN in SQL (Roman Urdu)
+## CROSS JOIN in SQL 
 
 **Simple Definition:**  
 CROSS JOIN ka matlab hai **dono tables ki har row ko dusre table ki har row ke saath jorna**.  
