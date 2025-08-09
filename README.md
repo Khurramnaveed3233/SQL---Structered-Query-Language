@@ -482,18 +482,6 @@ CustomerID NULL` aur `CustomerID 5` ka match nahi mila, isliye wo rows skip ho g
 | 103     | NULL       |
 | 104     | 5          |
 
----
-
-### SQL Query:
-
----
-
-```sql
-SELECT c.FullName, o.OrderID
-FROM Customers c
-FULL JOIN Orders o
-ON c.CustomerID = o.CustomerID;
-
 **Output:**
 
 | FullName   | OrderID |
@@ -518,7 +506,7 @@ FULL OUTER JOIN = **LEFT JOIN + RIGHT JOIN ka combination**.
 - **Usman Shah (3)** → No order → **OrderID = NULL**.  
 - **Ayesha (4)** → No order → **OrderID = NULL**.  
 - **Order 103 (NULL CustomerID)** → No customer → **FullName = NULL**.  
-- **Order 104 (CustomerID = 5)** → No customer → **FullName = NULL**.                                                                                                            
+- **Order 104 (CustomerID = 5)** → No customer → **FullName = NULL**.  
 
 ---
 
