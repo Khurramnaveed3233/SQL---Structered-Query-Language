@@ -1117,7 +1117,60 @@ SELECT CHARINDEX('Zind', 'Pakistan Zindabad') AS position;
 
 ---
 
-##  3. `DATEDIFF()`
+##  3. `Use of Substring and Charindex Together
+
+### 1. `SUBSTRING()` Syntax
+```sql
+SUBSTRING(expression, start, length)
+```
+
+**Parameters:**
+- `expression`: The text (column or string literal) to extract from
+- `start`: The starting position (1-based index)
+- `length`: How many characters to extract
+
+**Example:**
+```sql
+SELECT SUBSTRING('SQLServer', 4, 6) AS Result;
+-- Output: 'Server'
+```
+
+---
+
+### 2. `CHARINDEX()` Syntax
+```sql
+CHARINDEX(search_expression, expression)
+```
+
+**Parameters:**
+- `search_expression`: The character or substring to find
+- `expression`: The full string in which to search
+
+**Example:**
+```sql
+SELECT CHARINDEX('@', 'alice@test.org') AS Position;
+-- Output: 6
+```
+
+---
+
+### Example: Using Both Together to Extract Email Domain
+To extract the domain name (e.g., `test.org`) from email addresses:
+
+```sql
+SELECT 
+  Email,
+  SUBSTRING(Email, CHARINDEX('@', Email) + 1, LEN(Email)) AS DomainName
+FROM CustomerData;
+```
+
+**Explanation:**
+- `CHARINDEX('@', Email)` → finds the position of `@`
+- `+ 1` → moves to the first character after `@`
+- `LEN(Email)` → extracts the remaining string (domain name)
+
+--- 
+##  4. `DATEDIFF()`
 
 ###  Kya karta hai?
 Do dates ke darmiyan **difference (days, months, years)** batata hai.
@@ -1139,7 +1192,7 @@ SELECT DATEDIFF(DAY, '2023-01-01', '2023-01-10') AS days_between;
 
 ---
 
-##  4. `DATEADD()`
+##  5. `DATEADD()`
 
 ###  Kya karta hai?
 Date mein **naya time (days, months, etc.) add karta hai**.
@@ -1161,7 +1214,7 @@ SELECT DATEADD(DAY, 5, '2023-01-01') AS new_date;
 
 ---
 
-##  5. `DATENAME()`
+##  6. `DATENAME()`
 
 ###  Kya karta hai?
 Date ka **part (day, month name, weekday)** return karta hai in text form.
@@ -1183,7 +1236,7 @@ SELECT DATENAME(MONTH, '2023-08-03') AS month_name;
 
 ---
 
-##  6. `CAST()` vs `CONVERT()`
+##  7. `CAST()` vs `CONVERT()`
 
 ###  Kya karte hain?
 Data type **convert karte hain** (e.g., number to string, string to date)
@@ -1211,7 +1264,7 @@ SELECT CAST(123 AS VARCHAR) AS casted_value,
 
 ---
 
-##  7. `CASE WHEN THEN ELSE END`
+##  8. `CASE WHEN THEN ELSE END`
 
 ### ➤ Kya karta hai?
 Conditional logic apply karta hai (jaise IF/ELSE).
@@ -1243,7 +1296,7 @@ FROM employees;
 
 ---
 
-##  8. `COALESCE()`
+##  9. `COALESCE()`
 
 ###  Kya karta hai?
 Jo pehli **non-null value** milti hai, woh return karta hai.
@@ -1265,7 +1318,7 @@ SELECT COALESCE(NULL, NULL, 'Value Mil Gayi') AS result;
 
 ---
 
-##  9. `NULLIF()`
+##  10. `NULLIF()`
 
 ### ➤ Kya karta hai?
 Agar dono values same hon to `NULL` return karta hai, warna pehli value.
@@ -1283,7 +1336,7 @@ SELECT NULLIF(100, 100) AS result1,
 
 ---
 
-##  10. `IIF()` (Shortcut of CASE)
+##  11. `IIF()` (Shortcut of CASE)
 
 ###  Kya karta hai?
 Simple condition evaluate karta hai (IF/ELSE style).
@@ -1305,7 +1358,7 @@ SELECT IIF(100 > 50, 'Yes', 'No') AS result;
 
 ---
 
-##  11. `EXISTS`
+##  12. `EXISTS`
 
 ###  Kya karta hai?
 Check karta hai ke subquery se **kuch result aaya ya nahi**.
@@ -1323,7 +1376,7 @@ High salary employee exists
 
 ---
 
-##  12. `IN` vs `NOT IN`
+##  13. `IN` vs `NOT IN`
 
 ###  Kya karte hain?
 `IN`: Check karta hai value list ke andar hai ya nahi  
