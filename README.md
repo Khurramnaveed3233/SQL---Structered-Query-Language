@@ -1396,6 +1396,28 @@ WHERE department IN ('HR', 'IT');
 | Sara          |
 
 ---
+##  14. ## DATALENGTH() and PATINDEX() in SQL Server
+
+**Purpose**  
+- `DATALENGTH()`: Returns the number of **bytes** used to store a value (includes trailing spaces)  
+- `PATINDEX()`: Returns the starting position of a pattern in a string (supports wildcards `%`)
+
+**Details**  
+- `VARCHAR`: 1 byte per character  
+- `NVARCHAR`: 2 bytes per character  
+- `PATINDEX()` returns `0` if the pattern is not found  
+- `%` wildcard means “match any sequence of characters”
+
+**Example**
+```sql
+SELECT 
+    CustomerID,
+    Email,
+    DATALENGTH(Email) AS EmailBytes,            -- Bytes used to store Email
+    PATINDEX('%.com%', Email) AS DotComPosition -- Position of ".com" in Email, 0 if not found
+FROM CustomerData;
+
+---
 
 ##  Summary Table
 
