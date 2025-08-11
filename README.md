@@ -1487,7 +1487,40 @@ Last day of the month return karta hai, optional offset ke sath
 
 SELECT EOMONTH('2025-08-10') AS LastDay;
 
+**Output**
+
 <img width="204" height="62" alt="eo" src="https://github.com/user-attachments/assets/15f5207e-c74d-43cc-a9a4-ba6fde54869c" />
+
+--- 
+
+## 19. ISDATE()
+
+SELECT 
+    ISDATE('2025-08-10') AS IsValidDate, 
+    ISDATE('ABC123') AS IsValidDate2;
+
+**Explanation**
+
+ISDATE('2025-08-10')
+
+'2025-08-10' ek valid ISO date format hai (YYYY-MM-DD)
+
+SQL Server isko valid date recognize karta hai
+
+Result: 1 (true)
+
+ISDATE('ABC123')
+
+'ABC123' date format ke rules follow nahi karta
+
+SQL Server isko date mein convert nahi kar sakta
+
+Result: 0 (false)
+
+
+**Output**
+
+<img width="222" height="51" alt="is" src="https://github.com/user-attachments/assets/d60a233f-da83-4cf2-9a3e-c96ed1c15e21" />
 
 --- 
 ##  Summary Table
