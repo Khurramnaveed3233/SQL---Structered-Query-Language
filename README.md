@@ -1408,6 +1408,13 @@ It is similar to `CHARINDEX()` but allows the use of wildcard characters (`%`).
 - Returns `0` if the pattern is not found.  
 - Works with `CHAR`, `VARCHAR`, `NCHAR`, `NVARCHAR` data types.
 
+SELECT CustomerID,
+       Email,
+       PATINDEX('%.com%', Email) AS DotComPosition
+FROM dirtyCustomerData
+
+Output: 
+<img width="317" height="256" alt="pp" src="https://github.com/user-attachments/assets/c24112f7-a3c2-4036-9cd0-a9e17383607c" /
 --- 
 
 ##  Summary Table
