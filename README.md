@@ -1602,7 +1602,37 @@ SELECT POWER(2, 3) AS PowerValue;
 
 --- 
 
+### 6.SQRT()
 
+- Description: Number ka square root return karta hai
+
+- Asaan lafzon me, SQRT(16) ka matlab hai wo number jo apne aap se multiply ho kar 16 banata hai
+
+- Yani 4 × 4 = 16, is liye answer 4 aata hai
+
+SELECT SQRT(16) AS SquareRoot; -- Output: 4
+
+**Output**
+
+<img width="237" height="59" alt="s" src="https://github.com/user-attachments/assets/d6e9ee21-4fac-42c6-bc04-196108c70686" />
+
+--- 
+
+### PI()
+
+- Description: Pi constant (3.141592...) return karta hai
+
+SELECT PI() AS PiValue; 
+
+- Asaan lafzon me, PI() hamesha ek fixed number deta hai jo circle ke circumference aur diameter ka ratio hota hai
+
+- ye lagbhag 3.141593 hota hai, aur geometry me bohot use hota hai
+
+**Output**
+
+<img width="187" height="75" alt="pp" src="https://github.com/user-attachments/assets/a77c3819-2617-485a-9bd1-89c1b2ae541a" />
+
+--- 
 
 ##  Summary Table
 
