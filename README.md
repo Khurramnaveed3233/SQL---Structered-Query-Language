@@ -1455,6 +1455,19 @@ The `FORMAT()` function formats a value (numeric or date/time) according to a sp
 
 ---
 
+## SYSDATETIME() Example in SQL Server
+
+-- GETDATE() vs SYSDATETIME() precision difference example
+
+SELECT 
+    GETDATE() AS GetDateExample,         -- Returns current date and time (precision: milliseconds)
+    SYSDATETIME() AS SysDateTimeExample  -- Returns current date and time (precision: nanoseconds)
+
+**Output**
+
+<img width="590" height="146" alt="cc" src="https://github.com/user-attachments/assets/9affd4a0-6ba1-4292-b313-8eddf5ef81e7" />
+
+---
 ##  Summary Table
 
 | Function         | Use (Roman Urdu)                              |
