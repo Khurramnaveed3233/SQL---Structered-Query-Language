@@ -1481,17 +1481,6 @@ SELECT
 ---
 ## 18. DATEPART() in SQL Server
 
-**Purpose**:  
-
-`DATEPART()` kisi date ka specific part integer form me extract karta hai (jaise **year, month, day, hour** etc.)
-
-**Example**:  
-```sql
-SELECT DATEPART(YEAR, '2025-08-10') AS YearPart;
-
-**Output**
-
-<img width="396" height="147" alt="D" src="https://github.com/user-attachments/assets/b59ed689-c1e4-4563-b376-d6bf3eaaed94" />
 
 ---
 
