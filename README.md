@@ -1482,6 +1482,9 @@ SELECT
 
 ## 18. `EOMONTH()
 
+Last day of the month return karta hai, optional offset ke sath  
+**Syntax:** `EOMONTH(start_date [, month_to_add])`  
+
 --- 
 ##  Summary Table
 
