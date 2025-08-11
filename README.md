@@ -1461,6 +1461,7 @@ The `FORMAT()` function formats a value (numeric or date/time) according to a sp
 
 SELECT 
     GETDATE() AS GetDateExample,         -- Returns current date and time (precision: milliseconds)
+    
     SYSDATETIME() AS SysDateTimeExample  -- Returns current date and time (precision: nanoseconds)
 
 **Output**
