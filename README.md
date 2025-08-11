@@ -1421,25 +1421,10 @@ FROM dirtyCustomerData
 --- 
 ## REPLICATE() Example in SQL Server
 
-**Purpose**  
-The `REPLICATE()` function repeats a string value a specified number of times.
-
-**Details**  
-- Syntax: `REPLICATE(expression, number_of_times)`  
-- `expression` is the string or column to repeat.  
-- `number_of_times` is how many times the string should be repeated.  
-- If the result exceeds the maximum size of the return type, it will be truncated.
-
-**Example Query**
-```sql
-SELECT 
-    CustomerID,
-    REPLICATE(FullName, 2) AS NameTwice
-FROM CustomerData;
 
 **Output**
 
-<img width="275" height="254" alt="rep" src="https://github.com/user-attachments/assets/a98c85f6-ecc0-4166-91d0-f40556aaff3b" />
+
 
 ---
 ##  Summary Table
