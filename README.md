@@ -1485,6 +1485,10 @@ SELECT
 Last day of the month return karta hai, optional offset ke sath  
 **Syntax:** `EOMONTH(start_date [, month_to_add])`  
 
+SELECT EOMONTH('2025-08-10') AS LastDay;
+
+<img width="204" height="62" alt="eo" src="https://github.com/user-attachments/assets/15f5207e-c74d-43cc-a9a4-ba6fde54869c" />
+
 --- 
 ##  Summary Table
 
