@@ -1408,13 +1408,6 @@ It is similar to `CHARINDEX()` but allows the use of wildcard characters (`%`).
 - Returns `0` if the pattern is not found.  
 - Works with `CHAR`, `VARCHAR`, `NCHAR`, `NVARCHAR` data types.
 
-**Example Query**
-```sql
-SELECT 
-    CustomerID,
-    Email,
-    PATINDEX('%.com%', Email) AS DotComPosition
-FROM dirtyCustomerData
 --- 
 
 ##  Summary Table
