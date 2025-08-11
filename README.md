@@ -1481,6 +1481,7 @@ SELECT
 ---
 ## DATEPART() in SQL Server
 
+
 **Purpose**:  
 `DATEPART()` kisi date ka specific part integer form me extract karta hai (jaise **year, month, day, hour** etc.)
 
@@ -1494,7 +1495,9 @@ Pehla argument part ka name hota hai (YEAR, MONTH, DAY, HOUR, MINUTE etc.)
 
 Dusra argument date ya datetime value hoti hai
 
-<img width="396" height="147" alt="D" src="https://github.com/user-attachments/assets/8b51b50e-716e-4929-86fe-2ac23071e6c3" />
+**Output**
+
+<img width="396" height="147" alt="D" src="https://github.com/user-attachments/assets/b59ed689-c1e4-4563-b376-d6bf3eaaed94" />
 
 --- 
 ##  Summary Table
