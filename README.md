@@ -1544,6 +1544,66 @@ SELECT ABS(-25) AS AbsoluteValue; -- Output: 25
 <img width="246" height="64" alt="a" src="https://github.com/user-attachments/assets/414666ff-1abf-4aae-a052-30f0b5bfbb90" />
 
 --- 
+### 2. `CEILING()
+
+- Description: Decimal number ko upar wali nearest integer tak round karta hai
+
+SELECT CEILING(4.3) AS CeilingValue;
+
+**Output**
+
+<img width="232" height="72" alt="c" src="https://github.com/user-attachments/assets/c9d53471-1aa5-4236-a95e-345bda9cbe45" />
+
+---
+### 3. FLOOR()
+
+- Description: Decimal number ko neeche wali nearest integer tak round karta hai
+
+SELECT FLOOR(4.8) AS FloorValue; 
+
+**Output**
+
+<img width="179" height="75" alt="f" src="https://github.com/user-attachments/assets/c7058741-faa9-4842-94f8-825339294160" />
+
+---
+### 4. ROUND()
+
+- Description: Number ko specified decimal places tak round karta hai
+
+**Output**
+
+<img width="166" height="52" alt="r" src="https://github.com/user-attachments/assets/1ebf486a-42ed-44bc-99d5-9ade30e5834e" />
+
+--- 
+
+### 5. POWER()
+
+- Description: Ek number ko doosre number ki power tak uthata hai
+
+SELECT POWER(2, 3) AS PowerValue;
+
+**Description:** Ek number ko doosre number ki power tak uthata hai (exponentiation).  
+
+- POWER(x, y)` ka matlab hai **x raised to the power y**.
+
+- Asaan lafzon me, POWER(2, 3) ka matlab hai 2 ko 3 martaba apne aap se multiply karna
+
+- 2 × 2 × 2 = 8
+
+Yani base number (2) ko exponent (3) times multiply karte hain
+
+**Example:**
+
+SELECT POWER(2, 3) AS PowerValue;
+
+**Output**
+
+<img width="165" height="65" alt="p" src="https://github.com/user-attachments/assets/5fc338a9-04ab-4c52-b4fa-b79f70e05a0e" />
+
+--- 
+
+
+
 ##  Summary Table
 
 | Function         | Use (Roman Urdu)                              |
