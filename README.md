@@ -1435,6 +1435,26 @@ The `REPLICATE()` function repeats a string value a specified number of times.
 <img width="365" height="412" alt="rep" src="https://github.com/user-attachments/assets/c17c1f14-7623-477c-b74f-6eab7c122be1" />
 
 ---
+## FORMAT() Example in SQL Server
+
+**Purpose**  
+The `FORMAT()` function formats a value (numeric or date/time) according to a specified format and culture.
+
+**Details**  
+- Syntax: `FORMAT(value, format_string, culture)`  
+- `value`: The number or date/time you want to format.  
+- `format_string`: The format pattern, for example:  
+  - `'C'` → Currency  
+  - `'N'` → Number with commas  
+  - `'P'` → Percentage  
+- `culture`: The locale used for formatting, e.g., `'en-US'`, `'fr-FR'`.  
+
+**Output**
+
+<img width="501" height="373" alt="ff" src="https://github.com/user-attachments/assets/712e5266-87a0-4bb8-983e-cd1f5c7d9b9c" 
+
+---
+
 ##  Summary Table
 
 | Function         | Use (Roman Urdu)                              |
