@@ -1501,6 +1501,11 @@ SELECT
 | `IIF()`           | One-line IF condition                         |
 | `EXISTS`          | Check karna ke result aata hai ya nahi        |
 | `IN`, `NOT IN`    | Value list mein hai ya nahi                   |
+| `REPLICATE()`     | String ko multiple times repeat karna         |
+| `DATALENGTH()`    | Data ka size (bytes me) check karna            |
+| `PATINDEX()`      | Pattern ka position find karna (wildcards use hotay hain) |
+| `SYSDATETIME()`   | Current date aur time lana nanoseconds precision ke saath |
+| `DATEPART()`      | Date ka specific part integer form me nikalna  |
 
 ---
 
