@@ -1618,7 +1618,7 @@ SELECT SQRT(16) AS SquareRoot; -- Output: 4
 
 --- 
 
-### PI()
+### 7. PI()
 
 - Description: Pi constant (3.141592...) return karta hai
 
