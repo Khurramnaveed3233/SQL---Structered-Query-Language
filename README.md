@@ -1469,7 +1469,6 @@ SELECT
     GETDATE() AS GetDateExample,         -- Millisecond precision
     SYSDATETIME() AS SysDateTimeExample  -- Nanosecond precision
 
-SELECT 
 
     GETDATE() AS GetDateExample,         -- Returns current date and time (precision: milliseconds)
     
