@@ -1397,6 +1397,28 @@ WHERE department IN ('HR', 'IT');
 
 ---
 
+## PATINDEX() Example in SQL Server
+
+**Purpose**  
+The `PATINDEX()` function returns the starting position of a pattern within a string.  
+It is similar to `CHARINDEX()` but allows the use of wildcard characters (`%`).
+
+**Details**  
+- `%` matches any sequence of characters (including zero characters).  
+- Returns a 1-based index for the first occurrence of the pattern.  
+- Returns `0` if the pattern is not found.  
+- Works with `CHAR`, `VARCHAR`, `NCHAR`, `NVARCHAR` data types.
+
+**Example Query**
+```sql
+SELECT 
+    CustomerID,
+    Email,
+    PATINDEX('%.com%', Email) AS DotComPosition
+FROM dirtyCustomerData;
+
+--- 
+
 ##  Summary Table
 
 | Function         | Use (Roman Urdu)                              |
