@@ -1482,8 +1482,8 @@ SELECT
 
 ## 18. `EOMONTH()
 
-Last day of the month return karta hai, optional offset ke sath  
-**Syntax:** `EOMONTH(start_date [, month_to_add])`  
+-- Last day of the month return karta hai, optional offset ke sath  
+-- **Syntax:** `EOMONTH(start_date [, month_to_add])`  
 
 SELECT EOMONTH('2025-08-10') AS LastDay;
 
@@ -1524,11 +1524,12 @@ ISDATE('ABC123')
 ## Mathematical Functions with Explanations and Examples
 
 ### 1. `ABS()`
-**Description:** Returns the absolute value of a number (negative ko positive bana deta hai)
 
-ABS ka matlab absolute value hota hai, jo kisi number ka distance from zero hota hai regardless of sign.
+-- **Description:** Returns the absolute value of a number (negative ko positive bana deta hai)
 
-Matlab, chahe number positive ho ya negative, ABS() uska positive magnitude return karega.
+-- ABS ka matlab absolute value hota hai, jo kisi number ka distance from zero hota hai regardless of sign.
+
+-- Matlab, chahe number positive ho ya negative, ABS() uska positive magnitude return karega.
 
 **Example samjho:**
 
