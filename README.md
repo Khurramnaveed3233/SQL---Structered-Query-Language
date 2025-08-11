@@ -1508,14 +1508,19 @@ SELECT
 | `DATEPART()`      | Date ka specific part integer form me nikalna  |
 
 ---
+## Real-World Use Cases
 
-##  Real-World Use Cases
+- `SUBSTRING()`, `CHARINDEX()` → Email se domain nikalna  
+- `DATEDIFF()` → Customer ko kitne din se contact nahi kiya  
+- `DATEADD()` → Next follow-up date set karna  
+- `CASE` / `IIF()` → Customer status label assign karna  
+- `EXISTS` → Data presence validation in subqueries  
+- `REPLICATE()` → Customer name ko do ya zyada baar repeat karke display karna  
+- `DATALENGTH()` → Email ya address ka size bytes me check karna  
+- `PATINDEX()` → Email me specific pattern (jaise %.com%) ka position find karna  
+- `SYSDATETIME()` → Current date-time high precision (nanoseconds tak) ke sath lena  
+- `DATEPART()` → Date ka specific part extract karna (year, month, day, hour etc)  
 
-- `SUBSTRING()`, `CHARINDEX()` → Email se domain nikalna
-- `DATEDIFF()` → Customer ko kitne din se contact nahi kiya
-- `DATEADD()` → Next follow-up date set karna
-- `CASE` / `IIF()` → Customer status label assign karna
-- `EXISTS` → Data presence validation in subqueries
 
 ---
 
