@@ -1419,8 +1419,6 @@ FROM dirtyCustomerData
 <img width="317" height="256" alt="pp" src="https://github.com/user-attachments/assets/6a12fb64-008f-4a53-8f0f-33dea4a7a620" />
 
 --- 
-## 14. REPLICATE() Example in SQL Server
-
 ## REPLICATE() Example in SQL Server
 
 **Purpose**  
@@ -1444,7 +1442,6 @@ FROM CustomerData;
 <img width="275" height="254" alt="rep" src="https://github.com/user-attachments/assets/a98c85f6-ecc0-4166-91d0-f40556aaff3b" />
 
 ---
-
 ##  Summary Table
 
 | Function         | Use (Roman Urdu)                              |
