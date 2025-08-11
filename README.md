@@ -1419,7 +1419,7 @@ FROM dirtyCustomerData
 <img width="317" height="256" alt="pp" src="https://github.com/user-attachments/assets/6a12fb64-008f-4a53-8f0f-33dea4a7a620" />
 
 --- 
-## REPLICATE() Example in SQL Server
+## 15. REPLICATE() Example in SQL Server
 
 **Purpose**  
 The `REPLICATE()` function repeats a string value a specified number of times.
@@ -1435,7 +1435,7 @@ The `REPLICATE()` function repeats a string value a specified number of times.
 <img width="365" height="412" alt="rep" src="https://github.com/user-attachments/assets/c17c1f14-7623-477c-b74f-6eab7c122be1" />
 
 ---
-## FORMAT() Example in SQL Server
+## 16. FORMAT() Example in SQL Server
 
 **Purpose**  
 The `FORMAT()` function formats a value (numeric or date/time) according to a specified format and culture.
@@ -1455,7 +1455,7 @@ The `FORMAT()` function formats a value (numeric or date/time) according to a sp
 
 ---
 
-## SYSDATETIME() and GETDATE()  Example in SQL Server
+## 17. SYSDATETIME() and GETDATE()  Example in SQL Server
 
 Difference between GETDATE() and SYSDATETIME() precision
 
@@ -1479,6 +1479,24 @@ SELECT
 <img width="590" height="146" alt="cc" src="https://github.com/user-attachments/assets/9affd4a0-6ba1-4292-b313-8eddf5ef81e7" />
 
 ---
+## DATEPART() in SQL Server
+
+**Purpose**:  
+`DATEPART()` kisi date ka specific part integer form me extract karta hai (jaise **year, month, day, hour** etc.)
+
+**Example**:  
+```sql
+SELECT DATEPART(YEAR, '2025-08-10') AS YearPart;
+
+Notes:
+
+Pehla argument part ka name hota hai (YEAR, MONTH, DAY, HOUR, MINUTE etc.)
+
+Dusra argument date ya datetime value hoti hai
+
+<img width="396" height="147" alt="D" src="https://github.com/user-attachments/assets/8b51b50e-716e-4929-86fe-2ac23071e6c3" />
+
+--- 
 ##  Summary Table
 
 | Function         | Use (Roman Urdu)                              |
