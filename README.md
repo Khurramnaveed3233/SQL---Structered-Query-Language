@@ -1526,7 +1526,21 @@ ISDATE('ABC123')
 ### 1. `ABS()`
 **Description:** Returns the absolute value of a number (negative ko positive bana deta hai)
 
---- SELECT ABS(-25) AS AbsoluteValue; -- Output: 25
+ABS ka matlab absolute value hota hai, jo kisi number ka distance from zero hota hai regardless of sign.
+
+Matlab, chahe number positive ho ya negative, ABS() uska positive magnitude return karega.
+
+**Example samjho:**
+
+- ABS(25) → 25
+
+- ABS(-25) → 25
+
+Iska use tab hota hai jab hume sirf magnitude chahiye, sign ignore karke, jaise difference calculation me.
+
+SELECT ABS(-25) AS AbsoluteValue; -- Output: 25
+
+<img width="246" height="64" alt="a" src="https://github.com/user-attachments/assets/414666ff-1abf-4aae-a052-30f0b5bfbb90" />
 
 --- 
 ##  Summary Table
