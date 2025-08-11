@@ -1396,7 +1396,6 @@ WHERE department IN ('HR', 'IT');
 | Sara          |
 
 ---
-
 ## PATINDEX() Example in SQL Server
 
 **Purpose**  
@@ -1415,8 +1414,7 @@ SELECT
     CustomerID,
     Email,
     PATINDEX('%.com%', Email) AS DotComPosition
-FROM dirtyCustomerData;
-
+FROM dirtyCustomerData
 --- 
 
 ##  Summary Table
