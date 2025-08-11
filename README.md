@@ -1479,9 +1479,18 @@ SELECT
 <img width="590" height="146" alt="cc" src="https://github.com/user-attachments/assets/9affd4a0-6ba1-4292-b313-8eddf5ef81e7" />
 
 ---
-## 18. DATEPART() in SQL Server
+## 18. `EOMONTH()` in SQL Server
 
 <img width="396" height="147" alt="D" src="https://github.com/user-attachments/assets/f9d0f343-4714-47b7-995a-f753b6470647" />
+
+## 18. DATEPART() in SQL Server
+
+Last day of the month return karta hai, optional offset ke sath  
+**Syntax:** `EOMONTH(start_date [, month_to_add])`  
+
+**Example:**
+```sql
+SELECT EOMONTH('2025-08-10') AS LastDay;
 
 ---
 
