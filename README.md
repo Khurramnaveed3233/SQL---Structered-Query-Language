@@ -1415,7 +1415,7 @@ FROM dirtyCustomerData
 
 **Output:** 
 
-<img width="317" height="256" alt="pp" src="https://github.com/user-attachments/assets/c24112f7-a3c2-4036-9cd0-a9e17383607c" /
+<img width="317" height="256" alt="pp" src="https://github.com/user-attachments/assets/6a12fb64-008f-4a53-8f0f-33dea4a7a620" />
 
 --- 
 
