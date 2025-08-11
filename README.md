@@ -1521,6 +1521,13 @@ ISDATE('ABC123')
 
 <img width="222" height="51" alt="is" src="https://github.com/user-attachments/assets/d60a233f-da83-4cf2-9a3e-c96ed1c15e21" />
 
+## Mathematical Functions with Explanations and Examples
+
+### 1. `ABS()`
+**Description:** Returns the absolute value of a number (negative ko positive bana deta hai)
+
+--- SELECT ABS(-25) AS AbsoluteValue; -- Output: 25
+
 --- 
 ##  Summary Table
 
