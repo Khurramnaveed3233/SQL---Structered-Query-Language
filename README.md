@@ -1413,8 +1413,10 @@ SELECT CustomerID,
        PATINDEX('%.com%', Email) AS DotComPosition
 FROM dirtyCustomerData
 
-Output: 
+**Output:** 
+
 <img width="317" height="256" alt="pp" src="https://github.com/user-attachments/assets/c24112f7-a3c2-4036-9cd0-a9e17383607c" /
+
 --- 
 
 ##  Summary Table
