@@ -1411,6 +1411,7 @@ It is similar to `CHARINDEX()` but allows the use of wildcard characters (`%`).
 SELECT CustomerID,
        Email,
        PATINDEX('%.com%', Email) AS DotComPosition
+       
 FROM dirtyCustomerData
 
 **Output:** 
