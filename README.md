@@ -1479,7 +1479,7 @@ SELECT
 <img width="590" height="146" alt="cc" src="https://github.com/user-attachments/assets/9affd4a0-6ba1-4292-b313-8eddf5ef81e7" />
 
 ---
-## DATEPART() in SQL Server
+## 18. DATEPART() in SQL Server
 
 **Purpose**:  
 
@@ -1488,12 +1488,6 @@ SELECT
 **Example**:  
 ```sql
 SELECT DATEPART(YEAR, '2025-08-10') AS YearPart;
-
-Notes:
-
-Pehla argument part ka name hota hai (YEAR, MONTH, DAY, HOUR, MINUTE etc.)
-
-Dusra argument date ya datetime value hoti hai
 
 **Output**
 
