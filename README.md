@@ -1480,6 +1480,9 @@ SELECT
 
 ---
 
+## 18. `EOMONTH()
+
+--- 
 ##  Summary Table
 
 | Function         | Use (Roman Urdu)                              |
