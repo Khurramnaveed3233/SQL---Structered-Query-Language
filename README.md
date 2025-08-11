@@ -1455,9 +1455,20 @@ The `FORMAT()` function formats a value (numeric or date/time) according to a sp
 
 ---
 
-## SYSDATETIME() Example in SQL Server
+## SYSDATETIME() and GETDATE()  Example in SQL Server
 
--- GETDATE() vs SYSDATETIME() precision difference example
+-- Difference between GETDATE() and SYSDATETIME() precision
+
+-- SYSDATETIME() ka output GETDATE() se zyada accurate hota hai 
+-- kyunki isme seconds ke baad fractional seconds nanoseconds tak include hote hain
+
+-- GETDATE() precision: milliseconds (seconds ke 3 decimal places tak)
+-- SYSDATETIME() precision: nanoseconds (seconds ke 7 decimal places tak)
+
+SELECT 
+    GETDATE() AS GetDateExample,         -- Millisecond precision
+    SYSDATETIME() AS SysDateTimeExample  -- Nanosecond precision
+
 
 SELECT 
 
