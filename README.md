@@ -1503,20 +1503,19 @@ SELECT
 
 ISDATE('2025-08-10')
 
-'2025-08-10' ek valid ISO date format hai (YYYY-MM-DD)
+- '2025-08-10' ek valid ISO date format hai (YYYY-MM-DD)
 
-SQL Server isko valid date recognize karta hai
+- SQL Server isko valid date recognize karta hai
 
-Result: 1 (true)
+- Result: 1 (true)
 
 ISDATE('ABC123')
 
-'ABC123' date format ke rules follow nahi karta
+- 'ABC123' date format ke rules follow nahi karta
 
-SQL Server isko date mein convert nahi kar sakta
+- SQL Server isko date mein convert nahi kar sakta
 
-Result: 0 (false)
-
+- Result: 0 (false)
 
 **Output**
 
