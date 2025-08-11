@@ -1451,7 +1451,7 @@ The `FORMAT()` function formats a value (numeric or date/time) according to a sp
 
 **Output**
 
-<img width="501" height="373" alt="ff" src="https://github.com/user-attachments/assets/712e5266-87a0-4bb8-983e-cd1f5c7d9b9c" 
+<img width="501" height="373" alt="ff" src="https://github.com/user-attachments/assets/9aca94f9-8b99-42d9-a02d-84e0e4e08603" />
 
 ---
 
