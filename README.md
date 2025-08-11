@@ -1419,6 +1419,7 @@ FROM CustomerData;
 
 ---
 
+
 ##  Summary Table
 
 | Function         | Use (Roman Urdu)                              |
