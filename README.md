@@ -1521,6 +1521,39 @@ ISDATE('ABC123')
 
 <img width="222" height="51" alt="is" src="https://github.com/user-attachments/assets/d60a233f-da83-4cf2-9a3e-c96ed1c15e21" />
 
+##  STDEV() → Standard Deviation
+
+**Easy Words:**  
+
+Batata hai ki numbers **mean** se kitne door-door bikhre huye hain.  
+- Zyada value = data zyada spread.
+
+**Example:**
+
+<img width="374" height="169" alt="st" src="https://github.com/user-attachments/assets/9c4b916c-ce0a-4829-8d32-e01d3f90649b" />
+
+**Example Data:**
+
+100, 102, 105, 500
+
+- Mean ke paas wale values ka STDEV chhota hota hai.
+- 500 jaisa outlier STDEV ko bada bana deta hai.
+
+## VAR() → Variance
+
+**Easy Words:**
+
+Ye standard deviation ka square hota hai.
+
+- Zyada variance = data ka spread zyada.
+- Kam variance = data tight group me.
+
+**Example:**
+
+<img width="415" height="160" alt="vv" src="https://github.com/user-attachments/assets/7a885297-4ab5-49c4-b548-165bb7b80d02" />
+
+- Agar STDEV = 20 hai, to VAR ≈ 400 hoga.
+
 ## Mathematical Functions with Explanations and Examples
 
 ### 1. `ABS()`
