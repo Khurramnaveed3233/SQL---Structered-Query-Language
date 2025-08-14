@@ -1539,6 +1539,29 @@ Batata hai ki numbers **mean** se kitne door-door bikhre huye hain.
 - Mean ke paas wale values ka STDEV chhota hota hai.
 - 500 jaisa outlier STDEV ko bada bana deta hai.
 
+## Standard Deviation Layman (Aam Zubaan) Mein
+
+Socho tumhare paas 5 dosto ki height ka data hai.  
+Agar sab ki height lagbhag barabar ho, iska matlab sab **ek jese** hain — is case mein standard deviation chhota hoga.
+
+Lekin agar ek dost bohot lamba hai, ek bohot chhota hai, aur baaki beech beech ke hain, to heights **bikhri hui** hongi — is case mein standard deviation bara hoga.
+
+### Simple Baat:
+- **Chhota standard deviation** → sab numbers ek dusre ke kareeb.
+- **Bara standard deviation** → numbers door door, zyada difference.
+
+### Easy Example:
+
+1. **Close numbers:** 50, 51, 52, 53, 54  
+   - Sab kareeb hain → SD chhota.
+2. **Far numbers:** 10, 50, 90, 130, 170  
+   - Numbers door door → SD bara.
+
+**Yaani:** Standard deviation bas ek tarika hai measure karne ka  
+"Numbers kitne ek jese hain ya kitne alag alag hain."
+
+--- 
+
 ## VAR() → Variance
 
 **Easy Words:**
@@ -1553,6 +1576,102 @@ Ye standard deviation ka square hota hai.
 <img width="415" height="160" alt="vv" src="https://github.com/user-attachments/assets/7a885297-4ab5-49c4-b548-165bb7b80d02" />
 
 - Agar STDEV = 20 hai, to VAR ≈ 400 hoga.
+
+## Variance Layman (Aam Zubaan) Mein
+
+Socho tumhare paas kuch numbers hain, jaise tumhare dosto ki test marks.  
+Tum dekhna chahte ho ke ye marks **kitne ek jese** hain ya **kitne alag alag**.
+
+Variance ek number hai jo batata hai:
+- Agar variance **chhota** hai → sab marks kareeb kareeb hain.
+- Agar variance **bara** hai → marks mein zyada farq hai.
+
+### Easy Example:
+
+1. **Close marks:** 50, 52, 53, 54, 55  
+   - Sab kareeb → variance chhota.
+2. **Far marks:** 20, 40, 60, 80, 100  
+   - Door door → variance bara.
+
+### Simple Soch:
+
+Variance = har number ka mean se difference ka square ka average.  
+Yaani pehle dekhte ho har number mean se kitna door hai,  
+phir un distances ka **average** lete ho.
+
+**Short me:** 
+
+Variance batata hai data kitna spread (bikhar) hua hai.
+
+## Class A
+
+### Step 1: Mean (Average) nikalna
+- Sab numbers ka sum karo:  
+  50 + 52 + 55 + 57 + 60 = 274  
+- Total ko 5 (numbers ki tadaad) se divide karo:  
+  274 ÷ 5 = 54.8  
+- **Mean (μ)** = **54.8**
+
+---
+
+### Step 2: Har number ka Squared Deviation nikalna
+1. Har score se mean minus karo: (xᵢ − μ)  
+2. Result ka square karo: (xᵢ − μ)²  
+
+| Score (xᵢ) | xᵢ − μ  | (xᵢ − μ)² |
+|------------|--------|-----------|
+| 50         | -4.8   | 23.04     |
+| 52         | -2.8   | 7.84      |
+| 55         | 0.2    | 0.04      |
+| 57         | 2.2    | 4.84      |
+| 60         | 5.2    | 27.04     |
+
+---
+
+### Step 3: Variance nikalna
+- Squared deviations ka sum:  
+  23.04 + 7.84 + 0.04 + 4.84 + 27.04 = 62.8  
+- Isko 5 se divide karo:  
+  62.8 ÷ 5 = 12.56  
+- **Variance (σ²) = 12.56**
+
+---
+
+## Class B
+
+### Step 1: Mean nikalna
+- Sum: 30 + 45 + 55 + 75 + 90 = 295  
+- Divide by 5: 295 ÷ 5 = 59  
+- **Mean (μ)** = 59
+
+---
+
+### Step 2: Squared Deviations
+
+| Score (xᵢ) | xᵢ − μ  | (xᵢ − μ)² |
+|------------|--------|-----------|
+| 30         | -29    | 841       |
+| 45         | -14    | 196       |
+| 55         | -4     | 16        |
+| 75         | 16     | 256       |
+| 90         | 31     | 961       |
+
+---
+
+### Step 3: Variance nikalna
+- Squared deviations ka sum:  
+  841 + 196 + 16 + 256 + 961 = 2270  
+- Divide by 5:  
+  2270 ÷ 5 = 454  
+- **Variance (σ²) = 454**
+
+---
+
+## Final Conclusion
+- **Class A ka Variance:** 12.56 → scores zyada close hain.
+- **Class B ka Variance:** 454 → scores bohot zyada spread hain.
+
+Matlab Class B ka data zyada bikhra hua hai compare to Class A.
 
 ## Mathematical Functions with Explanations and Examples
 
