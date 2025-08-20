@@ -1716,11 +1716,39 @@ FROM kaps_cafe;
 
 -  Identifies rows that cannot be converted to TIME before running ALTER.
 
-### Summary
+###  Example (checking conversion):
+
+SELECT transaction_time,
+       TRY_CONVERT(TIME, transaction_time) AS SafeTime
+FROM kaps_cafe;
+
+**Example (finding invalid values):**
+
+SELECT transaction_time
+FROM kaps_cafe
+WHERE TRY_CONVERT(TIME, transaction_time) IS NULL
+  AND transaction_time IS NOT NULL;
+
+- Identifies rows that cannot be converted to TIME before running ALTER.
+
+## 4. Converting Invalid Text Values to NULL
+
+Before altering a column, invalid entries can be replaced with NULL safely.
+
+**Example:**
+
+UPDATE kaps_cafe
+SET transaction_time = NULL
+WHERE TRY_CONVERT(TIME, transaction_time) IS NULL;
+
+- Any value that cannot be converted into TIME (like abc, 25:99, empty strings) is set to NULL.
+
+**Summary**
 
 - UPDATE → change data
 - ALTER → change schema
 - TRY_CONVERT → validate and clean data safely
+- Use TRY_CONVERT + UPDATE to replace invalid text with NULL before running ALTER
 
 ## Mathematical Functions with Explanations and Examples
 
