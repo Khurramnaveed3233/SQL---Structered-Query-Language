@@ -1673,6 +1673,55 @@ Variance batata hai data kitna spread (bikhar) hua hai.
 
 Matlab Class B ka data zyada bikhra hua hai compare to Class A.
 
+
+# SQL Server: UPDATE, ALTER, and TRY_CONVERT
+
+## 1. UPDATE
+- Used to modify **data values** inside a table.
+- Works row by row without changing the column definition.
+
+### Example:
+
+UPDATE kaps_cafe
+SET transaction_time = CAST(transaction_time AS TIME);
+
+Updates the values in transaction_time but does not change the column type.
+
+## 2. ALTER
+
+- Used to modify the table schema (column type, size, nullability).
+
+- Changes the structure of the table.
+
+### Example:
+
+ALTER TABLE kaps_cafe
+ALTER COLUMN transaction_time TIME;
+
+- Converts the column itself into TIME. Fails if invalid values exist.
+
+## 3. TRY_CONVERT
+
+- Used to safely attempt conversion of values into another data type.
+- If conversion succeeds → returns value.
+- If conversion fails → returns NULL instead of throwing error.
+
+### Example:
+
+SELECT transaction_time,
+       TRY_CONVERT(TIME, transaction_time) AS SafeTime
+FROM kaps_cafe;
+
+**Finding invalid values:**
+
+-  Identifies rows that cannot be converted to TIME before running ALTER.
+
+### Summary
+
+- UPDATE → change data
+- ALTER → change schema
+- TRY_CONVERT → validate and clean data safely
+
 ## Mathematical Functions with Explanations and Examples
 
 ### 1. `ABS()`
