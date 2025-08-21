@@ -1,6 +1,66 @@
-#  SQL Functions for Data Analysis 
 
-Yeh examples real-world data analysis mein use hotay hain, jaise SQL databases ya Python Pandas DataFrames mein filtering karte waqt.
+# SQL Kya Hoti Hai?
+
+**SQL** ka matlab hai **Structured Query Language**. Ye ek zubaan hai jo databases se baat karne ke liye use hoti hai.
+
+### SQL se kya kya kar sakte hain?
+- Data **search** karna (jaise: "Mujhe sab customers dikhayo")
+- Data ko **filter** karna (jaise: "Sirf Lahore ke orders dikhayo")
+- Data ko **group** karna (jaise: "Har din ki total sales")
+- Data ko **update** ya **delete** karna (jaise: "Galat entry hata do")
+
+---
+
+#  Data Science Mein SQL Kyun Zaroori Hai?
+
+Data Science ka kaam hota hai data ko samajhna aur us se insights nikalna. Aur data aksar databases mein pada hota hai — jaise MySQL, SQL Server, PostgreSQL.
+
+###  SQL ka role Data Science mein:
+- **Raw data access** karne ke liye
+- **Data cleaning aur filtering** ke liye
+- **Summaries aur trends** nikalne ke liye
+- **Dashboards aur reports** banane ke liye (Power BI mein bhi SQL ka use hota hai)
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 
