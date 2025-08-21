@@ -176,7 +176,58 @@ ORDER BY column ASC|DESC;
 
 --- 
 
-OOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+#  SQL Constraints 
+
+1️⃣ **NOT NULL**  
+- Matlab: Column mein value **blank** (NULL) nahi ho sakti  
+`name VARCHAR(50) NOT NULL` → Name hamesha enter karna zaroori  
+
+---
+
+2️⃣ **UNIQUE**  
+- Matlab: Column ki value **har row mein unique** honi chahiye  
+`email VARCHAR(100) UNIQUE` → Do logon ka email same nahi ho sakta  
+
+---
+
+3️⃣ **PRIMARY KEY**  
+- Matlab: Ek column ya columns ka set jo **har record ko uniquely identify** kare  
+- Auto **NOT NULL + UNIQUE** hota hai  
+`id INT PRIMARY KEY` → Har row ka unique ID  
+
+---
+
+4️⃣ **FOREIGN KEY**  
+- Matlab: Ek column jo doosri table ke **PRIMARY KEY** se linked ho  
+- Tables ke beech **relationship** banata hai  
+`FOREIGN KEY (dept_id) REFERENCES departments(id)` → dept_id must match departments table ka id  
+
+---
+
+5️⃣ **CHECK**  
+- Matlab: Condition lagana jo value ko restrict kare  
+`age INT CHECK (age >= 18)` → Sirf 18 ya us se zyada age allowed  
+
+---
+
+6️⃣ **DEFAULT**  
+- Matlab: Agar value provide na ho to ek **default value** assign ho  
+`status VARCHAR(10) DEFAULT 'Active'` → Agar status na diya to "Active" set hoga  
+
+---
+
+## 🎯 Example Table with All Constraints
+```sql
+CREATE TABLE employees (
+    id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    dept_id INT,
+    age INT CHECK (age >= 18),
+    status VARCHAR(10) DEFAULT 'Active',
+    FOREIGN KEY (dept_id) REFERENCES departments(id)
+);
+
 
 ---
 
