@@ -145,65 +145,46 @@ GROUP BY column
 HAVING condition
 ORDER BY column ASC|DESC;
 
-1️⃣ SELECT
+# 🖥️ SQL SELECT Statement — All 6 Clauses in One Example
 
-- Matlab: "Mujhe yeh data chahiye"
-- Use: Specific columns choose karna
+1️⃣ **SELECT**  
+- Matlab: "Mujhe yeh data chahiye"  
+- Use: Specific columns choose karna  
+`SELECT name, age` → Sirf name aur age ka data dikhayega  
 
-SELECT name, age
+2️⃣ **FROM**  
+- Matlab: "Ye data is table se lo"  
+`FROM customers` → Data customers table se aayega  
 
-- Sirf name aur age column ka data dikhayega.
+3️⃣ **WHERE**  
+- Matlab: "Sirf woh data do jo is condition ko meet kare" (filtering)  
+`WHERE age > 25` → Sirf un records ka data jinki age 25 se zyada ho  
 
-2️⃣ FROM
+4️⃣ **GROUP BY**  
+- Matlab: "Data ko group mein divide karo"  
+- Mostly aggregate functions ke saath use hota hai (SUM, COUNT, AVG)  
+`GROUP BY city` → City ke hisaab se grouping karega  
 
-- Matlab: "Ye data is table se lo"
+5️⃣ **HAVING**  
+- Matlab: "Grouped data par filter lagao"  
+`HAVING COUNT(*) > 5` → Sirf woh groups show karega jahan 5 se zyada records hain  
 
-FROM customers
+6️⃣ **ORDER BY**  
+- Matlab: "Data ko arrange karo"  
+- ASC = chhote se bara | DESC = bare se chhota  
+`ORDER BY age DESC` → Sabse badi age se start karega  
 
-- Data customers table se aayega.
+---
 
-3️⃣ WHERE
-
-Matlab: "Sirf woh data do jo is condition ko meet kare" (filtering)
-
-WHERE age > 25
-
-- Sirf un records ka data jinki age 25 se zyada ho.
-
-4️⃣ GROUP BY
-
-Matlab: "Data ko group mein divide karo"
-
-- Mostly aggregate functions ke saath use hota hai (SUM, COUNT, AVG)
-
-GROUP BY city
-
-- City ke hisaab se grouping karega.
-
-5️⃣ HAVING
-
-Matlab: "Grouped data par filter lagao"
-
-HAVING COUNT(*) > 5
-
-- Sirf woh groups show karega jahan 5 se zyada records hain.
-
-6️⃣ ORDER BY
-
-- Matlab: "Data ko arrange karo"
-- ASC = chhote se bara
-- DESC = bare se chhota
-
-ORDER BY age DESC
-
-- Age ke hisaab se sabse badi age se start karega.
-
+##  Full Combined Example
+```sql
 SELECT city, COUNT(*) AS total_customers
 FROM customers
 WHERE age > 25
 GROUP BY city
 HAVING COUNT(*) > 5
 ORDER BY total_customers DESC;
+
 
 **Is Query ka Kaam:**
 
@@ -213,73 +194,6 @@ ORDER BY total_customers DESC;
 - Result ko zyada se kam customers ke order mein arrange karega
 
 ---
-
-# 🛡️ SQL Constraints in SELECT Statement
-
-## 📌 Constraints Kya Hote Hain?
-Constraints wo rules hote hain jo hum database table ke columns par lagate hain — taake data **sahi, valid, aur consistent** rahe.  
-Jab hum **SELECT** statement chalate hain, to ye constraints decide karte hain kaunsa data table mein store hua hai (aur consequently kaunsa data SELECT hoga).
-
----
-
-##  Common Constraints aur Unka SELECT par Asar
-
-Note: Constraints directly SELECT ke andar likhe nahi jaate — ye table create/update karte waqt lagaye jaate hain, lekin SELECT chalane par unka asar result par hota hai. Isliye main dono connect karke samjha raha hoon.
-
-### 1. **NOT NULL**
-
-- Column mein NULL value allow nahi hoti.
-- SELECT karte waqt hamesha is column mein koi value hogi.
-```sql
-SELECT name FROM customers;
-
-Agar name column NOT NULL hai to SELECT hamesha value show karega (empty nahi hoga).
-
-2. UNIQUE
-
-- Column ke sare values alag hone chahiye (duplicate nahi allowed).
-- SELECT se hamesha unique values milengi (jo store hui hain).
-
-SELECT email FROM users;
-
-- Agar email UNIQUE hai to kisi ka email repeat nahi hoga.
-
-3. PRIMARY KEY
-
-- UNIQUE + NOT NULL ka combination.
-- Har row ka apna ek unique ID hota hai.
-
-SELECT id, name FROM employees;
-
-- id hamesha unique aur NULL-free hogi.
-
-4. FOREIGN KEY
-
-- Ek table ka column doosre table ke column se linked hota hai.
-- SELECT mein JOIN karte waqt data match hota hai.
-
-SELECT orders.id, customers.name
-FROM orders
-JOIN customers ON orders.customer_id = customers.id;
-
-5. CHECK
-
-- Specific condition define karta hai jo data insert/update hote waqt check hoti hai.
-- SELECT mein tum dekh sakte ho ke table mein sirf valid data hi store hai.
-
-SELECT * FROM products WHERE price > 0;
-
-- Agar CHECK constraint price > 0 hai to SELECT mein kabhi price negative nahi milega.
-
-
-6. DEFAULT
-
-- Agar koi value insert na ki jaye to ek default value lag jaati hai.
- - SELECT mein tum dekh sakte ho ke jis column ki value insert nahi hui thi, wahan default value aa gayi.
-
-SELECT status FROM orders;
-
-- Agar status ka DEFAULT 'Pending' hai to blank entries bhi 'Pending' show karengi.
 
 ## 📊 SQL Constraints Summary Table
 
