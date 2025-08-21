@@ -150,24 +150,34 @@ ORDER BY column ASC|DESC;
 1️⃣ **SELECT**  
 - Matlab: "Mujhe yeh data chahiye"  
 - Use: Specific columns choose karna  
-`SELECT name, age` → Sirf name aur age ka data dikhayega  
+`SELECT name, age` → Sirf name aur age ka data dikhayega
+
+---
 
 2️⃣ **FROM**  
 - Matlab: "Ye data is table se lo"  
-`FROM customers` → Data customers table se aayega  
+`FROM customers` → Data customers table se aayega
+
+------
 
 3️⃣ **WHERE**  
 - Matlab: "Sirf woh data do jo is condition ko meet kare" (filtering)  
-`WHERE age > 25` → Sirf un records ka data jinki age 25 se zyada ho  
+`WHERE age > 25` → Sirf un records ka data jinki age 25 se zyada ho
+
+---
 
 4️⃣ **GROUP BY**  
 - Matlab: "Data ko group mein divide karo"  
 - Mostly aggregate functions ke saath use hota hai (SUM, COUNT, AVG)  
-`GROUP BY city` → City ke hisaab se grouping karega  
+`GROUP BY city` → City ke hisaab se grouping karega
+
+---
 
 5️⃣ **HAVING**  
 - Matlab: "Grouped data par filter lagao"  
-`HAVING COUNT(*) > 5` → Sirf woh groups show karega jahan 5 se zyada records hain  
+`HAVING COUNT(*) > 5` → Sirf woh groups show karega jahan 5 se zyada records hain
+
+---
 
 6️⃣ **ORDER BY**  
 - Matlab: "Data ko arrange karo"  
