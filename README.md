@@ -226,21 +226,6 @@ ORDER BY column ASC|DESC;
 
 ---
 
-## 🎯 Example Table with All Constraints
-```sql
-CREATE TABLE employees (
-    id INT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) UNIQUE,
-    dept_id INT,
-    age INT CHECK (age >= 18),
-    status VARCHAR(10) DEFAULT 'Active',
-    FOREIGN KEY (dept_id) REFERENCES departments(id)
-);
-
-
----
-
 ##  DDL (Data Definition Language)
 
 **DDL ka kaam hota hai database ke structure ko define karna** — jaise tables, views ya indexes banana, modify karna ya delete karna. Data analysts analysis start karne se pehle mostly tables ya views banate hain using DDL.
