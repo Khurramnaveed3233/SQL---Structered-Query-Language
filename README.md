@@ -224,9 +224,9 @@ ORDER BY column ASC|DESC;
 - Matlab: Agar value provide na ho to ek **default value** assign ho  
 `status VARCHAR(10) DEFAULT 'Active'` → Agar status na diya to "Active" set hoga  
 
-# 📌 SQL Indexes — Roman Urdu Explanation
+#  SQL Indexes — Roman Urdu Explanation
 
-## 🔍 Index kya hota hai?
+##  Index kya hota hai?
 
 SQL mein **Index** ek aisa database object hota hai jo table se data retrieve karne ki **speed aur efficiency** ko improve karta hai.
 
@@ -257,7 +257,7 @@ Jab hum kisi table ke ek ya zyada columns par index banate hain, to database sys
 SQL mein index banane ke liye `CREATE INDEX` statement use hoti hai:
 
 ###  Example:
-```sql
+
 CREATE INDEX idx_LastName ON Employees (LastName);
 
 ##  Index Explanation — Roman Urdu
