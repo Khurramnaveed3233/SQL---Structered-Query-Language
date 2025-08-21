@@ -176,6 +176,10 @@ ORDER BY column ASC|DESC;
 
 --- 
 
+OOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+---
+
 ##  DDL (Data Definition Language)
 
 **DDL ka kaam hota hai database ke structure ko define karna** — jaise tables, views ya indexes banana, modify karna ya delete karna. Data analysts analysis start karne se pehle mostly tables ya views banate hain using DDL.
