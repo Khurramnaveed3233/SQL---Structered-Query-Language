@@ -22,6 +22,54 @@ Data Science ka kaam hota hai data ko samajhna aur us se insights nikalna. Aur d
 - **Dashboards aur reports** banane ke liye (Power BI mein bhi SQL ka use hota hai)
 
 ---
+#  SQL vs NoSQL — Asaan Lafzon Mein Farq
+
+##  SQL (Structured Query Language)
+- **Type:** Relational Database (RDBMS)
+- **Data Format:** Tables (rows & columns)
+- **Schema:** Fixed schema — pehle se structure define karna hota hai
+- **Examples:** MySQL, SQL Server, PostgreSQL, Oracle
+- **Best For:** Structured data jahan relationships important hon (jaise customer-orders system)
+
+###  SQL ki khasiyat:
+- Strong consistency
+- Complex queries (joins, filters, aggregations)
+- ACID compliance (Atomicity, Consistency, Isolation, Durability)
+
+---
+
+##  NoSQL (Not Only SQL)
+- **Type:** Non-relational Database
+- **Data Format:** Flexible — documents, key-value pairs, graphs, wide-columns
+- **Schema:** Dynamic schema — structure change hota reh sakta hai
+- **Examples:** MongoDB, Cassandra, Redis, Firebase
+- **Best For:** Unstructured ya semi-structured data (jaise social media posts, logs, IoT data)
+  
+###  NoSQL ki khasiyat:
+- High scalability (big data ke liye)
+- Fast performance for large volumes
+- Flexible data modeling
+
+---
+
+## Summary Table
+
+| Feature            | SQL                          | NoSQL                          |
+|--------------------|------------------------------|--------------------------------|
+| Structure          | Relational (tables)          | Non-relational (flexible)      |
+| Schema             | Fixed                        | Dynamic                        |
+| Scalability        | Vertical                     | Horizontal                     |
+| Query Language     | SQL                          | Varies (JSON, key-value, etc.) |
+| Use Case           | Structured data              | Big data, real-time apps       |
+| Examples           | MySQL, PostgreSQL            | MongoDB, Cassandra             |
+
+---
+
+##  Kab Kya Use Karein?
+
+- **SQL:** Jab data structured ho aur complex relationships ho (e.g. ERP, finance systems)
+- **NoSQL:** Jab data fast grow kar raha ho, flexible ho, ya real-time ho (e.g. chat apps, analytics)
+
 
 
 
