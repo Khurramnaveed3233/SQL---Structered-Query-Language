@@ -70,7 +70,85 @@ Data Science ka kaam hota hai data ko samajhna aur us se insights nikalna. Aur d
 - **SQL:** Jab data structured ho aur complex relationships ho (e.g. ERP, finance systems)
 - **NoSQL:** Jab data fast grow kar raha ho, flexible ho, ya real-time ho (e.g. chat apps, analytics)
 
+#  What is Database?
 
+**Database** ek organized jagah hoti hai jahan data store kiya jata hai — taake usay easily access, manage, aur update kiya ja sake.
+
+###  Real-life Example:
+Socho ek Excel sheet jisme tumhare customers ka naam, address, aur order details hain — ye bhi ek chhoti database jaisi hoti hai. Lekin jab data bohot zyada ho jaye, to hum proper database systems use karte hain.
+
+---
+
+# Types of Databases
+
+## 1. **Relational Database (RDBMS)**
+- Data tables mein store hota hai (rows & columns)
+- Tables ke beech relationships hotay hain
+- Example: MySQL, SQL Server, PostgreSQL, Oracle
+
+## 2. **NoSQL Database**
+- Data flexible format mein hota hai (documents, key-value, graphs)
+- Schema fixed nahi hota
+- Example: MongoDB, Cassandra, Firebase
+
+## 3. **In-Memory Database**
+- Data RAM mein store hota hai — super fast access
+- Example: Redis
+
+## 4. **Cloud Database**
+- Internet ke zariye access hoti hai
+- Scalable aur distributed hoti hai
+- Example: Amazon Aurora, Google BigQuery
+
+## 5. **Graph Database**
+- Data nodes aur edges mein hota hai (relationships ko highlight karta hai)
+- Example: Neo4j
+
+---
+
+#  What is RDBMS?
+
+**RDBMS** ka matlab hai **Relational Database Management System**. Ye ek software hota hai jo relational databases ko manage karta hai.
+
+###  RDBMS ki khasiyat:
+- Data tables mein hota hai
+- Tables ke beech relationships define kiye ja sakte hain (foreign keys)
+- SQL language use hoti hai
+- ACID properties follow karta hai (Atomicity, Consistency, Isolation, Durability)
+
+### 🔧 Common RDBMS Examples:
+- MySQL  
+- Microsoft SQL Server  
+- PostgreSQL  
+- Oracle Database
+
+---
+
+#  Summary Table
+
+| Feature              | RDBMS                          | NoSQL                         |
+|----------------------|--------------------------------|-------------------------------|
+| Data Format          | Tables (rows & columns)        | Documents, key-value, etc.    |
+| Schema               | Fixed                          | Flexible                      |
+| Query Language       | SQL                            | Varies (JSON, etc.)           |
+| Relationships        | Strong (joins, foreign keys)   | Weak or none                  |
+| Use Case             | Structured business data       | Big data, real-time apps      |
+
+# 🖥️ SQL SELECT Statement — Full Guide
+
+##  Basic Syntax
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition
+GROUP BY column
+HAVING condition
+ORDER BY column ASC|DESC;
+
+1️⃣ SELECT
+
+- Matlab: "Mujhe yeh data chahiye"
+- Use: Specific columns choose karna
 
 
 
