@@ -150,7 +150,6 @@ ORDER BY column ASC|DESC;
 - Matlab: "Mujhe yeh data chahiye"
 - Use: Specific columns choose karna
 
-```sql
 SELECT name, age
 
 - Sirf name aur age column ka data dikhayega.
