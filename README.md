@@ -134,7 +134,7 @@ Socho ek Excel sheet jisme tumhare customers ka naam, address, aur order details
 | Relationships        | Strong (joins, foreign keys)   | Weak or none                  |
 | Use Case             | Structured business data       | Big data, real-time apps      |
 
-# 🖥️ SQL SELECT Statement — Full Guide
+#  SQL SELECT Statement — Full Guide
 
 ##  Basic Syntax
 
@@ -145,7 +145,7 @@ GROUP BY column
 HAVING condition
 ORDER BY column ASC|DESC;
 
-# 🖥️ SQL SELECT Statement — All 6 Clauses in One Example
+# SQL SELECT Statement — All 6 Clauses in One Example
 
 1️⃣ **SELECT**  
 - Matlab: "Mujhe yeh data chahiye"  
@@ -175,6 +175,7 @@ ORDER BY column ASC|DESC;
 `ORDER BY age DESC` → Sabse badi age se start karega  
 
 --- 
+
 ##  DDL (Data Definition Language)
 
 **DDL ka kaam hota hai database ke structure ko define karna** — jaise tables, views ya indexes banana, modify karna ya delete karna. Data analysts analysis start karne se pehle mostly tables ya views banate hain using DDL.
