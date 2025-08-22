@@ -1348,25 +1348,21 @@ DROP PROCEDURE get_high_salary;
 
 ### Create Stored Procedure
 
-```sql
 CREATE PROCEDURE GetCustomerOrders
     @CustomerID INT
 AS
 BEGIN
-    SELECT 
-        o.OrderID,
-        o.OrderDate,
-        p.ProductName,
-        oi.Quantity,
-        p.Price
-    FROM 
-        [Order] o
-    JOIN 
-        OrderItem oi ON o.OrderID = oi.OrderID
-    JOIN 
-        Product p ON oi.ProductID = p.ProductID
-    WHERE 
-        o.CustomerID = @CustomerID;
+SELECT 
+o.OrderID,
+o.OrderDate,
+p.ProductName,
+oi.Quantity,
+p.Price
+FROM 
+[Order] o
+JOIN     OrderItem oi ON o.OrderID = oi.OrderID
+JOIN     Product p ON oi.ProductID = p.ProductID
+WHERE  o.CustomerID = @CustomerID;
 END;
 
 ---
