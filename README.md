@@ -1321,6 +1321,53 @@ EXEC get_salary_above @min_salary = 85000;
 ```sql
 DROP PROCEDURE get_high_salary;
 ```
+#  SQL Stored Procedures — Input aur Output Parameters 
+
+## Input Parameters
+
+- Stored procedure ke andar **input parameters** woh hote hain jo hum procedure chalate waqt value pass karte hain.  
+- Ye parameters procedure create karte waqt **declare** kiye jaate hain.  
+- Example: Customer ka ID pass karna taake uske specific orders mil sakein.
+
+## Output Parameters
+
+- **Output parameters** ka use stored procedure se value wapas calling code ko bhejne ke liye hota hai.  
+- Is se hum procedure ke andar calculation ya result generate karke bahar bhej sakte hain.
+
+---
+
+## Parameters ka Fayda
+
+- Stored procedures ko zyada **flexible** banate hain  
+- Alag-alag values ke saath run ho sakte hain  
+- **Dynamic behaviour** possible hota hai (har run pe alag result mil sakta hai)  
+
+---
+
+##  Example — Specific Customer ke Orders Lena
+
+### Create Stored Procedure
+
+```sql
+CREATE PROCEDURE GetCustomerOrders
+    @CustomerID INT
+AS
+BEGIN
+    SELECT 
+        o.OrderID,
+        o.OrderDate,
+        p.ProductName,
+        oi.Quantity,
+        p.Price
+    FROM 
+        [Order] o
+    JOIN 
+        OrderItem oi ON o.OrderID = oi.OrderID
+    JOIN 
+        Product p ON oi.ProductID = p.ProductID
+    WHERE 
+        o.CustomerID = @CustomerID;
+END;
 
 ---
 
