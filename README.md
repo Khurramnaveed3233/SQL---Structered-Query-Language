@@ -185,6 +185,67 @@ ORDER BY column ASC|DESC;
 `ORDER BY age DESC` → Sabse badi age se start karega  
 
 --- 
+# 🗄️ SQL Data Types — Asaan Roman Urdu Mein
+
+SQL mein **Data Types** ka matlab hota hai — column kis tarah ka data store karega.
+
+Har column ka ek data type hota hai jo decide karta hai:
+- Kaunsa data store hoga (numbers, text, date, etc.)
+- Kitni space lagegi
+- Data ka format kya hoga
+
+---
+
+## 1️⃣ Numeric Data Types (Numbers ke liye)
+
+- **INT / INTEGER** → Pura number (e.g., 10, -45, 250)  
+- **BIGINT** → Bohat bara number store karne ke liye  
+- **DECIMAL(p,s) / NUMERIC(p,s)** → Decimal wale numbers, jaise prices (e.g., 125.50)  
+- **FLOAT / REAL** → Decimal numbers with precision (scientific calculations ke liye)
+
+---
+
+## 2️⃣ Character / String Data Types (Text ke liye)
+
+- **CHAR(n)** → Fixed length text (e.g., CHAR(5) → "Ali  ")  
+- **VARCHAR(n)** → Variable length text (short words, names, etc.)  
+- **TEXT** → Long text, paragraphs
+
+---
+
+## 3️⃣ Date and Time Data Types
+
+- **DATE** → Sirf date (YYYY-MM-DD)  
+- **TIME** → Sirf time (HH:MM:SS)  
+- **DATETIME** → Date + Time together  
+- **TIMESTAMP** → Date + Time (auto update option ke saath)
+
+---
+
+## 4️⃣ Boolean Data Type
+
+- **BIT / BOOLEAN** → Sirf 2 values store hoti hain: `TRUE (1)` ya `FALSE (0)`
+
+---
+
+## 5️⃣ Other / Special Data Types
+
+- **BINARY / VARBINARY** → Images, files, ya binary data store karne ke liye  
+- **JSON** → JSON formatted data store karne ke liye (modern DBs mein)  
+
+---
+
+## 📌 Example:
+```sql
+CREATE TABLE Employees (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Salary DECIMAL(10,2),
+    JoinDate DATE,
+    IsActive BIT
+);
+
+---
 
 #  SQL Constraints 
 
