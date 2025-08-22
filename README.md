@@ -1344,29 +1344,6 @@ DROP PROCEDURE get_high_salary;
 
 ---
 
-##  Example — Specific Customer ke Orders Lena
-
-### Create Stored Procedure
-
-CREATE PROCEDURE GetCustomerOrders
-    @CustomerID INT
-AS
-BEGIN
-SELECT 
-o.OrderID,
-o.OrderDate,
-p.ProductName,
-oi.Quantity,
-p.Price
-FROM 
-[Order] o
-JOIN     OrderItem oi ON o.OrderID = oi.OrderID
-JOIN     Product p ON oi.ProductID = p.ProductID
-WHERE  o.CustomerID = @CustomerID;
-END;
-
----
-
 ##  3. CTE (Common Table Expression)
 
 ###  CTE Kya Hoti Hai?
