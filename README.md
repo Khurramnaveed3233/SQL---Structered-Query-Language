@@ -237,6 +237,15 @@ Har column ka ek data type hota hai jo decide karta hai:
 
 ##  Example:
 
+```sql
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    ...
+);
+
+
+```sql
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
     Name VARCHAR(50),
