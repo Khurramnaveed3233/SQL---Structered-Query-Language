@@ -185,7 +185,7 @@ ORDER BY column ASC|DESC;
 `ORDER BY age DESC` → Sabse badi age se start karega  
 
 --- 
-# 🗄️ SQL Data Types — Asaan Roman Urdu Mein
+#  SQL Data Types 
 
 SQL mein **Data Types** ka matlab hota hai — column kis tarah ka data store karega.
 
