@@ -235,8 +235,8 @@ Har column ka ek data type hota hai jo decide karta hai:
 
 ---
 
-## 📌 Example:
-```sql
+##  Example:
+
 CREATE TABLE Employees (
     ID INT PRIMARY KEY,
     Name VARCHAR(50),
