@@ -134,7 +134,67 @@ Socho ek Excel sheet jisme tumhare customers ka naam, address, aur order details
 | Relationships        | Strong (joins, foreign keys)   | Weak or none                  |
 | Use Case             | Structured business data       | Big data, real-time apps      |
 
-#  SQL SELECT Statement — Full Guide
+--- 
+
+## 🏪 OLTP (Online Transaction Processing)
+- Roz marra ka kaam sambhalta hai — jahan data **bar bar update hota hai**.
+- Chhoti chhoti transactions ko tez speed se record karta hai.
+- Example: Supermarket billing, ATM se paise nikalna, online ticket book karna.
+
+ **Yaad rakho: OLTP = **Tez aur live transactions**.
+
+---
+
+##  OLAP (Online Analytical Processing)
+- Purana data le kar **analysis aur reports** banata hai.
+- Lambe queries aur summaries ke liye use hota hai.
+- Example: 5 saal ka sales report banana, customer habits ka analysis, Power BI dashboards.
+
+Yaad rakho: OLAP = **Gehra data analysis**, na ke rozana ka kaam.
+
+---
+
+## 🏪 OLTP — Rozana ka kaam
+Socho tum ek **restaurant** chalate ho.  
+- Har customer ka **order lena**, uska **bill banana**, aur payment record karna — yeh sab OLTP hai.  
+- Har kaam turant hota hai, data current hota hai, aur chhoti chhoti transactions bohot tez chal rahi hoti hain.  
+
+💡 OLTP = "Live kaam, turant result."
+
+---
+
+##  OLAP — Picture ko samajhna
+Ab socho mahine ke end pe tum **pichlay 6 mahino ka sales data** dekhte ho.  
+- Tum check karte ho kaunse dishes zyada bik rahi hain, kaunse kam.  
+- Trend dekhte ho: kis mahine zyada customers aaye, kis mahine kam.  
+- Ye analysis tum planning ke liye karte ho — aglay mahine ka menu decide karna, discount schemes lagana, etc.
+
+- OLAP = "Purana data, gehra soch, behtar faislay."
+
+---
+
+##  Chhota Farq
+
+| OLTP  Rozana kaam        | OLAP  Planning aur analysis  |
+|---------------------------|--------------------------------|
+| Live orders record karna  | Purane orders ka trend dekhna  |
+| Tez, chhoti transactions  | Lambe analysis wale queries    |
+| Data hamesha current      | Data summarized & purana       |
+
+
+##  Farq ek nazar mein
+| Feature        | OLTP  Transactions       | OLAP  Analysis         |
+|---------------|----------------------------|--------------------------|
+| Kaam          | Rozana kaam chalana        | Faislay lene ka analysis |
+| Data           | Current/live               | Purana/summarized        |
+| Queries        | Simple aur short           | Complex aur detailed     |
+| Example        | POS billing system         | Power BI reports         |
+
+<img width="731" height="302" alt="vv" src="https://github.com/user-attachments/assets/5b6d1bfb-c6f7-4d8e-a6d5-26d3b9349176" />
+
+--- 
+
+## SQL SELECT Statement — Full Guide
 
 ##  Basic Syntax
 
