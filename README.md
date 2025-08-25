@@ -116,7 +116,7 @@ Socho ek Excel sheet jisme tumhare customers ka naam, address, aur order details
 - SQL language use hoti hai
 - ACID properties follow karta hai (Atomicity, Consistency, Isolation, Durability)
 
-### 🔧 Common RDBMS Examples:
+###  Common RDBMS Examples:
 - MySQL  
 - Microsoft SQL Server  
 - PostgreSQL  
@@ -136,7 +136,7 @@ Socho ek Excel sheet jisme tumhare customers ka naam, address, aur order details
 
 --- 
 
-## 🏪 OLTP (Online Transaction Processing)
+##  OLTP (Online Transaction Processing)
 - Roz marra ka kaam sambhalta hai — jahan data **bar bar update hota hai**.
 - Chhoti chhoti transactions ko tez speed se record karta hai.
 - Example: Supermarket billing, ATM se paise nikalna, online ticket book karna.
@@ -146,6 +146,7 @@ Socho ek Excel sheet jisme tumhare customers ka naam, address, aur order details
 ---
 
 ##  OLAP (Online Analytical Processing)
+
 - Purana data le kar **analysis aur reports** banata hai.
 - Lambe queries aur summaries ke liye use hota hai.
 - Example: 5 saal ka sales report banana, customer habits ka analysis, Power BI dashboards.
@@ -154,12 +155,12 @@ Yaad rakho: OLAP = **Gehra data analysis**, na ke rozana ka kaam.
 
 ---
 
-## 🏪 OLTP — Rozana ka kaam
+##  OLTP — Rozana ka kaam
 Socho tum ek **restaurant** chalate ho.  
 - Har customer ka **order lena**, uska **bill banana**, aur payment record karna — yeh sab OLTP hai.  
 - Har kaam turant hota hai, data current hota hai, aur chhoti chhoti transactions bohot tez chal rahi hoti hain.  
 
-💡 OLTP = "Live kaam, turant result."
+ OLTP = "Live kaam, turant result."
 
 ---
 
