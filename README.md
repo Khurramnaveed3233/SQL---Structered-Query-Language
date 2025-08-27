@@ -191,14 +191,14 @@
 ## 6. Data Analysis Steps
 
 - Collect
-  - Data gather karna, company guidelines follow karna  
-
+  - Data gather karna, company guidelines follow karna
+    
 -Clean
-  - Missing ya inaccurate values fix karna, “data wrangling”  
-
+  - Missing ya inaccurate values fix karna, “data wrangling”
+     
 -Analyze
-  - Trends, patterns, correlations identify karna  
-
+  - Trends, patterns, correlations identify karna
+    
 - Visualize
   - Charts, graphs, maps bana ke insights communicate karna  
 
