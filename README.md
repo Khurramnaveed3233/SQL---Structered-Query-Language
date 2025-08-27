@@ -135,22 +135,51 @@
 
 ## 5. Data Analytics Types
 
-### Descriptive Analytics
-- Snapshot of business, past/present summary  
-- **Misal:** last month sales report  
+### Descriptive Analytics → **Kya hua?**
 
-### Diagnostic Analytics
-- Samajhna **kyun ho raha hai**  
-- **Misal:** sales drop ka reason identify karna  
+- Snapshot of business, past/present summary
+- Ye bas humein past ka snapshot dikhata hai.
+- Matlab jo ho chuka hai uski report banata hai.
+- 
+- **Misal:**
+  last month sales report
+- Ek shop owner apne monthly sales ka chart dekhta hai → “Is mahine 5000 products bike.”
 
-### Predictive Analytics
-- Future trends aur outcomes ka forecast  
-- **Misal:** weather forecasting, stock prediction  
+### Diagnostic Analytics → **Kyun hua?**
 
-### Prescriptive Analytics
-- Recommend actions to solve problems or exploit opportunities  
-- **Misal:** inventory optimization, targeted campaigns  
+- Samajhna **kyun ho raha hai**
+- Ye humein batata hai ke problem ya trend ke peeche reason kya hai.
+- Matlab sirf numbers nahi, balki unke causes dikhata hai.
+  
+- **Misal:**
+- sales drop ka reason identify karna
+- Sales kam kyun hui? → Kyunki competitors ne discount diya tha ya rainy season tha aur log kam nikle.
 
+### Predictive Analytics  **"Agay kya hoga?"**
+
+- Future trends aur outcomes ka forecast
+- Ye future ke forecast aur trend batata hai.
+- Past data use karke guess karta hai ke agle time mein kya ho sakta hai.
+
+- **Misal:**
+  
+- Weather forecasting, stock prediction
+- Agar last 3 years December mein sales zyada hui hai, to model predict karega ke is December bhi sales high hogi.
+
+### Prescriptive Analytics **Ab kya karna chahiye?**
+
+- Recommend actions to solve problems or exploit opportunities
+- Ye sirf predict nahi karta, balki actions recommend karta hai.
+- Matlab aapko solution deta hai ke agle step mein kya karein.
+
+- **Misal:**
+  
+- Inventory optimization, targeted campaigns
+- Agar December mein sales zyada aayengi, to system recommend karega:
+   - “Extra stock order karo”
+   - “Ad campaign launch karo”
+   - “Staff double shift lagao”
+  
 **Summary:**  
 - Descriptive = kya ho chuka / ho raha hai  
 - Diagnostic = kyun ho raha hai  
