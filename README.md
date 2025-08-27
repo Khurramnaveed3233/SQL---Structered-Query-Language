@@ -57,23 +57,79 @@
 
 ### 1. Volume
 - Data ki **bohot zyada quantity**  
-- Misal: retail sales data, mobile app interactions  
+- Misal: retail sales data, mobile app interactions
+- Volume ka handle karne ke liye cloud storage, distributed systems, aur data warehouses use kiye jate hain.
+- Volume ka matlab hai bohot zyada data jo har din generate hota hai.
+- Zyada data ka matlab hai large databases aur storage solutions ki zarurat.
+
+**Examples:**
+
+- Retail company ka har store ka sales data
+- Mobile app users ke interactions aur clicks
+- Social media platforms pe posts aur likes
+
+**Key Point:**  Agar data ka volume manage na ho, to analysis mushkil ho jata hai.
 
 ### 2. Velocity
 - Data ka **generate aur move hone ki speed**  
-- Misal: Twitter trending hashtags real-time  
+- Misal: Twitter trending hashtags real-time
+- Velocity ka matlab hai data generate aur move hone ki speed.
+- Kuch data real-time generate hota hai aur turant process karna padta hai.
+- High velocity data ko stream processing tools se manage kiya jata hai.
 
-### 3. Veracity
+**Examples:**
+
+- Stock market trading data
+- Social media trending hashtags
+- IoT devices se sensor data
+
+**Key Point:**  Velocity ka matlab hai kitni tezi se data system mein aata aur process hota hai.
+
+### 3. Veracity (Data ki Quality)
 - Data ki **quality aur trustworthiness**  
-- Misal: incorrect formatting, missing values  
+- Misal: incorrect formatting, missing values
+- Veracity ka matlab hai data ki accuracy, reliability, aur trustworthiness.
+- Agar data mein typos, missing values, ya errors hain, to analysis aur decision-making galat ho sakti hai.
+- Data cleaning aur validation techniques veracity improve karte hain.
 
-### 4. Value
+**Examples:**
+
+- Customer database mein wrong addresses
+- Financial records mein duplicate entries
+- Sensor data ka inconsistent readings
+
+**Key Point:* High veracity = accurate aur reliable data → better insights.
+
+### 4. Value (Data ka Fayda)
+
 - Data se **benefit ya insights** nikalna  
-- Misal: customer patterns → targeted marketing  
+- Value ka matlab hai data se nikalne wale benefits aur insights.
+- Sirf data collect karna kaafi nahi, uska analysis karke business decisions, revenue growth, aur strategic advantage banana zaruri hai.
 
-### 5. Variety
+**Examples:**
+
+- Customer purchase patterns se targeted marketing
+- Website analytics se UX improve karna
+- Healthcare data se disease prediction
+- customer patterns → targeted marketing
+
+**Key Point:** Data tabhi important hai jab usse actionable insights milen.
+
+### 5. Variety (Data ke Different Types)
+
 - Different types aur sources of data  
-- Misal: social media + website clicks + purchase history  
+- Misal: social media + website clicks + purchase history
+- Variety ka matlab hai different formats aur sources ka data.
+- Data sirf numbers nahi, balki text, audio, video, images, aur sensor data bhi ho sakta hai.
+- Variety handle karne ke liye ETL processes aur advanced analytics tools ki zarurat hoti hai.
+
+**Examples:**
+
+- Social media posts (text + images + videos)
+- Customer feedback forms
+- Website clicks aur IoT device data
+
+**Key Point:** Zyada variety ka matlab hai complex data processing, lekin insights bhi richer hoti hain.
 
 ---
 
@@ -134,80 +190,7 @@
 - Effective, Attractive, Impactful  
 
 **Summary:** Visualization = data ko **dikhana aur samajhna easy** banana
-
----
-
-# SQL Kya Hoti Hai?
-
-**SQL** ka matlab hai **Structured Query Language**. Ye ek zubaan hai jo databases se baat karne ke liye use hoti hai.
-
-### SQL se kya kya kar sakte hain?
-- Data **search** karna (jaise: "Mujhe sab customers dikhayo")
-- Data ko **filter** karna (jaise: "Sirf Lahore ke orders dikhayo")
-- Data ko **group** karna (jaise: "Har din ki total sales")
-- Data ko **update** ya **delete** karna (jaise: "Galat entry hata do")
-
----
-
-#  Data Science Mein SQL Kyun Zaroori Hai?
-
-Data Science ka kaam hota hai data ko samajhna aur us se insights nikalna. Aur data aksar databases mein pada hota hai — jaise MySQL, SQL Server, PostgreSQL.
-
-###  SQL ka role Data Science mein:
-- **Raw data access** karne ke liye
-- **Data cleaning aur filtering** ke liye
-- **Summaries aur trends** nikalne ke liye
-- **Dashboards aur reports** banane ke liye (Power BI mein bhi SQL ka use hota hai)
-
----
-#  SQL vs NoSQL — Asaan Lafzon Mein Farq
-
-##  SQL (Structured Query Language)
-- **Type:** Relational Database (RDBMS)
-- **Data Format:** Tables (rows & columns)
-- **Schema:** Fixed schema — pehle se structure define karna hota hai
-- **Examples:** MySQL, SQL Server, PostgreSQL, Oracle
-- **Best For:** Structured data jahan relationships important hon (jaise customer-orders system)
-
-###  SQL ki khasiyat:
-- Strong consistency
-- Complex queries (joins, filters, aggregations)
-- ACID compliance (Atomicity, Consistency, Isolation, Durability)
-
----
-
-##  NoSQL (Not Only SQL)
-- **Type:** Non-relational Database
-- **Data Format:** Flexible — documents, key-value pairs, graphs, wide-columns
-- **Schema:** Dynamic schema — structure change hota reh sakta hai
-- **Examples:** MongoDB, Cassandra, Redis, Firebase
-- **Best For:** Unstructured ya semi-structured data (jaise social media posts, logs, IoT data)
-  
-###  NoSQL ki khasiyat:
-- High scalability (big data ke liye)
-- Fast performance for large volumes
-- Flexible data modeling
-
----
-
-## Summary Table
-
-| Feature            | SQL                          | NoSQL                          |
-|--------------------|------------------------------|--------------------------------|
-| Structure          | Relational (tables)          | Non-relational (flexible)      |
-| Schema             | Fixed                        | Dynamic                        |
-| Scalability        | Vertical                     | Horizontal                     |
-| Query Language     | SQL                          | Varies (JSON, key-value, etc.) |
-| Use Case           | Structured data              | Big data, real-time apps       |
-| Examples           | MySQL, PostgreSQL            | MongoDB, Cassandra             |
-
----
-
-##  Kab Kya Use Karein?
-
-- **SQL:** Jab data structured ho aur complex relationships ho (e.g. ERP, finance systems)
-- **NoSQL:** Jab data fast grow kar raha ho, flexible ho, ya real-time ho (e.g. chat apps, analytics)
-
+--- 
 #  What is Database?
 
 **Database** ek organized jagah hoti hai jahan data store kiya jata hai — taake usay easily access, manage, aur update kiya ja sake.
@@ -330,6 +313,80 @@ Ab socho mahine ke end pe tum **pichlay 6 mahino ka sales data** dekhte ho.
 | Example        | POS billing system         | Power BI reports         |
 
 <img width="731" height="302" alt="vv" src="https://github.com/user-attachments/assets/5b6d1bfb-c6f7-4d8e-a6d5-26d3b9349176" />
+
+---
+
+# SQL Kya Hoti Hai?
+
+**SQL** ka matlab hai **Structured Query Language**. Ye ek zubaan hai jo databases se baat karne ke liye use hoti hai.
+
+### SQL se kya kya kar sakte hain?
+- Data **search** karna (jaise: "Mujhe sab customers dikhayo")
+- Data ko **filter** karna (jaise: "Sirf Lahore ke orders dikhayo")
+- Data ko **group** karna (jaise: "Har din ki total sales")
+- Data ko **update** ya **delete** karna (jaise: "Galat entry hata do")
+
+---
+
+#  Data Science Mein SQL Kyun Zaroori Hai?
+
+Data Science ka kaam hota hai data ko samajhna aur us se insights nikalna. Aur data aksar databases mein pada hota hai — jaise MySQL, SQL Server, PostgreSQL.
+
+###  SQL ka role Data Science mein:
+- **Raw data access** karne ke liye
+- **Data cleaning aur filtering** ke liye
+- **Summaries aur trends** nikalne ke liye
+- **Dashboards aur reports** banane ke liye (Power BI mein bhi SQL ka use hota hai)
+
+---
+#  SQL vs NoSQL — Asaan Lafzon Mein Farq
+
+##  SQL (Structured Query Language)
+- **Type:** Relational Database (RDBMS)
+- **Data Format:** Tables (rows & columns)
+- **Schema:** Fixed schema — pehle se structure define karna hota hai
+- **Examples:** MySQL, SQL Server, PostgreSQL, Oracle
+- **Best For:** Structured data jahan relationships important hon (jaise customer-orders system)
+
+###  SQL ki khasiyat:
+- Strong consistency
+- Complex queries (joins, filters, aggregations)
+- ACID compliance (Atomicity, Consistency, Isolation, Durability)
+
+---
+
+##  NoSQL (Not Only SQL)
+- **Type:** Non-relational Database
+- **Data Format:** Flexible — documents, key-value pairs, graphs, wide-columns
+- **Schema:** Dynamic schema — structure change hota reh sakta hai
+- **Examples:** MongoDB, Cassandra, Redis, Firebase
+- **Best For:** Unstructured ya semi-structured data (jaise social media posts, logs, IoT data)
+  
+###  NoSQL ki khasiyat:
+- High scalability (big data ke liye)
+- Fast performance for large volumes
+- Flexible data modeling
+
+---
+
+## Summary Table
+
+| Feature            | SQL                          | NoSQL                          |
+|--------------------|------------------------------|--------------------------------|
+| Structure          | Relational (tables)          | Non-relational (flexible)      |
+| Schema             | Fixed                        | Dynamic                        |
+| Scalability        | Vertical                     | Horizontal                     |
+| Query Language     | SQL                          | Varies (JSON, key-value, etc.) |
+| Use Case           | Structured data              | Big data, real-time apps       |
+| Examples           | MySQL, PostgreSQL            | MongoDB, Cassandra             |
+
+---
+
+##  Kab Kya Use Karein?
+
+- **SQL:** Jab data structured ho aur complex relationships ho (e.g. ERP, finance systems)
+- **NoSQL:** Jab data fast grow kar raha ho, flexible ho, ya real-time ho (e.g. chat apps, analytics)
+
 
 --- 
 
