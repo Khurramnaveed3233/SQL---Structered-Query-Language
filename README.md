@@ -140,8 +140,9 @@
 - Snapshot of business, past/present summary
 - Ye bas humein past ka snapshot dikhata hai.
 - Matlab jo ho chuka hai uski report banata hai.
-- 
+
 **Misal:**
+
 - last month sales report
 - Ek shop owner apne monthly sales ka chart dekhta hai → “Is mahine 5000 products bike.”
 
@@ -151,7 +152,8 @@
 - Ye humein batata hai ke problem ya trend ke peeche reason kya hai.
 - Matlab sirf numbers nahi, balki unke causes dikhata hai.
   
-- **Misal:**
+**Misal:**
+
 - sales drop ka reason identify karna
 - Sales kam kyun hui? → Kyunki competitors ne discount diya tha ya rainy season tha aur log kam nikle.
 
@@ -181,6 +183,7 @@
    - “Staff double shift lagao”
   
 **Summary:**  
+
 - Descriptive = kya ho chuka / ho raha hai  
 - Diagnostic = kyun ho raha hai  
 - Predictive = kya hoga  
