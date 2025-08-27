@@ -254,7 +254,7 @@
 - Company ka budget breakdown → Marketing 30%, Salaries 50%, Tech 20%.  
 - Election results → Candidate A 60%, Candidate B 40%.  
 
-⚠️ **Note:** Zyada categories (>5) ho to pie chart confusing ho jata hai.  
+**Note:** Zyada categories (>5) ho to pie chart confusing ho jata hai.  
 
 ---
 
