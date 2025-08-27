@@ -1,3 +1,141 @@
+# Data Concepts Cheat Sheet (Roman Urdu)
+
+---
+
+## 1. Data Kya Hoti Hai?
+- Data asal mein **facts aur information** hoti hai jo kisi cheez ke baare mein collect ki jati hai.  
+- Ye **raw form** mein hoti hai aur analysis ke liye use hoti hai.  
+- **Misal:** Student ka naam, age, marks; company ke sales figures.
+
+---
+
+## 2. Types of Data
+
+### Qualitative vs Quantitative
+- **Qualitative data:** descriptive, text type, numbers nahi hote.  
+  - Misal: kutte ka rang, aurat ka bal ka rang, desk ka material  
+- **Quantitative data:** numeric, measure ya count kiya ja sakta hai.  
+  - Misal: kutte ke paon = 4, desk ka height = 70 cm  
+
+**Summary:** Qualitative = description, Quantitative = numbers  
+
+### Discrete vs Continuous
+- **Discrete:** countable numbers, exact values  
+  - Misal: kutte ke paon = 4  
+- **Continuous:** measurable numbers, decimals possible  
+  - Misal: newborn ka height = 50.2 cm, weight = 3.4 kg  
+
+**Summary:** Discrete = countable, Continuous = measurable  
+
+### Nominal vs Ordinal
+- **Nominal:** categories with no order  
+  - Misal: sheher ka naam, marital status  
+- **Ordinal:** categories with order, difference not meaningful  
+  - Misal: satisfaction level = low, medium, high  
+
+**Summary:** Nominal = sirf labels, Ordinal = labels with order  
+
+---
+
+## 3. Structured vs Unstructured Data
+
+### Structured Data
+- Organized format, tables/spreadsheets/databases  
+- Predefined layout, easily processable  
+- **Misal:** customer name, date, payment method  
+
+### Unstructured Data
+- Not organized, raw, difficult to process  
+- Mostly text, audio, video, images  
+- **Misal:** social media posts, audio files, videos, text documents  
+
+**Summary:** Structured = organized, easy to analyze; Unstructured = raw, flexible, hard to process  
+
+---
+
+## 4. Big Data Characteristics (5 V’s)
+
+### 1. Volume
+- Data ki **bohot zyada quantity**  
+- Misal: retail sales data, mobile app interactions  
+
+### 2. Velocity
+- Data ka **generate aur move hone ki speed**  
+- Misal: Twitter trending hashtags real-time  
+
+### 3. Veracity
+- Data ki **quality aur trustworthiness**  
+- Misal: incorrect formatting, missing values  
+
+### 4. Value
+- Data se **benefit ya insights** nikalna  
+- Misal: customer patterns → targeted marketing  
+
+### 5. Variety
+- Different types aur sources of data  
+- Misal: social media + website clicks + purchase history  
+
+---
+
+## 5. Data Analytics Types
+
+### Descriptive Analytics
+- Snapshot of business, past/present summary  
+- **Misal:** last month sales report  
+
+### Diagnostic Analytics
+- Samajhna **kyun ho raha hai**  
+- **Misal:** sales drop ka reason identify karna  
+
+### Predictive Analytics
+- Future trends aur outcomes ka forecast  
+- **Misal:** weather forecasting, stock prediction  
+
+### Prescriptive Analytics
+- Recommend actions to solve problems or exploit opportunities  
+- **Misal:** inventory optimization, targeted campaigns  
+
+**Summary:**  
+- Descriptive = kya ho chuka / ho raha hai  
+- Diagnostic = kyun ho raha hai  
+- Predictive = kya hoga  
+- Prescriptive = kya karna chahiye  
+
+---
+
+## 6. Data Analysis Steps
+
+### Collect
+- Data gather karna, company guidelines follow karna  
+
+### Clean
+- Missing ya inaccurate values fix karna, “data wrangling”  
+
+### Analyze
+- Trends, patterns, correlations identify karna  
+
+### Visualize
+- Charts, graphs, maps bana ke insights communicate karna  
+
+---
+
+## 7. Data Visualization
+
+### Purpose
+- Patterns explore karna  
+- Insights communicate karna  
+
+### Best Chart Types
+- Line Chart → trends/time-series  
+- Bar Chart → ranking/comparison  
+- Scatter Plot → correlation/relationship  
+
+### Qualities
+- Effective, Attractive, Impactful  
+
+**Summary:** Visualization = data ko **dikhana aur samajhna easy** banana
+
+---
 
 # SQL Kya Hoti Hai?
 
