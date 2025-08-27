@@ -141,8 +141,8 @@
 - Ye bas humein past ka snapshot dikhata hai.
 - Matlab jo ho chuka hai uski report banata hai.
 - 
-- **Misal:**
-  last month sales report
+**Misal:**
+- last month sales report
 - Ek shop owner apne monthly sales ka chart dekhta hai → “Is mahine 5000 products bike.”
 
 ### Diagnostic Analytics → **Kyun hua?**
@@ -161,7 +161,7 @@
 - Ye future ke forecast aur trend batata hai.
 - Past data use karke guess karta hai ke agle time mein kya ho sakta hai.
 
-- **Misal:**
+**Misal:**
   
 - Weather forecasting, stock prediction
 - Agar last 3 years December mein sales zyada hui hai, to model predict karega ke is December bhi sales high hogi.
@@ -190,19 +190,22 @@
 
 ## 6. Data Analysis Steps
 
-- Collect
-  - Data gather karna, company guidelines follow karna
-    
--Clean
-  - Missing ya inaccurate values fix karna, “data wrangling”
-     
--Analyze
-  - Trends, patterns, correlations identify karna
-    
-- Visualize
-  - Charts, graphs, maps bana ke insights communicate karna  
+- **Collect**
+  - Data gather karna  
+  - Company guidelines follow karna  
 
----
+- **Clean**
+  - Missing ya inaccurate values fix karna  
+  - “Data wrangling” karna  
+
+- **Analyze**
+  - Trends identify karna  
+  - Patterns aur correlations dhoondhna  
+
+- **Visualize**
+  - Charts, graphs, maps banana  
+  - Insights ko communicate karna  
+
 
 ## 7. Data Visualization
 
