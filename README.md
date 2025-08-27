@@ -1,4 +1,4 @@
-# Data Concepts Cheat Sheet (Roman Urdu)
+# Data Concepts Cheat Sheet 
 
 ---
 
